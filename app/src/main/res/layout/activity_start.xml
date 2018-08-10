@@ -2,12 +2,13 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StartActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/ItemCreator"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/createColor"
@@ -23,26 +24,25 @@
         android:id="@+id/divider"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginBottom="56dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/divider2"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/ItemCreator" />
 
     <View
         android:id="@+id/divider2"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/itemPlayer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="382dp"
+        android:id="@+id/itemPlayer"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/pleyColor"
         android:gravity="center"
@@ -53,8 +53,59 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/divider2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider">
+
+        <ImageView
+            android:id="@+id/itemStar"
+            android:layout_width="42dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/star" />
+
+        <ImageView
+            android:id="@+id/itemInfo"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/info" />
+
+        <ImageView
+            android:id="@+id/itemSetting"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/settings" />
+
+        <ImageView
+            android:id="@+id/itemExit"
+            android:layout_width="36dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/exit" />
+    </LinearLayout>
+
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ItemUp"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:layout_marginEnd="8dp"
@@ -65,7 +116,7 @@
         app:srcCompat="@drawable/icon_up_down" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/itemDown"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:layout_marginEnd="8dp"
@@ -76,12 +127,4 @@
         app:layout_constraintTop_toTopOf="@+id/divider2"
         app:srcCompat="@drawable/icon_up_down" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"
-        app:layout_constraintBottom_toTopOf="@+id/divider2"
-        app:layout_constraintTop_toBottomOf="@+id/divider"
-        app:srcCompat="@mipmap/ic_launcher_round"
-        tools:layout_editor_absoluteX="56dp" />
 </android.support.constraint.ConstraintLayout>
