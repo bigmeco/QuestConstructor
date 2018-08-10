@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".StartActivity">
 
+    <FrameLayout
+        android:id="@+id/fragmentCreator"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+    </FrameLayout>
+
     <TextView
         android:id="@+id/ItemCreator"
         android:layout_width="0dp"
@@ -28,7 +40,7 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ItemCreator" />
+        app:layout_constraintTop_toBottomOf="@+id/fragmentCreator" />
 
     <View
         android:id="@+id/divider2"
