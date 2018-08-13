@@ -14,6 +14,12 @@ import android.support.v7.widget.LinearLayoutManager
 import android.transition.TransitionManager
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_start.*
+import android.support.v7.widget.SnapHelper
+import android.support.v7.widget.LinearSnapHelper
+
+
+
+
 
 
 class CreatorFragment : Fragment() {
@@ -37,11 +43,12 @@ class CreatorFragment : Fragment() {
         test.add(ObjectProject())
         test.add(ObjectProject())
 
-        listProjects.layoutManager = LinearLayoutManager(activity)
+        listProjects.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
         listProjects.adapter = ProjectAdapter(test) {
 
         }
-
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(listProjects)
         }
 
 }
