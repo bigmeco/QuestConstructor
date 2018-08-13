@@ -47,8 +47,7 @@ class CreatorFragment : Fragment() {
         listProjects.adapter = ProjectAdapter(test) {
 
         }
-        val snapHelper = LinearSnapHelper()
-        snapHelper.attachToRecyclerView(listProjects)
+        LinearSnapHelper().attachToRecyclerView(listProjects)
         }
 
 }
