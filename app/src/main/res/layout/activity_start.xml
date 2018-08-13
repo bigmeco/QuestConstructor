@@ -83,7 +83,7 @@
         android:orientation="horizontal"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

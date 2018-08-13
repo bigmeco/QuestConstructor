@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_creator.*
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.transition.TransitionManager
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_start.*
@@ -29,6 +30,17 @@ class CreatorFragment : Fragment() {
 
 
 
+        val test = ArrayList<ObjectProject>()
+
+        test.add(ObjectProject())
+        test.add(ObjectProject())
+        test.add(ObjectProject())
+        test.add(ObjectProject())
+
+        listProjects.layoutManager = LinearLayoutManager(activity)
+        listProjects.adapter = ProjectAdapter(test) {
+
+        }
 
         }
 
