@@ -32,35 +32,41 @@ class CreatorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
         val test = ArrayList<ObjectProject>()
 
         test.add(ObjectProject())
         test.add(ObjectProject())
         test.add(ObjectProject())
         test.add(ObjectProject())
-        listProjects.setNestedScrollingEnabled(false);
-        listProjects.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
-        listProjects.adapter = ProjectAdapter(test) {
-            val test = ArrayList<ObjectScreen>()
-            it.listScreens.setNestedScrollingEnabled(false);
+        listProjects.isNestedScrollingEnabled = false;
+        listProjects.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        listProjects.adapter = ProjectAdapter(test) { it: View, list: List<ObjectProject>, i: Int ->
+            it.plus.setOnClickListener {
+                Log.d("ff","fdfdfdg")
+            }
+            if (i == (list.size - 1)) {
+                it.plus.visibility = View.VISIBLE
+            } else {
+                val test = ArrayList<ObjectScreen>()
+                it.listScreens.isNestedScrollingEnabled = false
 
-            test.add(ObjectScreen())
-            test.add(ObjectScreen())
-            test.add(ObjectScreen())
-            test.add(ObjectScreen())
-            test.add(ObjectScreen())
-            test.add(ObjectScreen())
-            test.add(ObjectScreen())
-            test.add(ObjectScreen())
-            test.add(ObjectScreen())
-            test.add(ObjectScreen())
-            it.listScreens.layoutManager = LinearLayoutManager(activity)
-            it.listScreens.adapter = ScreenAdapter(test) {
+                test.add(ObjectScreen())
+                test.add(ObjectScreen())
+                test.add(ObjectScreen())
+                test.add(ObjectScreen())
+                test.add(ObjectScreen())
+                test.add(ObjectScreen())
+                test.add(ObjectScreen())
+                test.add(ObjectScreen())
+                test.add(ObjectScreen())
+                test.add(ObjectScreen())
+                it.listScreens.layoutManager = LinearLayoutManager(activity)
+                it.listScreens.adapter = ScreenAdapter(test) {
 
+                }
             }
         }
         LinearSnapHelper().attachToRecyclerView(listProjects)
-        }
+    }
 
 }

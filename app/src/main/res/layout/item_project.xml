@@ -94,6 +94,18 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/plus"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/createColor"
+                android:gravity="center"
+                android:text="+"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+                android:textColor="@color/name_color"
+                android:visibility="invisible" />
+
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.RecyclerView
@@ -101,5 +113,6 @@
             android:scrollbars="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
     </LinearLayout>
 </ScrollView>
