@@ -16,10 +16,7 @@ import android.util.Log
 import kotlinx.android.synthetic.main.activity_start.*
 import android.support.v7.widget.SnapHelper
 import android.support.v7.widget.LinearSnapHelper
-
-
-
-
+import kotlinx.android.synthetic.main.item_project.view.*
 
 
 class CreatorFragment : Fragment() {
@@ -42,10 +39,26 @@ class CreatorFragment : Fragment() {
         test.add(ObjectProject())
         test.add(ObjectProject())
         test.add(ObjectProject())
-
+        listProjects.setNestedScrollingEnabled(false);
         listProjects.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
         listProjects.adapter = ProjectAdapter(test) {
+            val test = ArrayList<ObjectScreen>()
+            it.listScreens.setNestedScrollingEnabled(false);
 
+            test.add(ObjectScreen())
+            test.add(ObjectScreen())
+            test.add(ObjectScreen())
+            test.add(ObjectScreen())
+            test.add(ObjectScreen())
+            test.add(ObjectScreen())
+            test.add(ObjectScreen())
+            test.add(ObjectScreen())
+            test.add(ObjectScreen())
+            test.add(ObjectScreen())
+            it.listScreens.layoutManager = LinearLayoutManager(activity)
+            it.listScreens.adapter = ScreenAdapter(test) {
+
+            }
         }
         LinearSnapHelper().attachToRecyclerView(listProjects)
         }

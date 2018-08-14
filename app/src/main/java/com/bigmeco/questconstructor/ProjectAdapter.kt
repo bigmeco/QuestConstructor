@@ -1,9 +1,11 @@
 package com.bigmeco.questconstructor
 
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.item_project.view.*
 
 class ProjectAdapter(val items: List<ObjectProject>, val listener: (itemView: View) -> Unit) : RecyclerView.Adapter<ProjectAdapter.ViewHolder>() {
 
@@ -17,7 +19,7 @@ class ProjectAdapter(val items: List<ObjectProject>, val listener: (itemView: Vi
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: ObjectProject, listener: (itemView: View) -> Unit, items: List<ObjectProject>, position: Int) = with(itemView) {
-
+            listener.invoke(itemView)
 
         }
 
