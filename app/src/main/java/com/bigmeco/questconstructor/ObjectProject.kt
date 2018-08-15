@@ -1,12 +1,10 @@
 package com.bigmeco.questconstructor
 
-class ObjectProject {
-    var name: String? = null
-    var genre: String? = null
-    var body: String? = null
-    var colophons: Int? = null
-    var time: String? = null
-    var id: Int? = null
-    var screen: List<ObjectScreen>? = null
+data class ObjectProject(var name: String? ,
+                    var genre: String? ,
+                    var body: String? ,
+                    var time: String? ,
+                    var id: Int? ,
+                    var screen: List<ObjectScreen>? ) {
 
 }

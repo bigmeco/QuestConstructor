@@ -65,6 +65,9 @@ class StartActivity : AppCompatActivity() {
         mySwapTransition.addListener(object : Transition.TransitionListener {
             override fun onTransitionStart(transition: Transition) {}
             override fun onTransitionEnd(transition: Transition) {
+                val ft = supportFragmentManager.beginTransaction()
+                ft.replace(R.id.fragmentCreator, newFragment)
+                ft.commit()
                 set.clone(mainLayout)
                 set.setVisibility(itemCreator.id, ConstraintSet.INVISIBLE)
                 TransitionManager.beginDelayedTransition(mainLayout)
@@ -79,9 +82,7 @@ class StartActivity : AppCompatActivity() {
         TransitionManager.go(Scene(mainLayout), mySwapTransition)
         //TransitionManager.beginDelayedTransition(mainLayout)
         set.applyTo(mainLayout)
-        val ft = supportFragmentManager.beginTransaction()
-        ft.replace(R.id.fragmentCreator, newFragment)
-        ft.commit()
+
 
     }
 
@@ -94,6 +95,9 @@ class StartActivity : AppCompatActivity() {
         mySwapTransition.addListener(object : Transition.TransitionListener {
             override fun onTransitionStart(transition: Transition) {}
             override fun onTransitionEnd(transition: Transition) {
+                val ft = supportFragmentManager.beginTransaction()
+                ft.replace(R.id.fragmentPlayer, newFragment)
+                ft.commit()
                 set.clone(mainLayout)
                 set.setVisibility(itemPlayer.id, ConstraintSet.INVISIBLE)
                 TransitionManager.beginDelayedTransition(mainLayout)
@@ -107,9 +111,7 @@ class StartActivity : AppCompatActivity() {
 
         TransitionManager.go(Scene(mainLayout), mySwapTransition)
         set.applyTo(mainLayout)
-        val ft = supportFragmentManager.beginTransaction()
-        ft.replace(R.id.fragmentPlayer, newFragment)
-        ft.commit()
+
     }
 
     private fun OpenLayout(set: ConstraintSet, layout: LinearLayout) {

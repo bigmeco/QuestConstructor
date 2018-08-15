@@ -31,37 +31,36 @@ class CreatorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+                // тестовый обект
         val test = ArrayList<ObjectProject>()
+        val test2 = ArrayList<ObjectScreen>()
+        val test3 = ArrayList<ObjectButton>()
 
-        test.add(ObjectProject())
-        test.add(ObjectProject())
-        test.add(ObjectProject())
-        test.add(ObjectProject())
-        listProjects.isNestedScrollingEnabled = false;
-        listProjects.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        test.add(ObjectProject("История один","хоррор","Одинокий, потерянный человек...","1 час",1,test2))
+        test.add(ObjectProject("История два очень длинная","хоррор","Предки славян — праславяне — издавна жили на территории Центральной и Восточной Европы. По языку они относятся к индоевропейской группе народов, которые населяют Европу и часть Азии вплоть до Индии. Первые упоминания о праславянах относятся к I—II вв. Римские авторы Тацит, Плиний, Птолемей называли предков славян венедами и считали, что они населяли бассейн реки Вислы. Более поздние авторы — Прокопий Кесарийский и Иордан (VI век) разделяют славян на три группы: склавины, жившие между Вислой и Днестром, венеды, населявшие бассейн Вислы, и анты, расселившиеся между Днестром и Днепром. Именно анты считаются предками восточных славян.",
+                "6 часов",1,test2))
+        test.add(ObjectProject("","","","",1,ArrayList()))
+        test2.add(ObjectScreen("blablablablabla blablabla blablabla","",1,test3))
+        test2.add(ObjectScreen("blablablablabla2 blablabla2 blablabla2","",1,test3))
+
+        // тестовый обект/>
+
+        listProjects.isNestedScrollingEnabled = false
+        listProjects.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.HORIZONTAL, false)
         listProjects.adapter = ProjectAdapter(test) { it: View, list: List<ObjectProject>, i: Int ->
             it.plus.setOnClickListener {
-                Log.d("ff","fdfdfdg")
+
             }
             if (i == (list.size - 1)) {
                 it.plus.visibility = View.VISIBLE
             } else {
-                val test = ArrayList<ObjectScreen>()
+                it.plus.visibility = View.GONE
+
                 it.listScreens.isNestedScrollingEnabled = false
 
-                test.add(ObjectScreen())
-                test.add(ObjectScreen())
-                test.add(ObjectScreen())
-                test.add(ObjectScreen())
-                test.add(ObjectScreen())
-                test.add(ObjectScreen())
-                test.add(ObjectScreen())
-                test.add(ObjectScreen())
-                test.add(ObjectScreen())
-                test.add(ObjectScreen())
+
                 it.listScreens.layoutManager = LinearLayoutManager(activity)
-                it.listScreens.adapter = ScreenAdapter(test) {
+                it.listScreens.adapter = ScreenAdapter(test2) {
 
                 }
             }

@@ -1,8 +1,8 @@
 package com.bigmeco.questconstructor
 
-class ObjectScreen {
-    var body: String? = null
-    var image: String? = null
-    var id: Int? = null
-    var buttons: List<ObjectButton>? = null
-}
+data class ObjectScreen (
+    var body: String? ,
+    var image: String? = null,
+    var id: Int?,
+    var buttons: List<ObjectButton>?
+)
