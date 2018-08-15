@@ -1,6 +1,7 @@
 package com.bigmeco.questconstructor
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.constraint.ConstraintSet
@@ -49,6 +50,7 @@ class CreatorFragment : Fragment() {
         listProjects.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.HORIZONTAL, false)
         listProjects.adapter = ProjectAdapter(test) { it: View, list: List<ObjectProject>, i: Int ->
             it.plus.setOnClickListener {
+                startActivity(Intent(activity, CreatorActivity::class.java))
 
             }
             if (i == (list.size - 1)) {
