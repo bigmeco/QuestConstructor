@@ -42,7 +42,12 @@ class CreatorActivity : AppCompatActivity() {
             }
         }
         buttonNext.setOnClickListener{
+            if ( textNext.text == getString(R.string.next)) {
+                transitionBody(set)
+            } else{
+                finish()
 
+            }
             transitionBody(set)
 
         }
