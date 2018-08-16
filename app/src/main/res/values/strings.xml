@@ -6,8 +6,9 @@
     <string name="description">ОПИСАНИЕ</string>
     <string name="greeting">Добро пожаловать</string>
     <string name="continuation">А теперь</string>
-    <string name="edit_text_name">Для начала придумайте название вашей истории. В каком жанре, и количество времени на прохождение.</string>
-    <string name="edit_text_body">О чем расскажет ваша история?</string>
+    <string name="edit_text_name">Для начала давайте придумаем название вашей истории, укажем в каком она жанре, и среднее время на прохождение.</string>
+    <!--<string name="edit_text_name">Для начала придумайте название вашей истории. В каком жанре, и количество времени на прохождение.</string>-->
+    <string name="edit_text_body">Опишите свой мир, и о чем поведает ваша история?</string>
     <string name="hint_name">НАЗВАНИЕ</string>
     <string name="next">Далее</string>
     <string name="done">Готово</string>

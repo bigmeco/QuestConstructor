@@ -172,7 +172,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageBack"
-            app:srcCompat="@drawable/name_image" />
+            app:srcCompat="@drawable/spellbook" />
     </android.support.v7.widget.CardView>
 
     <ImageView

@@ -61,7 +61,7 @@ class CreatorActivity : AppCompatActivity() {
         set.clear(cardBody.id, ConstraintSet.BOTTOM)
         set.setVisibility(textHelloy.id, ConstraintSet.INVISIBLE)
         set.setVisibility(textBody.id, ConstraintSet.INVISIBLE)
-
+        imageLable.setImageResource(R.drawable.spellbook)
         textNext.text = getString(R.string.next)
         textBack.text = getString(R.string.exit)
         textHelloy.text = getString(R.string.greeting)
@@ -102,6 +102,7 @@ class CreatorActivity : AppCompatActivity() {
         set.clear(cardName.id, ConstraintSet.BOTTOM)
         set.setVisibility(textHelloy.id, ConstraintSet.INVISIBLE)
         set.setVisibility(textBody.id, ConstraintSet.INVISIBLE)
+        imageLable.setImageResource(R.drawable.castle)
 
         textNext.text = getString(R.string.done)
         textBack.text = getString(R.string.back)
