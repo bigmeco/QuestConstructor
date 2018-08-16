@@ -2,10 +2,36 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/createColor"
     tools:context=".CreatorActivity">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardBody"
+        android:layout_width="0dp"
+        android:layout_height="422dp"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent">
+
+        <EditText
+            android:id="@+id/editBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:ems="10"
+            android:hint="@string/description"
+            android:inputType="textMultiLine|textPersonName"
+            android:lines="5"
+            android:textAlignment="viewStart"
+            android:textSize="24sp" />
+    </android.support.v7.widget.CardView>
 
     <ImageView
         android:id="@+id/imageBack"
@@ -20,14 +46,15 @@
         app:srcCompat="@drawable/ic_black" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:id="@+id/textHelloy"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:fontFamily="sans-serif"
-        android:text="Добро пожаловать"
+        android:text="@string/greeting"
+        android:textAlignment="center"
         android:textColor="@color/name_color"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textBody"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -44,13 +71,13 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="6dp"
         android:elevation="@android:dimen/notification_large_icon_width"
-        android:text="Как называете вашу историю, в каком она жанре и какая длительность?"
+        android:text="@string/edit_text_name"
         android:textAlignment="center"
         android:textColor="@color/name_color"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textHelloy" />
 
     <EditText
         android:id="@+id/editName"
@@ -62,14 +89,13 @@
         android:background="@android:drawable/editbox_background_normal"
         android:elevation="1000dp"
         android:ems="10"
-        android:hint="НАЗВАНИЕ"
+        android:hint="@string/hint_name"
         android:inputType="textPersonName"
-        android:text=" "
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cardView" />
+        app:layout_constraintTop_toTopOf="@+id/cardName" />
 
     <Spinner
         android:id="@+id/spinnerTime"
@@ -87,18 +113,16 @@
         app:layout_constraintTop_toBottomOf="@+id/editName" />
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/cardName"
         android:layout_width="0dp"
         android:layout_height="300dp"
-        android:layout_marginBottom="32dp"
         android:rotation="180"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.454">
+        app:layout_constraintTop_toBottomOf="parent">
 
     </android.support.v7.widget.CardView>
 
@@ -142,6 +166,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView">
 
         <ImageView
+            android:id="@+id/imageLable"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -164,7 +189,7 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/buttonNext"
-        android:layout_width="168dp"
+        android:layout_width="190dp"
         android:layout_height="74dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -178,13 +203,13 @@
         app:layout_constraintTop_toBottomOf="parent">
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/textNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
             android:elevation="@android:dimen/notification_large_icon_width"
-            android:text="Далее"
+            android:text="@string/next"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
             android:textColor="@color/cardview_light_background"
             android:textSize="18sp"
@@ -210,14 +235,14 @@
         app:layout_constraintTop_toBottomOf="parent">
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/textBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
             android:layout_marginTop="8dp"
             android:elevation="@android:dimen/notification_large_icon_width"
             android:gravity="end"
-            android:text="Отмена"
+            android:text="@string/exit"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
             android:textColor="@color/cardview_light_background"
             android:textSize="18sp"
