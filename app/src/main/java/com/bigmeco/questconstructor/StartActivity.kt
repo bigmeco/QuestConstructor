@@ -12,6 +12,8 @@ import kotlinx.android.synthetic.main.activity_start.*
 import android.transition.Scene
 import android.transition.Transition
 import android.transition.ChangeBounds
+import io.realm.Realm
+import io.realm.RealmConfiguration
 
 
 class StartActivity : AppCompatActivity() {
@@ -19,6 +21,8 @@ class StartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
+        Realm.init(this)
+
         val set = ConstraintSet()
 
         ItemUp.setOnClickListener {

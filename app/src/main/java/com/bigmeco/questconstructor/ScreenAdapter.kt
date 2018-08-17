@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_screen.view.*
 
-class ScreenAdapter(val items: ArrayList<ObjectScreen>, val listener: (itemView: View) -> Unit) : RecyclerView.Adapter<ScreenAdapter.ViewHolder>() {
+class ScreenAdapter(val items: List<ObjectScreen>, val listener: (itemView: View) -> Unit) : RecyclerView.Adapter<ScreenAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_screen, parent, false))
@@ -17,7 +17,7 @@ class ScreenAdapter(val items: ArrayList<ObjectScreen>, val listener: (itemView:
     override fun getItemCount() = items.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: ObjectScreen, listener: (itemView: View) -> Unit, items: ArrayList<ObjectScreen>, position: Int) = with(itemView) {
+        fun bind(item: ObjectScreen, listener: (itemView: View) -> Unit, items: List<ObjectScreen>, position: Int) = with(itemView) {
             textBody.text = item.body
             if (true) {
                 colorState.setBackgroundColor(resources.getColor(R.color.createColor))
