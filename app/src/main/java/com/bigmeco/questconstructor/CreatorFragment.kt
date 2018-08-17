@@ -29,13 +29,12 @@ class CreatorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val realm = Realm.getDefaultInstance()
-//
+
 //
 //        var objectProject2 = ObjectProject()
 //        var object1 = ObjectScreen()
 //        object1.body ="rfrfrfr"
 //        object1.status =true
-//        object1.id =4
 //
 //        var objectScreen = RealmList<ObjectScreen>()
 //        objectScreen.add(object1)
@@ -45,7 +44,7 @@ class CreatorFragment : Fragment() {
 //        objectProject2.body = "Предки славян — праславяне — издавна жили на территории Центральной и Восточной Европы. По языку они относятся к индоевропейской группе народов, которые населяют Европу и часть Азии вплоть до Индии. Первые упоминания о праславянах относятся к I—II вв. Римские авторы Тацит, Плиний, Птолемей называли предков славян венедами и считали, что они населяли бассейн реки Вислы."
 //        objectProject2.time = "1 час"
 //        objectProject2.genre = "хоррор"
-//        objectProject2.id = 1
+//        objectProject2.id = 6
 //        objectProject2.name = "История tu"
 //        objectProject2.status = false
 //        objectProject2.screen = objectScreen

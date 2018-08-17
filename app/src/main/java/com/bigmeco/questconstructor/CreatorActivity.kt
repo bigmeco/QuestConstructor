@@ -21,6 +21,8 @@ import com.bigmeco.questconstructor.R.id.textView
 import com.bigmeco.questconstructor.R.id.textView
 import android.animation.ValueAnimator
 import android.animation.ValueAnimator.AnimatorUpdateListener
+import io.realm.Realm
+import io.realm.RealmList
 
 
 class CreatorActivity : AppCompatActivity() {
@@ -29,6 +31,10 @@ class CreatorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creator)
         val set = ConstraintSet()
+        val realm = Realm.getDefaultInstance()
+        var objectScreen = RealmList<ObjectScreen>()
+
+        editName
 
         imageBack.setOnClickListener{
             finish()
@@ -42,13 +48,15 @@ class CreatorActivity : AppCompatActivity() {
             }
         }
         buttonNext.setOnClickListener{
-            if ( textNext.text == getString(R.string.next)) {
+            if ( textBack.text != getString(R.string.back)) {
                 transitionBody(set)
             } else{
                 finish()
 
             }
             transitionBody(set)
+
+            objectScreen
 
         }
     }
@@ -67,7 +75,6 @@ class CreatorActivity : AppCompatActivity() {
         set.setVisibility(textHelloy.id, ConstraintSet.INVISIBLE)
         set.setVisibility(textBody.id, ConstraintSet.INVISIBLE)
         imageLable.setImageResource(R.drawable.spellbook)
-        textNext.text = getString(R.string.next)
         textBack.text = getString(R.string.exit)
         textHelloy.text = getString(R.string.greeting)
         textBody.text = getString(R.string.edit_text_name)
@@ -109,7 +116,6 @@ class CreatorActivity : AppCompatActivity() {
         set.setVisibility(textBody.id, ConstraintSet.INVISIBLE)
         imageLable.setImageResource(R.drawable.castle)
 
-        textNext.text = getString(R.string.done)
         textBack.text = getString(R.string.back)
         textHelloy.text = getString(R.string.continuation)
         textBody.text = getString(R.string.edit_text_body)

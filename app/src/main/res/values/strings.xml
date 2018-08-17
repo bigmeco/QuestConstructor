@@ -15,10 +15,39 @@
     <string name="exit">Отмена</string>
     <string name="back">Назад</string>
 
-    <string-array name="catlist">
-        <item>Барсик</item>
-        <item>Мурзик</item>
-        <item>Васька</item>
-        <item>Рыжик</item>
+    <string-array name="greetings">
+        <item>Боевик</item>
+        <item>Вестерн</item>
+        <item>Военный</item>
+        <item>Детектив</item>
+        <item>Детский</item>
+        <item>Драма</item>
+        <item>Комедия</item>
+        <item>Криминал</item>
+        <item>Мелодрама</item>
+        <item>Мистика</item>
+        <item>Научный</item>
+        <item>Приключения</item>
+        <item>Триллер</item>
+        <item>Ужасы</item>
+        <item>Фантастика</item>
+        <item>Фэнтези</item>
+        <item>Эротика</item>
+    </string-array>
+
+    <string-array name="duration">
+        <item>5-10 мин</item>
+        <item>10-20 мин</item>
+        <item>20-30 мин</item>
+        <item>30-40 мин</item>
+        <item>40-50 мин</item>
+        <item>50-60 мин</item>
+        <item>1 час</item>
+        <item>1.5 часа</item>
+        <item>2 часа</item>
+        <item>2.5 часа</item>
+        <item>3 часа</item>
+        <item>3.5 часа</item>
+        <item>4 часа</item>
     </string-array>
 </resources>
