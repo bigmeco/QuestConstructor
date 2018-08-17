@@ -1,13 +1,12 @@
 package com.bigmeco.questconstructor
 
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_project.view.*
 
-class ProjectAdapter(val items: List<ObjectProject>, val listener: (itemView: View,items: List<ObjectProject>, position: Int) -> Unit) : RecyclerView.Adapter<ProjectAdapter.ViewHolder>() {
+class ProjectAdapter(val items: ArrayList<ObjectProject>, val listener: (itemView: View, items: ArrayList<ObjectProject>, position: Int) -> Unit) : RecyclerView.Adapter<ProjectAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_project, parent, false))
@@ -18,7 +17,7 @@ class ProjectAdapter(val items: List<ObjectProject>, val listener: (itemView: Vi
     override fun getItemCount() = items.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: ObjectProject, listener: (itemView: View,items: List<ObjectProject>, position: Int) -> Unit, items: List<ObjectProject>, position: Int) = with(itemView) {
+        fun bind(item: ObjectProject, listener: (itemView: View,items: ArrayList<ObjectProject>, position: Int) -> Unit, items: ArrayList<ObjectProject>, position: Int) = with(itemView) {
 
             if (true) {
                 cardColor.setCardBackgroundColor(resources.getColor(R.color.pleyColor))

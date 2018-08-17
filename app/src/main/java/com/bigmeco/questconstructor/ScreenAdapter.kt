@@ -8,7 +8,6 @@ import kotlinx.android.synthetic.main.item_screen.view.*
 
 class ScreenAdapter(val items: List<ObjectScreen>, val listener: (itemView: View) -> Unit) : RecyclerView.Adapter<ScreenAdapter.ViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_screen, parent, false))
 
 
