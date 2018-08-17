@@ -19,8 +19,9 @@ class ProjectAdapter(val items: ArrayList<ObjectProject>, val listener: (itemVie
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: ObjectProject, listener: (itemView: View,items: ArrayList<ObjectProject>, position: Int) -> Unit, items: ArrayList<ObjectProject>, position: Int) = with(itemView) {
 
-            if (true) {
-                cardColor.setCardBackgroundColor(resources.getColor(R.color.pleyColor))
+
+            if (item.status!!) {
+                cardColor.setCardBackgroundColor(resources.getColor(R.color.createColor))
             }
             textName.text =item.name
             textBody.text =item.body
