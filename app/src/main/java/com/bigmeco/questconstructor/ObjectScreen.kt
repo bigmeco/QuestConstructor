@@ -12,7 +12,6 @@ open class ObjectScreen : RealmObject() {
     var buttons: RealmList<ObjectButton>?  =null
     var status: Boolean? = false
 
-
     fun thereIsNull():Boolean= body != null && id != null && buttons != null
 }
 

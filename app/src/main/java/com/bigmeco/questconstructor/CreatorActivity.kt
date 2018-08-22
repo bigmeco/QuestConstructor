@@ -33,33 +33,59 @@ class CreatorActivity : AppCompatActivity() {
         setContentView(R.layout.activity_creator)
         val set = ConstraintSet()
         val realm = Realm.getDefaultInstance()
-        var objectScreen = RealmList<ObjectScreen>()
+        var objectProject = ObjectProject()
 
-        editName
 
-        imageBack.setOnClickListener{
+
+        imageBack.setOnClickListener {
             finish()
         }
 
-        buttonBack.setOnClickListener{
-            if ( textBack.text == getString(R.string.back)) {
+        buttonBack.setOnClickListener {
+            if (textBack.text == getString(R.string.back)) {
                 transitionName(set)
-            } else{
+            } else {
                 finish()
 
             }
         }
 
-        buttonNext.setOnClickListener{
-            if ( textBack.text != getString(R.string.back)) {
+        buttonNext.setOnClickListener {
+            if (textBack.text != getString(R.string.back)) {
                 transitionBody(set)
-            } else{
-                startActivity(Intent(this, CreatorScreenActivity::class.java))
+            } else {
+                objectProject.name = editName.text.toString()
+                objectProject.body = editBody.text.toString()
+                objectProject.genre = spinnerGenres.selectedItem.toString()
+                objectProject.time = spinnerTime.selectedItem.toString()
+                objectProject.id = realm.where(ObjectProject::class.java).findAll().size
+                objectProject.status = false
+//                var endProject =ObjectScreen()
+//                var endButton =ObjectButton()
+//                endButton.status= true
+//                var objectButton =RealmList<ObjectButton>()
+//                objectButton.add(endButton)
+//                endProject.id=0
+//                endProject.buttons=objectButton
+//
+                var startProject = ObjectScreen()
+                startProject.id = 0
+
+                var objectScreen = RealmList<ObjectScreen>()
+                //objectScreen.add(endProject)
+                objectScreen.add(startProject)
+                objectProject.screen = objectScreen
+                realm.beginTransaction()
+                realm.insert(objectProject)
+                realm.commitTransaction()
+                val intent = Intent(this, CreatorScreenActivity::class.java)
+
+                intent.putExtra("idProject", objectProject.id!!)
+                startActivity(intent)
 
             }
             transitionBody(set)
 
-            objectScreen
 
         }
     }
@@ -83,7 +109,6 @@ class CreatorActivity : AppCompatActivity() {
         textBody.text = getString(R.string.edit_text_name)
 
 
-
         val mySwapTransition = ChangeBounds()
         mySwapTransition.addListener(object : Transition.TransitionListener {
             override fun onTransitionStart(transition: Transition) {}
@@ -91,7 +116,7 @@ class CreatorActivity : AppCompatActivity() {
                 set.clone(mainLayout)
                 set.setVisibility(textBody.id, ConstraintSet.VISIBLE)
                 set.setVisibility(textHelloy.id, ConstraintSet.VISIBLE)
-                 set.connect(cardName.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
+                set.connect(cardName.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
                 TransitionManager.beginDelayedTransition(mainLayout)
                 set.applyTo(mainLayout)
             }
@@ -124,7 +149,6 @@ class CreatorActivity : AppCompatActivity() {
         textBody.text = getString(R.string.edit_text_body)
 
 
-
         val mySwapTransition = ChangeBounds()
         mySwapTransition.addListener(object : Transition.TransitionListener {
             override fun onTransitionStart(transition: Transition) {}
@@ -132,7 +156,7 @@ class CreatorActivity : AppCompatActivity() {
                 set.clone(mainLayout)
                 set.setVisibility(textBody.id, ConstraintSet.VISIBLE)
                 set.setVisibility(textHelloy.id, ConstraintSet.VISIBLE)
-                 set.connect(cardBody.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
+                set.connect(cardBody.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
                 TransitionManager.beginDelayedTransition(mainLayout)
                 set.applyTo(mainLayout)
             }
