@@ -21,6 +21,7 @@ import com.bigmeco.questconstructor.R.id.textView
 import com.bigmeco.questconstructor.R.id.textView
 import android.animation.ValueAnimator
 import android.animation.ValueAnimator.AnimatorUpdateListener
+import android.content.Intent
 import io.realm.Realm
 import io.realm.RealmList
 
@@ -39,6 +40,7 @@ class CreatorActivity : AppCompatActivity() {
         imageBack.setOnClickListener{
             finish()
         }
+
         buttonBack.setOnClickListener{
             if ( textBack.text == getString(R.string.back)) {
                 transitionName(set)
@@ -47,11 +49,12 @@ class CreatorActivity : AppCompatActivity() {
 
             }
         }
+
         buttonNext.setOnClickListener{
             if ( textBack.text != getString(R.string.back)) {
                 transitionBody(set)
             } else{
-                finish()
+                startActivity(Intent(this, CreatorScreenActivity::class.java))
 
             }
             transitionBody(set)
