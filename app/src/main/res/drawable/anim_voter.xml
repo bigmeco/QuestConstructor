@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:drawable="@drawable/voter"
+    tools:ignore="NewApi">
+
+    <target
+        android:animation="@animator/voter1"
+        android:name="voter1" />
+    <target
+        android:animation="@animator/voter2"
+        android:name="voter2" />
+    <target
+        android:animation="@animator/voter3"
+        android:name="voter3" />
+
+</animated-vector>

@@ -1,5 +1,6 @@
 package com.bigmeco.questconstructor
 
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,7 @@ class ProjectAdapter(val items: ArrayList<ObjectProject>, val listener: (itemVie
 
             if (item.status!!) {
                 cardColor.setCardBackgroundColor(resources.getColor(R.color.createColor))
+
             }
             textName.text =item.name
             textBody.text =item.body

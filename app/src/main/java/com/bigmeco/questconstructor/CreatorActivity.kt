@@ -22,8 +22,15 @@ import com.bigmeco.questconstructor.R.id.textView
 import android.animation.ValueAnimator
 import android.animation.ValueAnimator.AnimatorUpdateListener
 import android.content.Intent
+import android.util.Log
 import io.realm.Realm
 import io.realm.RealmList
+import kotlinx.android.synthetic.main.activity_creator_screen.*
+import android.R.id.edit
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
+
+
 
 
 class CreatorActivity : AppCompatActivity() {
@@ -79,8 +86,11 @@ class CreatorActivity : AppCompatActivity() {
                 realm.insert(objectProject)
                 realm.commitTransaction()
                 val intent = Intent(this, CreatorScreenActivity::class.java)
+                val editor = PreferenceManager.getDefaultSharedPreferences(this).edit()
+                editor.putInt("idProject", objectProject.id!!)
+                editor.apply()
+                Log.d("ddd",objectProject.id.toString())
 
-                intent.putExtra("idProject", objectProject.id!!)
                 startActivity(intent)
 
             }
@@ -89,6 +99,8 @@ class CreatorActivity : AppCompatActivity() {
 
         }
     }
+
+
 
 
     private fun transitionName(set: ConstraintSet) {

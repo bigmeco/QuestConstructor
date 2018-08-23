@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import io.realm.Realm
 import io.realm.RealmList
+import kotlinx.android.synthetic.main.activity_creator_screen.*
 import kotlinx.android.synthetic.main.fragment_creator.*
 import kotlinx.android.synthetic.main.item_project.view.*
 
@@ -25,6 +26,14 @@ class CreatorFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_creator, container, false)
     }
+
+    override fun onResume() {
+        super.onResume()
+
+        listProjects.adapter!!.notifyDataSetChanged()
+
+        }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
