@@ -25,7 +25,6 @@ import android.content.Intent
 import android.util.Log
 import io.realm.Realm
 import io.realm.RealmList
-import kotlinx.android.synthetic.main.activity_creator_screen.*
 import android.R.id.edit
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
@@ -81,6 +80,10 @@ class CreatorActivity : AppCompatActivity() {
                 var objectScreen = RealmList<ObjectScreen>()
                 //objectScreen.add(endProject)
                 objectScreen.add(startProject)
+                objectScreen.add(startProject)
+                objectScreen.add(startProject)
+                objectScreen.add(startProject)
+                objectScreen.add(startProject)
                 objectProject.screen = objectScreen
                 realm.beginTransaction()
                 realm.insert(objectProject)
@@ -112,7 +115,7 @@ class CreatorActivity : AppCompatActivity() {
         colorAnimation.duration = 600
         colorAnimation.start()
         set.clone(mainLayout)
-        set.clear(cardBody.id, ConstraintSet.BOTTOM)
+        set.clear(cardView.id, ConstraintSet.BOTTOM)
         set.setVisibility(textHelloy.id, ConstraintSet.INVISIBLE)
         set.setVisibility(textBody.id, ConstraintSet.INVISIBLE)
         imageLable.setImageResource(R.drawable.spellbook)
@@ -168,7 +171,7 @@ class CreatorActivity : AppCompatActivity() {
                 set.clone(mainLayout)
                 set.setVisibility(textBody.id, ConstraintSet.VISIBLE)
                 set.setVisibility(textHelloy.id, ConstraintSet.VISIBLE)
-                set.connect(cardBody.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
+                set.connect(cardView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
                 TransitionManager.beginDelayedTransition(mainLayout)
                 set.applyTo(mainLayout)
             }

@@ -8,17 +8,13 @@ import android.support.v7.widget.helper.ItemTouchHelper
 import kotlinx.android.synthetic.main.activity_creator_screen.*
 import android.content.Intent
 import android.view.KeyEvent
-import android.view.KeyEvent.KEYCODE_BACK
 import android.preference.PreferenceManager
-import android.content.SharedPreferences
 import android.graphics.drawable.Animatable
-import android.graphics.drawable.Drawable
+import android.support.constraint.ConstraintSet
+import android.transition.TransitionManager
 import android.util.Log
+import android.view.View
 import io.realm.Realm
-import io.realm.RealmList
-import com.bigmeco.questconstructor.R.id.imageView
-
-
 
 
 class CreatorScreenActivity : AppCompatActivity() {
@@ -32,24 +28,52 @@ class CreatorScreenActivity : AppCompatActivity() {
         setContentView(R.layout.activity_creator_screen)
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         var id = preferences.getInt("idProject", 0)
+        var idVoter = false
+        val drawable = imageVoter.drawable
 
+        if (drawable is Animatable) {
+            (drawable as Animatable).start()
+        }
+
+        //
+        var obP= realm.where(ObjectProject::class.java).equalTo("id",id).findFirst()
+        if (obP != null) {
+            for (i in 0..obP.screen!!.size)
+                obP.screen
+        }
+        listScreen.layoutManager = LinearLayoutManager(this)!!
+        listScreen.adapter = ListScreenAdapter(ArrayList(obP!!.screen)){ view: View, arrayList: ArrayList<ObjectScreen>, i: Int ->
+
+        }
+//            var anim = imageView4.drawable as Animatable
+//            anim.start()
+
+        Log.d("ddd",   realm.where(ObjectProject::class.java).equalTo("id",id).findFirst().toString())
+        //
         objectScreens.add(ObjectButton())
+
+
+        imageVoter.setOnClickListener{
+            val set = ConstraintSet()
+
+            set.clone(mainLayout)
+            set.clear(fading_edge_layout.id, ConstraintSet.TOP)
+            if (idVoter) {
+                set.connect(fading_edge_layout.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
+
+                idVoter=false
+            }else {
+                set.connect(fading_edge_layout.id, ConstraintSet.TOP, cardBody.id, ConstraintSet.BOTTOM, 0)
+                idVoter=true
+
+            }
+            TransitionManager.beginDelayedTransition(mainLayout)
+            set.applyTo(mainLayout)
+        }
 
         listButtons.layoutManager = LinearLayoutManager(this)!!
         listButtons.adapter = ButtonsAdapter(objectScreens){
-            val drawable = imageView4.drawable
 
-            if (drawable is Animatable) {
-                (drawable as Animatable).start()
-            }
-//            var anim = imageView4.drawable as Animatable
-//            anim.start()
-            var obP= realm.where(ObjectProject::class.java).equalTo("id",id).findFirst()
-            if (obP != null) {
-                for (i in 0..obP.screen!!.size)
-                         obP.screen
-            }
-Log.d("ddd",   realm.where(ObjectProject::class.java).equalTo("id",id).findFirst().toString())
         }
         buttonAdd.setOnClickListener{
             objectScreens.add(ObjectButton())

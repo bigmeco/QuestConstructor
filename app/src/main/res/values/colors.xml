@@ -6,4 +6,5 @@
     <color name="createColor">#8bcd54</color>
     <color name="pleyColor">#dc4931</color>
     <color name="name_color">#e4ffffff</color>
+    <color name="color_divider">#78ffffff</color>
 </resources>

@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
@@ -14,7 +15,7 @@
         android:adjustViewBounds="false"
         android:background="@color/colorPrimary"
         android:scaleType="center"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintBottom_toTopOf="@+id/cardBody"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +35,7 @@
         app:srcCompat="@drawable/bg_image" />
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/cardBody"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -67,10 +68,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/colorPrimaryDark"
+        android:paddingBottom="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView">
+        app:layout_constraintTop_toBottomOf="@+id/cardBody">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -80,7 +82,7 @@
                 android:id="@+id/buttonAdd"
                 android:layout_width="112dp"
                 android:layout_height="56dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="36dp"
                 android:layout_marginTop="8dp"
                 app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="24dp"
@@ -113,13 +115,60 @@
     </ScrollView>
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imageVoter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="false"
-        android:scaleType="fitEnd"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+        android:paddingTop="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/fading_edge_layout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fading_edge_layout"
         app:srcCompat="@drawable/anim_voter" />
+
+    <com.bosphere.fadingedgelayout.FadingEdgeLayout
+        android:id="@+id/fading_edge_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#63a6ce"
+        app:fel_edge="top"
+        app:fel_size_top="86dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:padding="8dp"
+                    app:srcCompat="@drawable/plus" />
+
+                <View
+                    android:id="@+id/divider6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#66ffffff" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/listScreen"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never" />
+            </LinearLayout>
+        </ScrollView>
+
+    </com.bosphere.fadingedgelayout.FadingEdgeLayout>
 
 </android.support.constraint.ConstraintLayout>
