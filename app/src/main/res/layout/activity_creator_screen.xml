@@ -126,49 +126,54 @@
         app:layout_constraintTop_toTopOf="@+id/fading_edge_layout"
         app:srcCompat="@drawable/anim_voter" />
 
-    <com.bosphere.fadingedgelayout.FadingEdgeLayout
+
+    <ScrollView
         android:id="@+id/fading_edge_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#63a6ce"
-        app:fel_edge="top"
-        app:fel_size_top="86dp"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent">
 
-        <ScrollView
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:overScrollMode="never">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
+
+            <ImageView
+                android:id="@+id/imageView8"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="56dp"
+                android:padding="8dp"
+                app:srcCompat="@drawable/plus" />
 
-                <ImageView
-                    android:id="@+id/imageView8"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:padding="8dp"
-                    app:srcCompat="@drawable/plus" />
+            <View
+                android:id="@+id/divider6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#66ffffff" />
 
-                <View
-                    android:id="@+id/divider6"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#66ffffff" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/listScreen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never" />
+        </LinearLayout>
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/listScreen"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:overScrollMode="never" />
-            </LinearLayout>
-        </ScrollView>
+    </ScrollView>
 
-    </com.bosphere.fadingedgelayout.FadingEdgeLayout>
+    <View
+        android:id="@+id/divider8"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="@drawable/gidient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fading_edge_layout" />
 
 </android.support.constraint.ConstraintLayout>

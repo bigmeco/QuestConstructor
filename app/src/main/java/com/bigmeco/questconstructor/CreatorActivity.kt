@@ -84,6 +84,8 @@ class CreatorActivity : AppCompatActivity() {
                 objectScreen.add(startProject)
                 objectScreen.add(startProject)
                 objectScreen.add(startProject)
+                objectScreen.add(startProject)
+                objectScreen.add(startProject)
                 objectProject.screen = objectScreen
                 realm.beginTransaction()
                 realm.insert(objectProject)
