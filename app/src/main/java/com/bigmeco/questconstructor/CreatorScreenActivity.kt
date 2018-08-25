@@ -23,20 +23,21 @@ import android.view.MotionEvent
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.GestureDetector
 import android.widget.ScrollView
+import io.realm.RealmList
 
 
 class CreatorScreenActivity : AppCompatActivity() {
 
     val realm = Realm.getDefaultInstance()
     var idScreen = 0
-    var objectProject: ObjectProject? =ObjectProject()
-    var objectButton: ArrayList<ObjectButton> =ArrayList()
-
+    var objectProject: ObjectProject? = ObjectProject()
+    var objectButton: ArrayList<ObjectButton> = ArrayList()
+    var id: Int? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creator_screen)
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-        var id = preferences.getInt("idProject", 0)
+        id = preferences.getInt("idProject", 0)
         val drawable = imageVoter.drawable
 
         if (drawable is Animatable) {
@@ -45,7 +46,7 @@ class CreatorScreenActivity : AppCompatActivity() {
 
 
         //
-         objectProject = realm.where(ObjectProject::class.java).equalTo("id", id).findFirst()
+        objectProject = realm.where(ObjectProject::class.java).equalTo("id", id).findFirst()
         if (objectProject != null) {
             for (i in 0..objectProject!!.screen!!.size)
                 objectProject!!.screen
@@ -57,51 +58,19 @@ class CreatorScreenActivity : AppCompatActivity() {
         //
 
 
-
         val gdt = GestureDetector(GestureListener(mainLayout, fading_edge_layout, cardBody))
         imageVoter.setOnTouchListener { view, event ->
             gdt.onTouchEvent(event)
             true
         }
-        imageScreen.setOnClickListener{
+        imageScreen.setOnClickListener {
 
         }
 
         listScreen.layoutManager = LinearLayoutManager(this)!!
-        listScreen.adapter = ListScreenAdapter(ArrayList(objectProject!!.screen)) {
-            val set = ConstraintSet()
-
-            set.clone(mainLayout)
-            set.clear(fading_edge_layout.id, ConstraintSet.TOP)
-            set.connect(fading_edge_layout.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
-            val mySwapTransition = ChangeBounds()
-            mySwapTransition.addListener(object : Transition.TransitionListener {
-                override fun onTransitionStart(transition: Transition) {}
-                override fun onTransitionEnd(transition: Transition) {
-                    screenUpdate(it.id!!)
-                    set.clone(mainLayout)
-                    set.connect(fading_edge_layout.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
-                    TransitionManager.beginDelayedTransition(mainLayout)
-                    set.applyTo(mainLayout)
-                }
-
-                override fun onTransitionCancel(transition: Transition) {}
-                override fun onTransitionPause(transition: Transition) {}
-                override fun onTransitionResume(transition: Transition) {}
-            })
-
-            TransitionManager.go(Scene(mainLayout), mySwapTransition)
-            //TransitionManager.beginDelayedTransition(mainLayout)
-            set.applyTo(mainLayout)
-
-
-
-
-        }
+        listScreenUpdate(ArrayList(objectProject!!.screen))
         listButtons.layoutManager = LinearLayoutManager(this)!!
-        listButtons.adapter = ButtonsAdapter(objectButton!!) {
-
-        }
+        listButtonUpdate(objectButton)
         buttonAdd.setOnClickListener {
             objectButton!!.add(ObjectButton())
             (listButtons.adapter as ButtonsAdapter).notifyItemInserted(objectButton!!.size)
@@ -154,14 +123,78 @@ class CreatorScreenActivity : AppCompatActivity() {
     }
 
     private fun screenUpdate(idScreen: Int) {
+        realm.executeTransaction {
 
+            objectProject!!.screen!![this.idScreen]!!.image = editTextBody.text.toString()
 
+            objectProject!!.screen!![this.idScreen]!!.body = editTextBody.text.toString()
+            objectProject!!.screen!![this.idScreen]!!.body = editTextBody.text.toString()
+            objectProject!!.screen!![this.idScreen]!!.buttons!!.deleteAllFromRealm()
+            objectProject!!.screen!![this.idScreen]!!.buttons!!.addAll(objectButton)
+            for (i in 0 until objectProject!!.screen!![this.idScreen]!!.buttons!!.size) {
+                Log.d("testy", realm.where(ObjectProject::class.java).equalTo("id", id).findFirst()!!.screen!![this.idScreen]!!.buttons!![i].toString())
+
+                if (objectProject!!.screen!![this.idScreen]!!.buttons!![i]!!.status!!) {
+                    objectProject!!.screen!![this.idScreen]!!.status = true
+                } else {
+                    objectProject!!.screen!![this.idScreen]!!.status = false
+                    break
+                }
+            }
+            for (i in 0 until objectProject!!.screen!!.size) {
+                if (objectProject!!.screen!![i]!!.status!!) {
+                    objectProject!!.status = true
+                } else {
+                    objectProject!!.status = false
+                    break
+                }
+            }
+        }
+        Log.d("testy", realm.where(ObjectProject::class.java).equalTo("id", id).findFirst()!!.screen!![this.idScreen].toString())
         this.idScreen = idScreen
         editTextBody.setText(objectProject!!.screen!![idScreen]!!.body)
+        listButtonUpdate(objectButton)
         listButtons.invalidate()
+        listScreenUpdate(ArrayList(objectProject!!.screen))
+        listScreen.invalidate()
+    }
+
+    private fun listScreenUpdate(screens: ArrayList<ObjectScreen>) {
+        listScreen.adapter = ListScreenAdapter(screens) {
+            val set = ConstraintSet()
+
+            set.clone(mainLayout)
+            set.clear(fading_edge_layout.id, ConstraintSet.TOP)
+            set.connect(fading_edge_layout.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
+            val mySwapTransition = ChangeBounds()
+            mySwapTransition.addListener(object : Transition.TransitionListener {
+                override fun onTransitionStart(transition: Transition) {}
+                override fun onTransitionEnd(transition: Transition) {
+                    screenUpdate(it.id!!)
+                    set.clone(mainLayout)
+                    set.connect(fading_edge_layout.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
+                    TransitionManager.beginDelayedTransition(mainLayout)
+                    set.applyTo(mainLayout)
+                }
+
+                override fun onTransitionCancel(transition: Transition) {}
+                override fun onTransitionPause(transition: Transition) {}
+                override fun onTransitionResume(transition: Transition) {}
+            })
+
+            TransitionManager.go(Scene(mainLayout), mySwapTransition)
+            //TransitionManager.beginDelayedTransition(mainLayout)
+            set.applyTo(mainLayout)
+        }
     }
 
 
+    private fun listButtonUpdate(buttons: ArrayList<ObjectButton>) {
+        listButtons.adapter = ButtonsAdapter(buttons) {
+            objectProject!!.screen!![this.idScreen]!!.buttons!!
+        }
+
+    }
 }
 
 

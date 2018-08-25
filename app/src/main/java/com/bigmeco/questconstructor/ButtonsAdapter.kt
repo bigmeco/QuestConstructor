@@ -23,10 +23,13 @@ class ButtonsAdapter(val items:ArrayList<ObjectButton>, val listener: (position:
             buttenNextScreen.setOnClickListener {
                 listener.invoke(position)
             }
+            itemView.editBody.setText(item.text)
             itemView.editBody.addTextChangedListener(object : TextWatcher {
 
                 override fun afterTextChanged(s: Editable) {
                     item.text = itemView.editBody.text.toString()
+                    item.id =0
+                    item.status =true
                 }
 
                 override fun beforeTextChanged(s: CharSequence, start: Int,

@@ -67,12 +67,6 @@ class CreatorActivity : AppCompatActivity() {
                 var objectScreen = RealmList<ObjectScreen>()
                 //objectScreen.add(endProject)
                 objectScreen.add(startProject)
-                objectScreen.add(startProject)
-                objectScreen.add(startProject)
-                objectScreen.add(startProject)
-                objectScreen.add(startProject)
-                objectScreen.add(startProject)
-                objectScreen.add(startProject)
                 objectProject.screen = objectScreen
                 realm.beginTransaction()
                 realm.insert(objectProject)

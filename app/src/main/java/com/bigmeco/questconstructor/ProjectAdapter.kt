@@ -23,6 +23,9 @@ class ProjectAdapter(val items: ArrayList<ObjectProject>, val listener: (itemVie
             if (item.status!!) {
                 cardColor.setCardBackgroundColor(resources.getColor(R.color.createColor))
 
+            }else {
+                cardColor.setCardBackgroundColor(resources.getColor(R.color.pleyColor))
+
             }
             textName.text =item.name
             editTextBody.text =item.body

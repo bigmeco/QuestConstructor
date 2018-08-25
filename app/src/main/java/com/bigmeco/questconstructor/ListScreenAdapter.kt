@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_sreen_add.view.*
 
 
-
 class ListScreenAdapter(val items: ArrayList<ObjectScreen>, val listener: (item: ObjectScreen) -> Unit) : RecyclerView.Adapter<ListScreenAdapter.ViewHolder>() {
 
 
@@ -23,7 +22,7 @@ class ListScreenAdapter(val items: ArrayList<ObjectScreen>, val listener: (item:
             mainItam.setOnClickListener {
                 listener.invoke(item)
             }
-            if (item.body!=null) {
+            if (item.body != null || item.body != "") {
                 editTextBody.text = item.body
             }
             if (item.status!!) {
