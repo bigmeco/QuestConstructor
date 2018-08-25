@@ -58,7 +58,7 @@
 
     <Space
         android:id="@+id/space2"
-        android:layout_width="420dp"
+        android:layout_width="620dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

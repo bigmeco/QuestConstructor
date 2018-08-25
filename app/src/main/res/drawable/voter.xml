@@ -2,26 +2,23 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
 android:viewportWidth="628.9"
 android:viewportHeight="314.61"
-android:width="628.9dp"
+android:width="629dp"
 android:height="314.61dp">
 <group>
     <group
-        android:name="voter1"
-        android:translateY="-49.93">
+        android:name="voter1">
         <path
             android:pathData="M628.9 61.9c-34.92 0 -34.92 -12 -69.84 -12 -34.92 0 -34.92 12 -69.84 12 -34.92 0 -34.92 -12 -69.84 -12 -34.92 0 -34.92 12 -69.84 12 -34.92 0 -34.92 -12 -69.84 -12 -34.92 0 -34.92 12 -69.84 12 -34.92 0 -34.92 -12 -69.84 -12 -34.92 0 -34.92 12 -69.85 12 -34.93 0 -34.92 -12 -69.85 -12l0 252.67 628.58 0z"
             android:fillColor="#a1cee3" />
     </group>
     <group
-        android:name="voter2"
-        android:translateY="-49.93">
+        android:name="voter2">
         <path
             android:pathData="M628.58 90.6c-34.92 0 -34.92 -12 -69.84 -12 -34.92 0 -34.92 12 -69.84 12 -34.92 0 -34.92 -12 -69.84 -12 -34.92 0 -34.92 12 -69.84 12 -34.92 0 -34.92 -12 -69.84 -12 -34.92 0 -34.92 12 -69.84 12 -34.92 0 -34.92 -12 -69.84 -12 -34.92 0 -34.92 12 -69.85 12 -34.93 0 -34.92 -12 -69.85 -12l0 252.67 628.58 0z"
             android:fillColor="#70b8cf" />
     </group>
     <group
-        android:name="voter3"
-        android:translateY="-49.93">
+        android:name="voter3">
         <path
             android:pathData="M628.58 123.87c-34.92 0 -34.92 -12 -69.84 -12 -34.92 0 -34.92 12 -69.84 12 -34.92 0 -34.92 -12 -69.84 -12 -34.92 0 -34.92 12 -69.84 12 -34.92 0 -34.92 -12 -69.84 -12 -34.92 0 -34.92 12 -69.84 12 -34.92 0 -34.92 -12 -69.84 -12 -34.92 0 -34.92 12 -69.85 12 -34.93 0 -34.92 -12 -69.85 -12l0 252.67 628.58 0z"
             android:fillColor="#63a6ce" />
