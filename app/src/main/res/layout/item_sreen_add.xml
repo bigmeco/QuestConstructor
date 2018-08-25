@@ -2,12 +2,13 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainItam"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
 
     <TextView
-        android:id="@+id/textBody"
+        android:id="@+id/editTextBody"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -19,7 +20,7 @@
         android:text="..........................................................................................................................................................................................................................................................................."
         android:textColor="@color/name_color"
         app:layout_constraintBottom_toTopOf="@+id/divider7"
-        app:layout_constraintEnd_toStartOf="@+id/cardView3"
+        app:layout_constraintEnd_toStartOf="@+id/cardState"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,11 +32,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textBody"
+        app:layout_constraintTop_toBottomOf="@+id/editTextBody"
         app:layout_constraintVertical_bias="1.0" />
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardView3"
+        android:id="@+id/cardState"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginStart="8dp"

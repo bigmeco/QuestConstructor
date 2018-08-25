@@ -63,7 +63,7 @@
                     android:layout_marginTop="2dp"
                     android:text="..........."
                     android:textColor="@color/colorPrimaryDark"
-                    app:layout_constraintBottom_toTopOf="@+id/textBody"
+                    app:layout_constraintBottom_toTopOf="@+id/editTextBody"
                     app:layout_constraintEnd_toEndOf="@+id/textView"
                     app:layout_constraintStart_toStartOf="@+id/textView"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -80,7 +80,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
                 <TextView
-                    android:id="@+id/textBody"
+                    android:id="@+id/editTextBody"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
@@ -129,7 +129,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:background="?android:attr/listDivider"
-                    app:layout_constraintBottom_toTopOf="@+id/textBody"
+                    app:layout_constraintBottom_toTopOf="@+id/editTextBody"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textName" />

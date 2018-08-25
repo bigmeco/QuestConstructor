@@ -10,6 +10,7 @@
     <!--<string name="edit_text_name">Для начала придумайте название вашей истории. В каком жанре, и количество времени на прохождение.</string>-->
     <string name="edit_text_body">Опишите свой мир, и о чем поведает ваша история?</string>
     <string name="hint_name">НАЗВАНИЕ</string>
+    <string name="null_body">Не заполнено</string>
     <string name="next">Далее</string>
     <string name="done">Готово</string>
     <string name="exit">Отмена</string>

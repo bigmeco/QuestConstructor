@@ -17,7 +17,7 @@ class ScreenAdapter(val items: List<ObjectScreen>, val listener: (itemView: View
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: ObjectScreen, listener: (itemView: View) -> Unit, items: List<ObjectScreen>, position: Int) = with(itemView) {
-            textBody.text = item.body
+            editTextBody.text = item.body
             if (item.status!!) {
                 colorState.setBackgroundColor(resources.getColor(R.color.createColor))
             }

@@ -1,32 +1,19 @@
 package com.bigmeco.questconstructor
 
-import android.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
-import android.support.v4.view.GravityCompat
 import android.transition.ChangeBounds
 import android.transition.Scene
 import android.transition.Transition
 import android.transition.TransitionManager
-import android.view.ViewGroup
 import kotlinx.android.synthetic.main.activity_creator.*
-import android.R.attr.visible
-import android.view.View
-import android.graphics.drawable.ColorDrawable
-import android.R.attr.button
 import android.animation.ArgbEvaluator
-import com.bigmeco.questconstructor.R.id.textView
-import com.bigmeco.questconstructor.R.id.textView
 import android.animation.ValueAnimator
-import android.animation.ValueAnimator.AnimatorUpdateListener
 import android.content.Intent
 import android.util.Log
 import io.realm.Realm
 import io.realm.RealmList
-import android.R.id.edit
-import android.content.SharedPreferences
 import android.preference.PreferenceManager
 
 
@@ -119,11 +106,11 @@ class CreatorActivity : AppCompatActivity() {
         set.clone(mainLayout)
         set.clear(cardView.id, ConstraintSet.BOTTOM)
         set.setVisibility(textHelloy.id, ConstraintSet.INVISIBLE)
-        set.setVisibility(textBody.id, ConstraintSet.INVISIBLE)
+        set.setVisibility(editTextBody.id, ConstraintSet.INVISIBLE)
         imageLable.setImageResource(R.drawable.spellbook)
         textBack.text = getString(R.string.exit)
         textHelloy.text = getString(R.string.greeting)
-        textBody.text = getString(R.string.edit_text_name)
+        editTextBody.text = getString(R.string.edit_text_name)
 
 
         val mySwapTransition = ChangeBounds()
@@ -131,7 +118,7 @@ class CreatorActivity : AppCompatActivity() {
             override fun onTransitionStart(transition: Transition) {}
             override fun onTransitionEnd(transition: Transition) {
                 set.clone(mainLayout)
-                set.setVisibility(textBody.id, ConstraintSet.VISIBLE)
+                set.setVisibility(editTextBody.id, ConstraintSet.VISIBLE)
                 set.setVisibility(textHelloy.id, ConstraintSet.VISIBLE)
                 set.connect(cardName.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
                 TransitionManager.beginDelayedTransition(mainLayout)
@@ -158,12 +145,12 @@ class CreatorActivity : AppCompatActivity() {
         set.clone(mainLayout)
         set.clear(cardName.id, ConstraintSet.BOTTOM)
         set.setVisibility(textHelloy.id, ConstraintSet.INVISIBLE)
-        set.setVisibility(textBody.id, ConstraintSet.INVISIBLE)
+        set.setVisibility(editTextBody.id, ConstraintSet.INVISIBLE)
         imageLable.setImageResource(R.drawable.castle)
 
         textBack.text = getString(R.string.back)
         textHelloy.text = getString(R.string.continuation)
-        textBody.text = getString(R.string.edit_text_body)
+        editTextBody.text = getString(R.string.edit_text_body)
 
 
         val mySwapTransition = ChangeBounds()
@@ -171,7 +158,7 @@ class CreatorActivity : AppCompatActivity() {
             override fun onTransitionStart(transition: Transition) {}
             override fun onTransitionEnd(transition: Transition) {
                 set.clone(mainLayout)
-                set.setVisibility(textBody.id, ConstraintSet.VISIBLE)
+                set.setVisibility(editTextBody.id, ConstraintSet.VISIBLE)
                 set.setVisibility(textHelloy.id, ConstraintSet.VISIBLE)
                 set.connect(cardView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
                 TransitionManager.beginDelayedTransition(mainLayout)

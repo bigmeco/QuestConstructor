@@ -1,6 +1,5 @@
 package com.bigmeco.questconstructor
 
-import android.app.Notification
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -14,24 +13,24 @@ import android.graphics.drawable.Animatable
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
 import android.support.v7.widget.CardView
+import android.transition.ChangeBounds
+import android.transition.Scene
+import android.transition.Transition
 import android.transition.TransitionManager
 import android.util.Log
-import android.view.View
 import io.realm.Realm
 import android.view.MotionEvent
-import android.view.View.OnTouchListener
 import android.view.GestureDetector.SimpleOnGestureListener
-import android.text.method.Touch.onTouchEvent
-import com.bigmeco.questconstructor.R.id.imageView
 import android.view.GestureDetector
 import android.widget.ScrollView
 
 
 class CreatorScreenActivity : AppCompatActivity() {
 
-    val objectScreens = ArrayList<ObjectButton>()
     val realm = Realm.getDefaultInstance()
-
+    var idScreen = 0
+    var objectProject: ObjectProject? =ObjectProject()
+    var objectButton: ArrayList<ObjectButton> =ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,42 +44,67 @@ class CreatorScreenActivity : AppCompatActivity() {
         }
 
 
-
-
-
-
-
         //
-        var obP = realm.where(ObjectProject::class.java).equalTo("id", id).findFirst()
-        if (obP != null) {
-            for (i in 0..obP.screen!!.size)
-                obP.screen
+         objectProject = realm.where(ObjectProject::class.java).equalTo("id", id).findFirst()
+        if (objectProject != null) {
+            for (i in 0..objectProject!!.screen!!.size)
+                objectProject!!.screen
         }
-        listScreen.layoutManager = LinearLayoutManager(this)!!
-        listScreen.adapter = ListScreenAdapter(ArrayList(obP!!.screen)) { view: View, arrayList: ArrayList<ObjectScreen>, i: Int ->
+        objectButton = ArrayList(objectProject!!.screen!![idScreen]!!.buttons)
 
-        }
 
         Log.d("ddd", realm.where(ObjectProject::class.java).equalTo("id", id).findFirst().toString())
         //
 
 
 
-        objectScreens.add(ObjectButton())
-
-       val gdt = GestureDetector(GestureListener(mainLayout, fading_edge_layout, cardBody))
+        val gdt = GestureDetector(GestureListener(mainLayout, fading_edge_layout, cardBody))
         imageVoter.setOnTouchListener { view, event ->
             gdt.onTouchEvent(event)
             true
         }
+        imageScreen.setOnClickListener{
 
+        }
+
+        listScreen.layoutManager = LinearLayoutManager(this)!!
+        listScreen.adapter = ListScreenAdapter(ArrayList(objectProject!!.screen)) {
+            val set = ConstraintSet()
+
+            set.clone(mainLayout)
+            set.clear(fading_edge_layout.id, ConstraintSet.TOP)
+            set.connect(fading_edge_layout.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
+            val mySwapTransition = ChangeBounds()
+            mySwapTransition.addListener(object : Transition.TransitionListener {
+                override fun onTransitionStart(transition: Transition) {}
+                override fun onTransitionEnd(transition: Transition) {
+                    screenUpdate(it.id!!)
+                    set.clone(mainLayout)
+                    set.connect(fading_edge_layout.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
+                    TransitionManager.beginDelayedTransition(mainLayout)
+                    set.applyTo(mainLayout)
+                }
+
+                override fun onTransitionCancel(transition: Transition) {}
+                override fun onTransitionPause(transition: Transition) {}
+                override fun onTransitionResume(transition: Transition) {}
+            })
+
+            TransitionManager.go(Scene(mainLayout), mySwapTransition)
+            //TransitionManager.beginDelayedTransition(mainLayout)
+            set.applyTo(mainLayout)
+
+
+
+
+        }
         listButtons.layoutManager = LinearLayoutManager(this)!!
-        listButtons.adapter = ButtonsAdapter(objectScreens) {
+        listButtons.adapter = ButtonsAdapter(objectButton!!) {
 
         }
         buttonAdd.setOnClickListener {
-            objectScreens.add(ObjectButton())
-            (listButtons.adapter as ButtonsAdapter).notifyItemInserted(objectScreens.size)
+            objectButton!!.add(ObjectButton())
+            (listButtons.adapter as ButtonsAdapter).notifyItemInserted(objectButton!!.size)
         }
 
         val itemLeftHelper = ItemTouchHelper(simpleLeftCallback)
@@ -97,7 +121,7 @@ class CreatorScreenActivity : AppCompatActivity() {
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
             val position = viewHolder.adapterPosition
-            objectScreens.removeAt(position)
+            objectButton!!.removeAt(position)
             listButtons.adapter!!.notifyDataSetChanged()
         }
     }
@@ -128,12 +152,17 @@ class CreatorScreenActivity : AppCompatActivity() {
         startActivity(Intent(this, StartActivity::class.java))
 
     }
+
+    private fun screenUpdate(idScreen: Int) {
+
+
+        this.idScreen = idScreen
+        editTextBody.setText(objectProject!!.screen!![idScreen]!!.body)
+        listButtons.invalidate()
+    }
+
+
 }
-
-
-
-
-
 
 
 val SWIPE_MIN_DISTANCE = 70
