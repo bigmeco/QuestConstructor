@@ -30,7 +30,8 @@ class CreatorScreenActivity : AppCompatActivity() {
 
     val realm = Realm.getDefaultInstance()
     var idScreen = 0
-    var objectProject: ObjectProject? = ObjectProject()
+    var idButton: Int? = null
+    private var objectProject: ObjectProject? = ObjectProject()
     var objectButton: ArrayList<ObjectButton> = ArrayList()
     var id: Int? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,10 +48,10 @@ class CreatorScreenActivity : AppCompatActivity() {
 
         //
         objectProject = realm.where(ObjectProject::class.java).equalTo("id", id).findFirst()
-        if (objectProject != null) {
-            for (i in 0..objectProject!!.screen!!.size)
-                objectProject!!.screen
-        }
+//        if (objectProject != null) {
+//            for (i in 0..objectProject!!.screen!!.size)
+//                objectProject!!.screen
+//        }
         objectButton = ArrayList(objectProject!!.screen!![idScreen]!!.buttons)
 
 
@@ -65,6 +66,14 @@ class CreatorScreenActivity : AppCompatActivity() {
         }
         imageScreen.setOnClickListener {
 
+        }
+        imagePlusScreen.setOnClickListener {
+            var addScreen = ObjectScreen()
+            addScreen.id = objectProject!!.screen!!.size
+            realm.executeTransaction {
+                objectProject!!.screen!!.add(addScreen)
+            }
+            screenUpdate(idScreen)
         }
 
         listScreen.layoutManager = LinearLayoutManager(this)!!
@@ -124,15 +133,18 @@ class CreatorScreenActivity : AppCompatActivity() {
 
     private fun screenUpdate(idScreen: Int) {
         realm.executeTransaction {
-
+            if (idButton != null) {
+                objectButton[idButton!!].id=idScreen
+                objectButton[idButton!!].status= objectButton[idButton!!].thereIsNull()
+            }
             objectProject!!.screen!![this.idScreen]!!.image = editTextBody.text.toString()
-
             objectProject!!.screen!![this.idScreen]!!.body = editTextBody.text.toString()
             objectProject!!.screen!![this.idScreen]!!.body = editTextBody.text.toString()
             objectProject!!.screen!![this.idScreen]!!.buttons!!.deleteAllFromRealm()
             objectProject!!.screen!![this.idScreen]!!.buttons!!.addAll(objectButton)
             for (i in 0 until objectProject!!.screen!![this.idScreen]!!.buttons!!.size) {
                 Log.d("testy", realm.where(ObjectProject::class.java).equalTo("id", id).findFirst()!!.screen!![this.idScreen]!!.buttons!![i].toString())
+                Log.d("testy", realm.where(ObjectProject::class.java).equalTo("id", id).findFirst()!!.screen!![this.idScreen]!!.buttons!![0].toString())
 
                 if (objectProject!!.screen!![this.idScreen]!!.buttons!![i]!!.status!!) {
                     objectProject!!.screen!![this.idScreen]!!.status = true
@@ -151,7 +163,12 @@ class CreatorScreenActivity : AppCompatActivity() {
             }
         }
         Log.d("testy", realm.where(ObjectProject::class.java).equalTo("id", id).findFirst()!!.screen!![this.idScreen].toString())
+        Log.d("testy", realm.where(ObjectProject::class.java).equalTo("id", id).findFirst()!!.screen!![idScreen].toString())
+
         this.idScreen = idScreen
+        idButton=null
+        objectButton = ArrayList(objectProject!!.screen!![idScreen]!!.buttons)
+
         editTextBody.setText(objectProject!!.screen!![idScreen]!!.body)
         listButtonUpdate(objectButton)
         listButtons.invalidate()
@@ -191,7 +208,13 @@ class CreatorScreenActivity : AppCompatActivity() {
 
     private fun listButtonUpdate(buttons: ArrayList<ObjectButton>) {
         listButtons.adapter = ButtonsAdapter(buttons) {
-            objectProject!!.screen!![this.idScreen]!!.buttons!!
+            idButton = it
+            val set = ConstraintSet()
+            set.clone(mainLayout)
+            set.clear(fading_edge_layout.id, ConstraintSet.TOP)
+            set.connect(fading_edge_layout.id, ConstraintSet.TOP, cardBody.id, ConstraintSet.BOTTOM, 0)
+            TransitionManager.beginDelayedTransition(mainLayout)
+            set.applyTo(mainLayout)
         }
 
     }

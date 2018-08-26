@@ -10,8 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.realm.Realm
-import io.realm.RealmList
-import kotlinx.android.synthetic.main.activity_creator_screen.*
 import kotlinx.android.synthetic.main.fragment_creator.*
 import kotlinx.android.synthetic.main.item_project.view.*
 
@@ -94,6 +92,9 @@ Log.d("rest",test.toString())
             }
             if (i == (list.size - 1)) {
                 it.plus.visibility = View.VISIBLE
+                it.listScreens.layoutManager = LinearLayoutManager(activity)
+                it.listScreens.adapter = ScreenAdapter(ArrayList()) {
+                }
             } else {
                 it.plus.visibility = View.GONE
 

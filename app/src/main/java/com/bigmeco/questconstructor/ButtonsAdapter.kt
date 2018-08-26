@@ -28,8 +28,6 @@ class ButtonsAdapter(val items:ArrayList<ObjectButton>, val listener: (position:
 
                 override fun afterTextChanged(s: Editable) {
                     item.text = itemView.editBody.text.toString()
-                    item.id =0
-                    item.status =true
                 }
 
                 override fun beforeTextChanged(s: CharSequence, start: Int,
