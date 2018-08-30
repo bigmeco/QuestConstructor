@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_sreen_add.view.*
 
 
-class ListScreenAdapter(val items: ArrayList<ObjectScreen>, val listener: (item: ObjectScreen) -> Unit) : RecyclerView.Adapter<ListScreenAdapter.ViewHolder>() {
+class ListScreenAdapter(val items: ArrayList<ObjectScreen>, val listener: (item: ObjectScreen,position: Int) -> Unit) : RecyclerView.Adapter<ListScreenAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_sreen_add, parent, false))
@@ -18,9 +18,9 @@ class ListScreenAdapter(val items: ArrayList<ObjectScreen>, val listener: (item:
     override fun getItemCount() = items.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: ObjectScreen, listener: (item: ObjectScreen) -> Unit, items: ArrayList<ObjectScreen>, position: Int) = with(itemView) {
+        fun bind(item: ObjectScreen, listener: (item: ObjectScreen, position: Int) -> Unit, items: ArrayList<ObjectScreen>, position: Int) = with(itemView) {
             mainItam.setOnClickListener {
-                listener.invoke(item)
+                listener.invoke(item,position)
             }
             if (item.body != null || item.body != "") {
                 editTextBody.text = item.body

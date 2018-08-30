@@ -227,12 +227,13 @@ import io.realm.RealmList
 
 class CreatorScreenActivity : AppCompatActivity() {
 
-    private var idProject =0
-    private var idScreen =0
-    private var idButton =0
+    private var idProject = 0
+    private var idScreen = 0
+    private var idButton = 0
     private var objectProject: ObjectProject? = ObjectProject()
     private var objectScreen: ObjectScreen? = ObjectScreen()
     private var objectButton: ArrayList<ObjectButton> = ArrayList()
+    private var oldFragment: Fragment? = null
     val realm = Realm.getDefaultInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -256,28 +257,31 @@ class CreatorScreenActivity : AppCompatActivity() {
         transitionFragment(CreatorScreenFragment(), idScreen)
 
 
-        imagePlusScreen.setOnClickListener{
-            transitionFragment(CreatorScreenFragment(), idScreen)
+        imagePlusScreen.setOnClickListener {
+            screenUpdate {
+                val addScreen = ObjectScreen()
+                addScreen.id = objectProject?.screen?.size
+                realm.executeTransaction {
+                    objectProject!!.screen!!.add(addScreen)
+                }
+                transitionFragment(CreatorScreenFragment(), addScreen.id!!)
+                listScreenUpdate(ArrayList(objectProject?.screen))
+                listScreen.invalidate()
+            }
 
         }
         listScreen.layoutManager = LinearLayoutManager(this)
-        listScreen.adapter = ScreenAdapter(ArrayList(objectProject?.screen?.get(idScreen))) {
-            screenUpdate{
-
-            }
-
-
-        }
-
+        listScreenUpdate(ArrayList(objectProject?.screen))
 
 
     }
 
 
-
-    private fun transitionFragment(newFragment: Fragment,idScreen:  Int) {
+    private fun transitionFragment(newFragment: Fragment, idScreen: Int) {
+        oldFragment= newFragment
         val bundle = Bundle()
-        bundle.putInt("screen",idScreen)
+        bundle.putInt("project", idProject)
+        bundle.putInt("screen", idScreen)
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.fragmentScreen, newFragment)
         newFragment.arguments = bundle
@@ -285,12 +289,14 @@ class CreatorScreenActivity : AppCompatActivity() {
 
     }
 
+
     private fun screenUpdate(listener: () -> Unit) {
         val set = ConstraintSet()
         set.clone(mainLayout)
         set.clear(fading_edge_layout.id, ConstraintSet.TOP)
         set.connect(fading_edge_layout.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
         val mySwapTransition = ChangeBounds()
+
         mySwapTransition.addListener(object : Transition.TransitionListener {
             override fun onTransitionStart(transition: Transition) {}
             override fun onTransitionEnd(transition: Transition) {
@@ -301,14 +307,29 @@ class CreatorScreenActivity : AppCompatActivity() {
                 TransitionManager.beginDelayedTransition(mainLayout)
                 set.applyTo(mainLayout)
             }
+
             override fun onTransitionCancel(transition: Transition) {}
             override fun onTransitionPause(transition: Transition) {}
             override fun onTransitionResume(transition: Transition) {}
         })
         TransitionManager.go(Scene(mainLayout), mySwapTransition)
         set.applyTo(mainLayout)
+
     }
 
+    private fun listScreenUpdate(screens: ArrayList<ObjectScreen>) {
+        listScreen.adapter = ListScreenAdapter(screens) { objectScreen: ObjectScreen, i: Int ->
+            screenUpdate {
+                val bundle = Bundle()
+                bundle.putInt("IDscreen", i)
+                oldFragment?.arguments = bundle
+                transitionFragment(CreatorScreenFragment(), i)
+
+            }
+
+
+        }
+    }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (Integer.parseInt(android.os.Build.VERSION.SDK) > 5
