@@ -239,6 +239,7 @@ class CreatorScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creator_screen)
+        Realm.init(this)
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         idProject = preferences.getInt("idProject", 0)
@@ -264,9 +265,17 @@ class CreatorScreenActivity : AppCompatActivity() {
                 realm.executeTransaction {
                     objectProject!!.screen!!.add(addScreen)
                 }
+                val bundle = Bundle()
+                bundle.putInt("IDscreen", addScreen.id!!)
+                oldFragment?.arguments = bundle
                 transitionFragment(CreatorScreenFragment(), addScreen.id!!)
                 listScreenUpdate(ArrayList(objectProject?.screen))
                 listScreen.invalidate()
+                screenUpdate {
+
+
+
+                }
             }
 
         }
@@ -317,7 +326,7 @@ class CreatorScreenActivity : AppCompatActivity() {
 
     }
 
-    private fun listScreenUpdate(screens: ArrayList<ObjectScreen>) {
+     fun listScreenUpdate(screens: ArrayList<ObjectScreen>) {
         listScreen.adapter = ListScreenAdapter(screens) { objectScreen: ObjectScreen, i: Int ->
             screenUpdate {
                 val bundle = Bundle()

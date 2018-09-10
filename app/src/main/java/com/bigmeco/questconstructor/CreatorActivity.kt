@@ -25,6 +25,8 @@ class CreatorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creator)
         val set = ConstraintSet()
+        Realm.init(this)
+
         val realm = Realm.getDefaultInstance()
         var objectProject = ObjectProject()
 

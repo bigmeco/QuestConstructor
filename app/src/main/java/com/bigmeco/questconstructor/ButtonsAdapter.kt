@@ -6,8 +6,10 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import io.realm.Realm
 
 import kotlinx.android.synthetic.main.item_button_add.view.*
+val realm = Realm.getDefaultInstance()
 
 class ButtonsAdapter(val items:ArrayList<ObjectButton>, val listener: (position: Int) -> Unit) : RecyclerView.Adapter<ButtonsAdapter.ViewHolder>() {
 
@@ -27,7 +29,10 @@ class ButtonsAdapter(val items:ArrayList<ObjectButton>, val listener: (position:
             itemView.editBody.addTextChangedListener(object : TextWatcher {
 
                 override fun afterTextChanged(s: Editable) {
+                    realm.executeTransaction {
+
                     item.text = itemView.editBody.text.toString()
+                    }
                 }
 
                 override fun beforeTextChanged(s: CharSequence, start: Int,
