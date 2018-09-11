@@ -106,11 +106,11 @@ class CreatorScreenFragment : Fragment() {
 
 
 
-            for (i in 0 until  objectScreen!!.buttons!!.size) {
-                if ( objectScreen!!.buttons!![i]!!.status!!) {
-                    objectScreen!!.status = true
+            for (i in 0 until objectScreen!!.buttons!!.size) {
+                if (objectScreen!!.buttons!![i]!!.thereIsNull()) {
+                    objectScreen!!.buttons!![i]!!.status = true
                 } else {
-                    objectScreen!!.status = false
+                    objectScreen!!.buttons!![i]!!.status = false
                     break
                 }
             }
@@ -122,15 +122,18 @@ class CreatorScreenFragment : Fragment() {
                     break
                 }
             }
-            for (i in 0 until objectProject!!.screen!!.size) {
-                if (objectProject!!.screen!![i]!!.status!!) {
-                    objectProject!!.status = true
-                } else {
-                    objectProject!!.status = false
-                    break
+            if (objectProject!!.thereIsNull()) {
+                for (i in 0 until objectProject!!.screen!!.size) {
+                    if (objectProject!!.screen!![i]!!.status!!) {
+                        objectProject!!.status = true
+                    } else {
+                        objectProject!!.status = false
+                        break
+                    }
                 }
+            } else {
+                objectProject!!.status = false
             }
-
         }
 
         //Log.d("screan", realm.where(ObjectProject::class.java).equalTo("id", idProject).findFirst()!!.screen!![idScreen]!!.buttons!![0].toString())

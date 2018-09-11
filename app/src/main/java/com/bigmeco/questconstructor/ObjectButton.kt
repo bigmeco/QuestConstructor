@@ -10,7 +10,7 @@ open class ObjectButton : RealmObject() {
     var status: Boolean? = false
 
 
-   fun thereIsNull(): Boolean = text != null && id != null
+   fun thereIsNull(): Boolean = text != null && id != null && text != ""
 
 }
 //

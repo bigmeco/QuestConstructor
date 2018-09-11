@@ -21,8 +21,10 @@
         <activity
             android:name=".CreatorActivity"
             android:theme="@style/CreatorActivityTheme" />
-        <activity android:name=".CreatorScreenActivity"
-            android:theme="@style/CreatorActivityTheme" ></activity>
+        <activity
+            android:name=".CreatorScreenActivity"
+            android:theme="@style/CreatorActivityTheme" />
+        <activity android:name=".EditProjectActivity"></activity>
     </application>
 
 </manifest>

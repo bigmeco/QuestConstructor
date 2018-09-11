@@ -2,6 +2,7 @@ package com.bigmeco.questconstructor
 
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
@@ -37,30 +38,6 @@ class CreatorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val realm = Realm.getDefaultInstance()
 
-//
-//        var objectProject2 = ObjectProject()
-//        var object1 = ObjectScreen()
-//        object1.body ="rfrfrfr"
-//        object1.status =true
-//
-//        var objectScreen = RealmList<ObjectScreen>()
-//        objectScreen.add(object1)
-//        objectScreen.add(object1)
-//        objectScreen.add(ObjectScreen())
-//        objectScreen.add(object1)
-//        objectProject2.body = "Предки славян — праславяне — издавна жили на территории Центральной и Восточной Европы. По языку они относятся к индоевропейской группе народов, которые населяют Европу и часть Азии вплоть до Индии. Первые упоминания о праславянах относятся к I—II вв. Римские авторы Тацит, Плиний, Птолемей называли предков славян венедами и считали, что они населяли бассейн реки Вислы."
-//        objectProject2.time = "1 час"
-//        objectProject2.genre = "хоррор"
-//        objectProject2.id = 6
-//        objectProject2.name = "История tu"
-//        objectProject2.status = false
-//        objectProject2.screen = objectScreen
-//        realm.beginTransaction()
-//        realm.insert(objectProject2)
-//        realm.commitTransaction()
-
-
-
         // тестовый обект/>
         var objectProject = ObjectProject()
         objectProject.body = ""
@@ -71,17 +48,7 @@ class CreatorFragment : Fragment() {
         listProjects.isNestedScrollingEnabled = false
         listProjects.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.HORIZONTAL, false)
        var test= ArrayList<ObjectProject>(realm.where(ObjectProject::class.java).findAll())
-//for (i in 0..test.size){
-//    if (test[i].screen!=null) {
-//        for (u in 0..test[i].screen!!.size) {
-//            var tr = ArrayList<ObjectScreen>(test[i].screen!!)[u]
-//            if (!tr.status!!){
-//
-//                break
-//            }
-//        }
-//    }
-//}
+
         test.add(ObjectProject())
 Log.d("rest",test.toString())
        // test(objectProject)
@@ -89,6 +56,13 @@ Log.d("rest",test.toString())
             it.plus.setOnClickListener {
                 startActivity(Intent(activity, CreatorActivity::class.java))
 
+            }
+            it.cardColor.setOnClickListener{
+                val intent = Intent(activity, EditProjectActivity::class.java)
+                val editor = PreferenceManager.getDefaultSharedPreferences(context).edit()
+                editor.putInt("idProject", list[i].id!!)
+                editor.apply()
+                startActivity(intent)
             }
             if (i == (list.size - 1)) {
                 it.plus.visibility = View.VISIBLE

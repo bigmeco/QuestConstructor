@@ -16,6 +16,7 @@ open class ObjectProject : RealmObject() {
     var screen: RealmList<ObjectScreen>? =null
 
 
+    fun thereIsNull(): Boolean = name != null && body != null && name != "" && body != ""
 
 
 }
