@@ -2,11 +2,16 @@ package com.bigmeco.questconstructor
 
 import android.content.Intent
 import android.os.Bundle
-import android.preference.PreferenceManager
+import android.support.constraint.ConstraintSet
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
+import android.transition.ChangeBounds
+import android.transition.Scene
+import android.transition.Transition
+import android.transition.TransitionManager
 import android.util.Log
+import android.view.GestureDetector
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,13 +62,51 @@ Log.d("rest",test.toString())
                 startActivity(Intent(activity, CreatorActivity::class.java))
 
             }
-            it.cardColor.setOnClickListener{
-                val intent = Intent(activity, EditProjectActivity::class.java)
-                val editor = PreferenceManager.getDefaultSharedPreferences(context).edit()
-                editor.putInt("idProject", list[i].id!!)
-                editor.apply()
-                startActivity(intent)
+
+            val gdt = GestureDetector(EditListener(mainFragment, editFragment))
+            editFragment.setOnTouchListener { _, event ->
+                gdt.onTouchEvent(event)
+                true
             }
+//            editFragment.setOnClickListener{
+//                var set=ConstraintSet()
+//                set.clone(mainFragment)
+//                set.clear(editFragment.id,ConstraintSet.TOP)
+//                set.clear(editFragment.id,ConstraintSet.BOTTOM)
+//                set.connect(editFragment.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
+//
+//                TransitionManager.beginDelayedTransition(mainFragment)
+//                set.applyTo(mainFragment)
+//            }
+            it.cardColor.setOnClickListener{
+
+                var set=ConstraintSet()
+                val ft = fragmentManager!!.beginTransaction()
+                ft.replace(R.id.editFragment, EditProjectFragment())
+                ft.commit()
+                set.clone(mainFragment)
+                val mySwapTransition = ChangeBounds()
+                mySwapTransition.addListener(object : Transition.TransitionListener {
+                    override fun onTransitionStart(transition: Transition) {}
+                    override fun onTransitionEnd(transition: Transition) {
+                        set.clone(mainFragment)
+                        set.connect(editFragment.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
+                        set.clear(editFragment.id,ConstraintSet.BOTTOM)
+                        set.connect(editFragment.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
+                        TransitionManager.beginDelayedTransition(mainFragment)
+                        set.applyTo(mainFragment)
+                    }
+
+                    override fun onTransitionCancel(transition: Transition) {}
+                    override fun onTransitionPause(transition: Transition) {}
+                    override fun onTransitionResume(transition: Transition) {}
+                })
+
+                TransitionManager.go(Scene(mainFragment), mySwapTransition)
+                set.applyTo(mainFragment)
+            }
+
+
             if (i == (list.size - 1)) {
                 it.plus.visibility = View.VISIBLE
                 it.listScreens.layoutManager = LinearLayoutManager(activity)
