@@ -241,8 +241,8 @@ class CreatorScreenActivity : AppCompatActivity() {
         setContentView(R.layout.activity_creator_screen)
         Realm.init(this)
 
-        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-        idProject = preferences.getInt("idProject", 0)
+            val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+            idProject = preferences.getInt("idProject", 0)
         objectProject = realm.where(ObjectProject::class.java).equalTo("id", idProject).findFirst()
         objectScreen = objectProject?.screen?.get(idScreen)
 

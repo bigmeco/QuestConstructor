@@ -79,10 +79,13 @@ Log.d("rest",test.toString())
 //                set.applyTo(mainFragment)
 //            }
             it.cardColor.setOnClickListener{
-
+                val args = Bundle()
+                args.putInt("id_project", list[i].id!!)
                 var set=ConstraintSet()
+                val editProjectFragment = EditProjectFragment()
+                editProjectFragment.arguments =args
                 val ft = fragmentManager!!.beginTransaction()
-                ft.replace(R.id.editFragment, EditProjectFragment())
+                ft.replace(R.id.editFragment, editProjectFragment)
                 ft.commit()
                 set.clone(mainFragment)
                 val mySwapTransition = ChangeBounds()
@@ -126,5 +129,6 @@ Log.d("rest",test.toString())
         }
         LinearSnapHelper().attachToRecyclerView(listProjects)
     }
+
 
 }

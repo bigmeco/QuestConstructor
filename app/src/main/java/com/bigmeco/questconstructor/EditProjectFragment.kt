@@ -1,13 +1,23 @@
 package com.bigmeco.questconstructor
 
 import android.os.Bundle
+import android.support.constraint.ConstraintSet
 import android.support.v4.app.Fragment
+import android.transition.ChangeBounds
+import android.transition.Scene
+import android.transition.Transition
+import android.transition.TransitionManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.realm.Realm
+import kotlinx.android.synthetic.main.fragment_creator.*
+import kotlinx.android.synthetic.main.fragment_edit_project.*
+
 
 class EditProjectFragment : Fragment() {
+    private var objectProject: ObjectProject? = ObjectProject()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -20,6 +30,56 @@ class EditProjectFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val realm = Realm.getDefaultInstance()
+        val idProject = arguments!!.getInt("id_project")
+        objectProject = realm.where(ObjectProject::class.java).equalTo("id", idProject).findFirst()
+        //Log.d("arguments",s.toString())
+        editName.setText(objectProject?.name)
+        editBody.setText(objectProject?.body)
+        spinnerGenres.setSelection(genreID(objectProject!!.genre!!)!!)
+        spinnerTime.setSelection(timeID(objectProject!!.time!!)!!)
+        cancel.setOnClickListener {
+            updateEdit()
+        }
+        done.setOnClickListener {
+            updateEdit()
+        }
     }
 
+    private fun genreID(str: String): Int? {
+        val names = resources.getStringArray(R.array.greetings)
+        var t: Int? = null
+        for (i in names.indices) {
+            if (str == names[i]) {
+                t = i
+                break
+            } else {
+                t = 0
+            }
+        }
+        return t
+    }
+    private fun timeID(str: String): Int? {
+        val names = resources.getStringArray(R.array.duration)
+        var t: Int? = null
+        for (i in names.indices) {
+            if (str == names[i]) {
+                t = i
+                break
+            } else {
+                t = 0
+            }
+        }
+        return t
+    }
+    fun updateEdit(){
+        var set= ConstraintSet()
+        set.clone(activity!!.mainFragment)
+        set.clear(activity!!.editFragment.id, ConstraintSet.TOP)
+
+        set.clear(activity!!.editFragment.id,ConstraintSet.TOP)
+        set.clear(activity!!.editFragment.id,ConstraintSet.BOTTOM)
+        set.connect(activity!!.editFragment.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
+        TransitionManager.beginDelayedTransition(activity!!.mainFragment)
+        set.applyTo(activity!!.mainFragment)
+    }
 }

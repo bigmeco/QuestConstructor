@@ -24,7 +24,6 @@
         <activity
             android:name=".CreatorScreenActivity"
             android:theme="@style/CreatorActivityTheme" />
-        <activity android:name=".EditProjectActivity"></activity>
     </application>
 
 </manifest>
