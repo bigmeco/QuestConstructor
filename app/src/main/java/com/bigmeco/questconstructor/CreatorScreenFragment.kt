@@ -1,26 +1,41 @@
 package com.bigmeco.questconstructor
 
 import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.content.DialogInterface
 import android.net.Uri
 import android.os.Bundle
 import android.support.constraint.ConstraintSet
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.transition.TransitionManager
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
 import com.bigmeco.questconstructor.R
 import io.realm.Realm
 import io.realm.RealmList
+import io.realm.internal.SyncObjectServerFacade.getApplicationContext
 import kotlinx.android.synthetic.main.activity_creator_screen.*
 import kotlinx.android.synthetic.main.fragment_creator_screen.*
+import android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT
+import android.support.v4.content.ContextCompat.getSystemService
+import android.view.inputmethod.InputMethodManager
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.support.v4.content.ContextCompat.getSystemService
+import android.util.DisplayMetrics
+import android.view.*
+import android.view.KeyEvent.KEYCODE_ENTER
+import android.view.KeyEvent.KEYCODE_DPAD_CENTER
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.item_project.view.*
+import java.lang.Exception
 
 
 class CreatorScreenFragment : Fragment() {
+
 
     val realm = Realm.getDefaultInstance()
     private var idProject = 0
@@ -39,7 +54,8 @@ class CreatorScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val metrics = DisplayMetrics()
+        activity!!.windowManager.defaultDisplay.getMetrics(metrics)
         val bundle = this.arguments
         if (bundle != null) {
             idProject = bundle.getInt("project", 0)
@@ -48,9 +64,61 @@ class CreatorScreenFragment : Fragment() {
         objectProject = realm.where(ObjectProject::class.java).equalTo("id", idProject).findFirst()
         objectScreen = objectProject?.screen?.get(idScreen)
         objectButton = ArrayList(objectScreen?.buttons)
-
+        if (objectScreen!!.image != "") {
+            Picasso.get().load(objectScreen!!.image).fit().centerCrop().error(R.drawable.plus).into(imageScreen)
+        } else {
+            imageScreen.setImageResource(R.drawable.plus)
+        }
         editTextBody.setText(objectScreen!!.body)
         imageScreen.setOnClickListener {
+            val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+
+            val set = ConstraintSet()
+            set.clone(mainLayoutFragment)
+            if (cardUrl.height != ConstraintSet.MATCH_CONSTRAINT) {
+                set.constrainHeight(cardUrl.id, ConstraintSet.MATCH_CONSTRAINT)
+                imm!!.hideSoftInputFromWindow(editTextUrl.getWindowToken(), 0)
+                realm.executeTransaction {
+                    objectScreen!!.image = editTextUrl.text.toString()
+                }
+                if (editTextUrl.text.toString() != "") {
+                    Picasso.get().load(editTextUrl.text.toString()).fit().centerCrop().error(R.drawable.plus).into(imageScreen)
+                } else {
+                    imageScreen.setImageResource(R.drawable.plus)
+                }
+
+            } else {
+                editTextUrl.setText(objectScreen!!.image)
+                set.constrainHeight(cardUrl.id, ConstraintSet.WRAP_CONTENT)
+                editTextUrl.requestFocus()
+                imm!!.showSoftInput(editTextUrl, InputMethodManager.SHOW_IMPLICIT)
+                editTextUrl.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+                    if (event.getAction() === KeyEvent.ACTION_DOWN) {
+                        when (keyCode) {
+                            KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
+                                realm.executeTransaction {
+                                    objectScreen!!.image = editTextUrl.text.toString()
+                                }
+                                set.constrainHeight(cardUrl.id, ConstraintSet.MATCH_CONSTRAINT)
+                                TransitionManager.beginDelayedTransition(mainLayoutFragment)
+                                set.applyTo(mainLayoutFragment)
+                                if (editTextUrl.text.toString() != "") {
+                                    Picasso.get().load(editTextUrl.text.toString()).fit().centerCrop().error(R.drawable.plus).into(imageScreen)
+                                } else {
+                                    imageScreen.setImageResource(R.drawable.plus)
+                                }
+                                return@OnKeyListener true
+                            }
+                            else -> {
+                            }
+                        }
+                    }
+                    false
+                })
+            }
+            TransitionManager.beginDelayedTransition(mainLayoutFragment)
+            set.applyTo(mainLayoutFragment)
+
             Log.d("rrrrr", idScreen.toString())
         }
         listButtons.layoutManager = LinearLayoutManager(activity)
@@ -69,8 +137,6 @@ class CreatorScreenFragment : Fragment() {
             (listButtons.adapter as ButtonsAdapter).notifyItemInserted(objectButton.size)
 
         }
-
-        mainLayout
 
 
         //    listButtonsUpdate(objectButton)
@@ -98,12 +164,10 @@ class CreatorScreenFragment : Fragment() {
                 objectButton[this.idButton!!].id = bundle?.getInt("IDscreen", 0)
             }
             objectScreen!!.body = editTextBody.text.toString()
-            objectScreen!!.image = "url"
             objectScreen!!.status = objectScreen!!.thereIsNull()
 
             objectScreen!!.buttons!!.clear()
             objectScreen!!.buttons!!.addAll(this.objectButton)
-
 
 
             for (i in 0 until objectScreen!!.buttons!!.size) {
@@ -114,14 +178,20 @@ class CreatorScreenFragment : Fragment() {
                     break
                 }
             }
-            for (i in 0 until objectScreen!!.buttons!!.size) {
-                if (objectScreen!!.buttons!![i]!!.status!!) {
-                    objectScreen!!.status = true
-                } else {
-                    objectScreen!!.status = false
-                    break
+            if (objectButton.size != 0) {
+                for (i in 0 until objectScreen!!.buttons!!.size) {
+                    if (objectScreen!!.buttons!![i]!!.status!!) {
+                        objectScreen!!.status = true
+                    } else {
+                        objectScreen!!.status = false
+                        break
+                    }
                 }
+            } else {
+                objectScreen!!.status = false
             }
+
+            Log.d("asasa", objectButton.size.toString())
             if (objectProject!!.thereIsNull()) {
                 for (i in 0 until objectProject!!.screen!!.size) {
                     if (objectProject!!.screen!![i]!!.status!!) {

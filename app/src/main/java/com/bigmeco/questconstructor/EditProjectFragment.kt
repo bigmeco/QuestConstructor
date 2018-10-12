@@ -37,10 +37,20 @@ class EditProjectFragment : Fragment() {
         editBody.setText(objectProject?.body)
         spinnerGenres.setSelection(genreID(objectProject!!.genre!!)!!)
         spinnerTime.setSelection(timeID(objectProject!!.time!!)!!)
+
         cancel.setOnClickListener {
             updateEdit()
         }
+
         done.setOnClickListener {
+            realm.executeTransaction {
+                objectProject!!.name = editName.text.toString()
+                objectProject!!.body = editBody.text.toString()
+                objectProject!!.genre = spinnerGenres.selectedItem.toString()
+                objectProject!!.time = spinnerTime.selectedItem.toString()
+                objectProject!!.status = editName.text.toString() != "" && editBody.text.toString() != ""
+            }
+            activity!!.listProjects.adapter!!.notifyDataSetChanged();
             updateEdit()
         }
     }
@@ -58,6 +68,7 @@ class EditProjectFragment : Fragment() {
         }
         return t
     }
+
     private fun timeID(str: String): Int? {
         val names = resources.getStringArray(R.array.duration)
         var t: Int? = null
@@ -71,13 +82,13 @@ class EditProjectFragment : Fragment() {
         }
         return t
     }
-    fun updateEdit(){
-        var set= ConstraintSet()
+
+    fun updateEdit() {
+        var set = ConstraintSet()
         set.clone(activity!!.mainFragment)
         set.clear(activity!!.editFragment.id, ConstraintSet.TOP)
-
-        set.clear(activity!!.editFragment.id,ConstraintSet.TOP)
-        set.clear(activity!!.editFragment.id,ConstraintSet.BOTTOM)
+        set.clear(activity!!.editFragment.id, ConstraintSet.TOP)
+        set.clear(activity!!.editFragment.id, ConstraintSet.BOTTOM)
         set.connect(activity!!.editFragment.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
         TransitionManager.beginDelayedTransition(activity!!.mainFragment)
         set.applyTo(activity!!.mainFragment)

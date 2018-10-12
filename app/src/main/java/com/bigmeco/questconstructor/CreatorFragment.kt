@@ -2,6 +2,7 @@ package com.bigmeco.questconstructor
 
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.constraint.ConstraintSet
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -123,6 +124,12 @@ Log.d("rest",test.toString())
 
                 it.listScreens.layoutManager = LinearLayoutManager(activity)
                 it.listScreens.adapter = ScreenAdapter(test[i].screen!!) {
+                    val intent = Intent(activity, CreatorScreenActivity::class.java)
+                    val editor = PreferenceManager.getDefaultSharedPreferences(context).edit()
+                    editor.putInt("idProject", list[i].id!!)
+                    editor.putInt("idScreen", it)
+                    editor.apply()
+                    startActivity(intent)
 
                 }
             }
