@@ -22,9 +22,10 @@ class ProjectAdapter(val items: ArrayList<ObjectProject>, val listener: (itemVie
 
             if (item.status!!) {
                 cardColor.setCardBackgroundColor(resources.getColor(R.color.createColor))
-
+                cardPush.visibility =View.VISIBLE
             }else {
                 cardColor.setCardBackgroundColor(resources.getColor(R.color.pleyColor))
+                cardPush.visibility =View.GONE
 
             }
             textName.text =item.name

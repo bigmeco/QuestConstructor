@@ -66,9 +66,9 @@ class CreatorScreenFragment : Fragment() {
         objectButton = ArrayList(objectScreen?.buttons)
         if (objectScreen!!.image != "") {
             Picasso.get().load(objectScreen!!.image).fit().centerCrop().error(R.drawable.plus).into(imageScreen)
-        } else {
-            imageScreen.setImageResource(R.drawable.plus)
         }
+        imageScreen.setImageResource(R.drawable.plus)
+
         editTextBody.setText(objectScreen!!.body)
         imageScreen.setOnClickListener {
             val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?

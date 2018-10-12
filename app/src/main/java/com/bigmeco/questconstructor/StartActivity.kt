@@ -54,7 +54,7 @@ class StartActivity : AppCompatActivity() {
             transitionCreator(CreatorFragment(), set)
         }
         itemPlayer.setOnClickListener {
-            transitionPlayer(CreatorFragment(), set)
+            transitionPlayer(PlayerFragment(), set)
 
         }
 

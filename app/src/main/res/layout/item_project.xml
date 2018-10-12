@@ -16,6 +16,26 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView
+            android:id="@+id/cardPush"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/pushButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/createColor"
+                android:padding="14dp"
+                android:text="ОПУБЛИКОВАТЬ"
+                android:textAlignment="center"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
             android:id="@+id/cardColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
