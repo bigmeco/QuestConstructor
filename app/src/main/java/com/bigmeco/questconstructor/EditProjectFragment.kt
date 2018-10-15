@@ -1,5 +1,6 @@
 package com.bigmeco.questconstructor
 
+import android.content.Context
 import android.os.Bundle
 import android.support.constraint.ConstraintSet
 import android.support.v4.app.Fragment
@@ -11,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import io.realm.Realm
 import kotlinx.android.synthetic.main.fragment_creator.*
 import kotlinx.android.synthetic.main.fragment_edit_project.*
@@ -50,6 +52,10 @@ class EditProjectFragment : Fragment() {
                 objectProject!!.time = spinnerTime.selectedItem.toString()
                 objectProject!!.status = editName.text.toString() != "" && editBody.text.toString() != ""
             }
+            val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+            imm!!.hideSoftInputFromWindow(editName.getWindowToken(), 0)
+            imm.hideSoftInputFromWindow(editBody.getWindowToken(), 0)
+
             activity!!.listProjects.adapter!!.notifyDataSetChanged();
             updateEdit()
         }

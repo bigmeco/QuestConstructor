@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PlayerFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:layout_gravity="bottom|end"
+        android:background="@drawable/filter_item"
+        android:paddingBottom="8dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="20dp"
+        android:paddingTop="16dp"
+        android:src="@android:drawable/stat_notify_call_mute" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:layout_gravity="bottom|start"
+        android:background="@drawable/menu_item"
+        android:paddingBottom="8dp"
+        android:paddingEnd="20dp"
+        android:paddingStart="8dp"
+        android:paddingTop="16dp"
+        android:src="@android:drawable/stat_notify_call_mute" />
 </FrameLayout>
