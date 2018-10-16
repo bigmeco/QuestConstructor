@@ -35,4 +35,12 @@
         android:paddingStart="8dp"
         android:paddingTop="16dp"
         android:src="@android:drawable/stat_notify_call_mute" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/full_filter_item">
+
+    </android.support.constraint.ConstraintLayout>
 </FrameLayout>

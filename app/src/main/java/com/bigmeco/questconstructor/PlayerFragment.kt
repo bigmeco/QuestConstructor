@@ -12,6 +12,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import kotlinx.android.synthetic.main.fragment_player.*
+import android.view.animation.AnimationUtils
+import android.view.animation.Animation
+
+
 
 
 class PlayerFragment : Fragment() {
@@ -25,14 +29,12 @@ class PlayerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val animScale = AnimationUtils.loadAnimation(activity, R.anim.genre_anim)
+
+
         imageView4.setOnClickListener{
-            val animationX = ObjectAnimator.ofFloat(imageView4, "scaleX", 1F)
-            val animationY = ObjectAnimator.ofFloat(imageView4, "scaleY", 1F)
-            val set = AnimatorSet()
-            set.play(animationX)
-                    .with(animationY)
-            set.interpolator = DecelerateInterpolator()
-            set.start()
+            imageView4.startAnimation(animScale)
+
         }
     }
 }
