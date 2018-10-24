@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.fragment_player.*
 import android.view.animation.AnimationUtils
 import android.view.animation.Animation
 import android.graphics.drawable.ColorDrawable
+import android.support.v7.widget.LinearLayoutManager
 import android.widget.NumberPicker
 
 
@@ -32,6 +33,12 @@ class PlayerFragment : Fragment() {
         setDividerColor(genrePicker, resources.getColor(R.color.pleyColor2))
         setDividerColor(timerPicker, resources.getColor(R.color.pleyColor2))
         setDividerColor(ratingPicker, resources.getColor(R.color.pleyColor2))
+
+        listGame.layoutManager = LinearLayoutManager(activity)
+        listGame.adapter = GameAdapter(listOf<ObjectScreen>() as ArrayList<ObjectScreen>) { objectScreen: ObjectScreen, i: Int ->
+
+        }
+
 
 
         val animFlterOpen = AnimationUtils.loadAnimation(activity, R.anim.filter_anim)
