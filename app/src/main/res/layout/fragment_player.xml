@@ -6,14 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".PlayerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imageFilter"
         android:layout_width="68dp"
         android:layout_height="68dp"
         android:layout_gravity="bottom|end"
@@ -25,7 +24,7 @@
         android:src="@android:drawable/stat_notify_call_mute" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imageMenu"
         android:layout_width="68dp"
         android:layout_height="68dp"
         android:layout_gravity="bottom|start"
@@ -37,10 +36,112 @@
         android:src="@android:drawable/stat_notify_call_mute" />
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/filterLayout"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="68dp"
         android:layout_gravity="bottom"
-        android:background="@drawable/full_filter_item">
+        android:background="@drawable/full_filter_item"
+        android:visibility="invisible">
 
+        <NumberPicker
+            android:id="@+id/timerPicker"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="8dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:descendantFocusability="blocksDescendants"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ratingPicker"
+            app:layout_constraintStart_toEndOf="@+id/imageOkF"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <NumberPicker
+            android:id="@+id/ratingPicker"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="4dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:descendantFocusability="blocksDescendants"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageBaeckF"
+            app:layout_constraintStart_toEndOf="@+id/timerPicker"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageOkF"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:src="@drawable/tick"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageBaeckF"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:src="@drawable/next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/menuLayout"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/full_menu_item"
+        android:visibility="invisible">
+
+        <NumberPicker
+            android:id="@+id/genrePicker"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:descendantFocusability="blocksDescendants"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageOk"
+            app:layout_constraintStart_toEndOf="@+id/imageBeack"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageBeack"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:rotation="180"
+            android:src="@drawable/next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageOk"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:src="@drawable/tick"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>
