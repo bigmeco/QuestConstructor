@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <objectAnimator
+        android:startOffset="200"
+        android:duration="2800"
+        android:propertyName="translateX"
+        android:repeatCount="infinite"
+        android:repeatMode="reverse"
+        android:valueFrom="-140"
+        android:valueTo="140"
+        android:valueType="floatType"/>
+
+
+</set>

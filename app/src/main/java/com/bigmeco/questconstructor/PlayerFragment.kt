@@ -35,7 +35,9 @@ class PlayerFragment : Fragment() {
         setDividerColor(ratingPicker, resources.getColor(R.color.pleyColor2))
 
         listGame.layoutManager = LinearLayoutManager(activity)
-        listGame.adapter = GameAdapter(listOf<ObjectScreen>() as ArrayList<ObjectScreen>) { objectScreen: ObjectScreen, i: Int ->
+        var t = arrayListOf<ObjectScreen>()
+        t.add(ObjectScreen())
+        listGame.adapter = GameAdapter(t) { objectScreen: ObjectScreen, i: Int ->
 
         }
 
