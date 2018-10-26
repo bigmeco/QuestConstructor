@@ -7,6 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_game.view.*
 import android.animation.ObjectAnimator
+import android.support.v4.content.ContextCompat.startActivity
+import android.provider.AlarmClock
+import android.content.Intent
+
+
 
 
 
@@ -32,7 +37,10 @@ class GameAdapter(val items: ArrayList<ObjectScreen>, val listener: (item: Objec
 //            if (item.status!!) {
 //                cardState.setCardBackgroundColor(resources.getColor(R.color.createColor))
 //            }
-            imageStar.setImageResource(R.drawable.anim_star1)
+            imageStar.setOnClickListener{
+
+            }
+            imageStar.setImageResource(R.drawable.anim_star35)
             val drawable = imageStar.drawable
             if (drawable is Animatable) (drawable as Animatable).start()
 

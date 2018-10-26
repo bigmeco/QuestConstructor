@@ -1,5 +1,6 @@
 package com.bigmeco.questconstructor
 
+import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,6 +11,8 @@ import kotlinx.android.synthetic.main.fragment_player.*
 import android.view.animation.AnimationUtils
 import android.view.animation.Animation
 import android.graphics.drawable.ColorDrawable
+import android.provider.AlarmClock
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.NumberPicker
 
@@ -36,6 +39,9 @@ class PlayerFragment : Fragment() {
 
         listGame.layoutManager = LinearLayoutManager(activity)
         var t = arrayListOf<ObjectScreen>()
+        t.add(ObjectScreen())
+        t.add(ObjectScreen())
+        t.add(ObjectScreen())
         t.add(ObjectScreen())
         listGame.adapter = GameAdapter(t) { objectScreen: ObjectScreen, i: Int ->
 
@@ -113,6 +119,7 @@ class PlayerFragment : Fragment() {
         imageMenu.setOnClickListener {
             menuLayout.visibility = View.VISIBLE
             menuLayout.startAnimation(animScale)
+
         }
         imageBeack.setOnClickListener {
             menuLayout.visibility = View.INVISIBLE

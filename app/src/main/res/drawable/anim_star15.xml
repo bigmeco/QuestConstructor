@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<animated-vector
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:aapt="http://schemas.android.com/aapt"
     android:drawable="@drawable/star_rang"
     tools:ignore="NewApi">
-
+    <target android:name="voter">
+    <aapt:attr name="android:animation">
     <set xmlns:android="http://schemas.android.com/apk/res/android">
         <objectAnimator
             android:name="voter"
@@ -13,10 +14,12 @@
             android:propertyName="translateY"
             android:repeatCount="infinite"
             android:repeatMode="reverse"
-            android:valueFrom="260"
-            android:valueTo="270"
+            android:valueFrom="250"
+            android:valueTo="260"
             android:valueType="floatType"/>
     </set>
+    </aapt:attr>
+    </target>
     <target
         android:animation="@animator/voter_star1"
         android:name="voter1" />

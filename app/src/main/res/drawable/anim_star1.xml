@@ -12,8 +12,8 @@
                     android:repeatCount="infinite"
                     android:repeatMode="reverse"
                     android:startOffset="100"
-                    android:valueFrom="290"
-                    android:valueTo="300"
+                    android:valueFrom="280"
+                    android:valueTo="290"
                     android:valueType="floatType" />
             </set>
         </aapt:attr>

@@ -7,20 +7,20 @@
     <group android:name="voter">
         <group android:name="voter1">
             <path
-                android:fillColor="#009fd7"
+                android:fillColor="#deb137"
                 android:fillType="evenOdd"
                 android:pathData="M586.64,141.74 L586.64,90.61 C497.93,48.76,487.8,111.61,426.37,85.15 C337.16,46.75,346.97,126.33,252.37,80.29 C191.37,50.61,185.03,120.62,89.46,83.37 C41.87,64.81,35.1,114.31,-37.7,80.52 A39.58,39.58,0,0,0,-64.76,77.72 L-64.76,141.72 Z" />
         </group>
         <group android:name="voter2">
             <path
-                android:fillColor="#21b9ec"
+                android:fillColor="#ecbc3b"
                 android:fillType="evenOdd"
                 android:pathData="M595.58,107 C509,67.32,498.5,128.8,437.58,102.59 C348.37,64.19,358.18,143.77,263.58,97.73 C202.58,68.05,196.24,138.06,100.67,100.81 C53.1,82.26,46.33,131.76,-26.47,98 C-42.28,90.66,-54.84,94.83,-64.77,99.14 L-64.77,159.2 L595.58,159.2 Z" />
 
         </group>
         <group android:name="voter3">
             <path
-                android:fillColor="#44c7f4"
+                android:fillColor="#ffcb3f"
                 android:fillType="evenOdd"
                 android:pathData="M595.58,417.22 L-64.77,417.22 L-64.77,131.32 C19.53,93.94,30.4,154,90.72,128 C179.93,89.6,170.12,169.18,264.72,123.14 C325.72,93.46,332.06,163.47,427.63,126.22 C475.24,107.66,482.01,157.17,554.81,123.37 C571.98,115.37,585.3,121.01,595.6,125.61 L595.6,417.22" />
         </group>
