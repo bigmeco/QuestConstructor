@@ -48,7 +48,13 @@ class PlayerFragment : Fragment() {
         t.add(ObjectScreen())
         t.add(ObjectScreen())
         listGame.adapter = GameAdapter(t) { objectScreen: ObjectScreen, i: Int ->
+            val intent = Intent(activity, InfoQuestActivity::class.java)
+//            val editor = PreferenceManager.getDefaultSharedPreferences(this).edit()
+//            editor.putInt("idProject", objectProject.id!!)
+//            editor.apply()
+//            Log.d("ddd",objectProject.id.toString())
 
+            startActivity(intent)
         }
 
 

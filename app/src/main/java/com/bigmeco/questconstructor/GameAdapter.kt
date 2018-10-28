@@ -28,7 +28,9 @@ class GameAdapter(val items: ArrayList<ObjectScreen>, val listener: (item: Objec
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: ObjectScreen, listener: (item: ObjectScreen, position: Int) -> Unit, items: ArrayList<ObjectScreen>, position: Int) = with(itemView) {
-//            mainItam.setOnClickListener {
+            mainLayout.setOnClickListener {
+                listener.invoke(item,position)
+            }
 //                listener.invoke(item,position)
 //            }
 //            if (item.body != null || item.body != "") {
