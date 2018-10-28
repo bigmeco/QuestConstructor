@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <shape>
-            <solid android:color="#dc4931"/>
-            <corners
-                android:topLeftRadius="60dp"/>
-        </shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="false">
+        <layer-list>
+            <!-- SHADOW -->
+            <item>
+                <shape>
+                    <solid android:color="#2e5e2117"/>
+                    <corners android:topLeftRadius="60dp"/>
+                </shape>
+            </item>
+            <item
+                android:top="2px"
+                android:left="2px"
+                >
+                <shape>
+                    <padding android:top="2dp"/>
+                    <gradient
+                        android:startColor="#e0dc4931"
+                        android:endColor="#dc4931"
+                        android:angle="270" />
+                    <corners
+                        android:topLeftRadius="60dp"/>
+
+                </shape>
+            </item>
+        </layer-list>
     </item>
+
 </selector>

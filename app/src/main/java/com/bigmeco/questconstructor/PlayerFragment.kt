@@ -43,6 +43,10 @@ class PlayerFragment : Fragment() {
         t.add(ObjectScreen())
         t.add(ObjectScreen())
         t.add(ObjectScreen())
+        t.add(ObjectScreen())
+        t.add(ObjectScreen())
+        t.add(ObjectScreen())
+        t.add(ObjectScreen())
         listGame.adapter = GameAdapter(t) { objectScreen: ObjectScreen, i: Int ->
 
         }
