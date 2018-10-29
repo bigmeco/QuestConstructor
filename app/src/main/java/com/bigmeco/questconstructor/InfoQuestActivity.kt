@@ -25,11 +25,13 @@ class InfoQuestActivity : AppCompatActivity() {
         val drawable = imageStarInfo.drawable
         if (drawable is Animatable) (drawable as Animatable).start()
         buttonGame.setOnClickListener{
+            Log.d("startTest","nutton")
+
             val set = ConstraintSet()
             set.clone(mainLayout)
            // set.setVisibility(buttonGame.id,ConstraintSet.GONE)
             set.clear(buttonGame.id, ConstraintSet.END)
-            set.setElevation(buttonGame.id, 10f)
+            set.setElevation(buttonGame.id, 20f)
 
             set.connect(buttonGame.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
             val mySwapTransition = ChangeBounds()
@@ -45,6 +47,8 @@ class InfoQuestActivity : AppCompatActivity() {
                     editor.apply()
                     Log.d("ddd",5.toString())
                     startActivity(intent)
+                    Log.d("startTest","start")
+
                 }
 
                 override fun onTransitionCancel(transition: Transition) {}
@@ -59,7 +63,7 @@ class InfoQuestActivity : AppCompatActivity() {
             set.clone(mainLayout)
            // set.setVisibility(buttonGame.id,ConstraintSet.GONE)
             set.clear(buttonComment.id, ConstraintSet.START)
-            set.setElevation(buttonComment.id, 10f)
+            set.setElevation(buttonComment.id, 20f)
             set.connect(buttonComment.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
             val mySwapTransition = ChangeBounds()
 
