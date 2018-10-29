@@ -24,7 +24,11 @@
         <activity
             android:name=".CreatorScreenActivity"
             android:theme="@style/CreatorActivityTheme" />
-        <activity android:name=".InfoQuestActivity"     android:theme="@style/Theme.AppCompat.Light.Dialog"/>
+        <activity
+            android:name=".InfoQuestActivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog.MinWidth" />
+        <activity android:name=".ActionScreenActivity"
+            android:theme="@style/CreatorActivityTheme" ></activity>
     </application>
 
 </manifest>

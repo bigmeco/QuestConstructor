@@ -53,7 +53,7 @@ class PlayerFragment : Fragment() {
 //            editor.putInt("idProject", objectProject.id!!)
 //            editor.apply()
 //            Log.d("ddd",objectProject.id.toString())
-
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
         }
 
