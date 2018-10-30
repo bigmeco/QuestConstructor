@@ -33,8 +33,6 @@ Log.d("startTest","ativiti")
         var ibj = arrayListOf<ObjectButton>(ObjectButton())
         ibj.add(ObjectButton())
         ibj.add(ObjectButton())
-        ibj.add(ObjectButton())
-        ibj.add(ObjectButton())
         listButton.adapter = ButtonsGameAdapter(ibj) {
         }
     }
