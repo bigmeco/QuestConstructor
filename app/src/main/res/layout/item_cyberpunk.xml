@@ -14,6 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,24 +29,23 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:adjustViewBounds="true"
-                android:background="@color/f7d997"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="@+id/textBody"
                 app:layout_constraintEnd_toEndOf="@+id/textBody"
                 app:layout_constraintStart_toStartOf="@+id/textBody"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/button_steampunk" />
+                app:srcCompat="@drawable/gidient_button_cyberpunk" />
 
             <TextView
                 android:id="@+id/textBody"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:backgroundTintMode="screen"
-                android:fontFamily="@font/ampir_deco"
+                android:fontFamily="@font/ocr_onectt"
                 android:padding="8dp"
                 android:text="Друг мой эльф! Яшке б свёз птиц южных чащ! В чащах юга жил бы цитрус? Да, но фальшивый экземпляр!"
-                android:textColor="@color/color6d3303"
-                android:textSize="16sp"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

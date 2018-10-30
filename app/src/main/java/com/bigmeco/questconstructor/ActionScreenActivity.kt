@@ -15,14 +15,14 @@ class ActionScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //   getWindow().setBackgroundDrawable(null)
 Log.d("startTest","ativiti")
-        if (true) {
+        if (false) {
             Log.d("startTest","ifdo")
 
-            setContentView(R.layout.activity_action_screen)
+            setContentView(R.layout.activity_action_screen_cyberpunk)
             Log.d("startTest","if")
 
         } else {
-            setContentView(R.layout.activity_action_screen_fantasy)
+            setContentView(R.layout.activity_action_screen_cyberpunk)
 
         }
        var listButton = findViewById<RecyclerView>(R.id.listButton)

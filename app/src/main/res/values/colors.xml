@@ -10,6 +10,8 @@
     <color name="name_color">#e4ffffff</color>
     <color name="color_divider">#78ffffff</color>
     <color name="steampunk_color">#fdeac2</color>
-    <color name="f7d997">#f7d997</color>
+    <color name="f7d997">#f6d99a</color>
     <color name="color6d3303">#4a2301</color>
+    <color name="beack_cyberpunk">#ec4080</color>
+    <color name="color_button_cyberpunk">#073037</color>
 </resources>
