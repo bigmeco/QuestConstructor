@@ -26,20 +26,25 @@
                 android:id="@+id/imageView6"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:adjustViewBounds="true"
                 android:background="@color/f7d997"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="@+id/textView14"
                 app:layout_constraintEnd_toEndOf="@+id/textView14"
                 app:layout_constraintStart_toStartOf="@+id/textView14"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/steampunk_background" />
+                app:srcCompat="@drawable/button_steampunk" />
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:backgroundTintMode="screen"
+                android:fontFamily="@font/ampir_deco"
                 android:padding="8dp"
-                android:text="................................................................................................."
+                android:text="Друг мой эльф! Яшке б свёз птиц южных чащ! В чащах юга жил бы цитрус? Да, но фальшивый экземпляр!"
+                android:textColor="@color/color6d3303"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
