@@ -27,8 +27,10 @@
         <activity
             android:name=".InfoQuestActivity"
             android:theme="@style/Theme.AppCompat.Light.Dialog.MinWidth" />
-        <activity android:name=".ActionScreenActivity"
-            android:theme="@style/CreatorActivityTheme" ></activity>
+        <activity
+            android:name=".ActionScreenActivity"
+            android:theme="@style/CreatorActivityTheme" />
+        <activity android:name=".PublicationActivity"></activity>
     </application>
 
 </manifest>

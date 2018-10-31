@@ -15,10 +15,10 @@ class ActionScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //   getWindow().setBackgroundDrawable(null)
 Log.d("startTest","ativiti")
-        if (false) {
+        if (true) {
             Log.d("startTest","ifdo")
 
-            setContentView(R.layout.activity_action_screen_cyberpunk)
+            setContentView(R.layout.activity_action_screen)
             Log.d("startTest","if")
 
         } else {
