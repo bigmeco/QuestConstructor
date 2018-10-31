@@ -30,6 +30,7 @@ import android.view.*
 import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.KeyEvent.KEYCODE_DPAD_CENTER
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.item_button_add.view.*
 import kotlinx.android.synthetic.main.item_project.view.*
 import java.lang.Exception
 
@@ -138,14 +139,25 @@ class CreatorScreenFragment : Fragment() {
 
         }
 
+        buttonExit.setOnClickListener {
+            val i =ObjectButton()
+            i.id=9000
+            i.status=true
+            objectButton.add(i)
+            (listButtons.adapter as ButtonsAdapter).notifyItemInserted(objectButton.size)
+            Log.d("scsdcsdcsdcs",objectProject.toString())
+            Log.d("scsdcsdcsdcs",objectScreen.toString())
+            Log.d("scsdcsdcsdcs",objectButton.toString())
+
+        }
+
 
         //    listButtonsUpdate(objectButton)
 
 
         val itemLeftHelper = ItemTouchHelper(simpleLeftCallback)
         itemLeftHelper.attachToRecyclerView(listButtons)
-        val itemRightHelper = ItemTouchHelper(simpleRightCallback)
-        itemRightHelper.attachToRecyclerView(listButtons)
+
 
     }
 
@@ -230,21 +242,11 @@ class CreatorScreenFragment : Fragment() {
         }
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
-            val position = viewHolder.adapterPosition
-            //objectButton.removeAt(position)
-            listButtons.adapter!!.notifyDataSetChanged()
+            viewHolder.itemView.editBody.text = null
+            objectButton.removeAt(viewHolder.getAdapterPosition());
+            listButtons.adapter!!.notifyItemRemoved(viewHolder.getAdapterPosition());
         }
     }
-    private var simpleRightCallback: ItemTouchHelper.SimpleCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
 
-        override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-            return false
-        }
-
-        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
-            listButtons.adapter!!.notifyDataSetChanged()
-
-        }
-    }
 
 }

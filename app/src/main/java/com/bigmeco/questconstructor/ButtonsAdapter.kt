@@ -22,6 +22,10 @@ class ButtonsAdapter(val items:ArrayList<ObjectButton>, val listener: (position:
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: ObjectButton, listener: ( position: Int) -> Unit, items: ArrayList<ObjectButton>, position: Int) = with(itemView) {
+            if (item.id== 9000){
+                buttenNextScreen.isEnabled =false
+                buttenNextScreen.visibility =View.INVISIBLE
+            }
             buttenNextScreen.setOnClickListener {
                 listener.invoke(position)
             }

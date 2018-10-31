@@ -275,8 +275,6 @@ class CreatorScreenActivity : AppCompatActivity() {
                 listScreen.invalidate()
                 screenUpdate {
 
-
-
                 }
             }
 
