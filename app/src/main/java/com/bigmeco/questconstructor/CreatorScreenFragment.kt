@@ -147,7 +147,7 @@ class CreatorScreenFragment : Fragment() {
             (listButtons.adapter as ButtonsAdapter).notifyItemInserted(objectButton.size)
             Log.d("scsdcsdcsdcs",objectProject.toString())
             Log.d("scsdcsdcsdcs",objectScreen.toString())
-            Log.d("scsdcsdcsdcs",objectButton.toString())
+            Log.d("scsdcsdcsdcs",objectButton[0].toString())
 
         }
 
