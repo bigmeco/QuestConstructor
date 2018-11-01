@@ -15,7 +15,7 @@ class ActionScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //   getWindow().setBackgroundDrawable(null)
 Log.d("startTest","ativiti")
-        if (true) {
+        if (false) {
             Log.d("startTest","ifdo")
 
             setContentView(R.layout.activity_action_screen)

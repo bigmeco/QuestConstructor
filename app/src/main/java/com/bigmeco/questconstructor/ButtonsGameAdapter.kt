@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.item_button_add.view.*
 
 class ButtonsGameAdapter(val items:ArrayList<ObjectButton>, val listener: (position: Int) -> Unit) : RecyclerView.Adapter<ButtonsGameAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-       var i = if (true){
+       var i = if (false){
             LayoutInflater.from(parent.context).inflate(R.layout.item_steampunk, parent, false)
         }
         else{
