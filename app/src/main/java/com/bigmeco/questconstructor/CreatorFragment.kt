@@ -63,6 +63,15 @@ Log.d("rest",test.toString())
                 startActivity(Intent(activity, CreatorActivity::class.java))
 
             }
+            it.cardPush.setOnClickListener{
+                val intent = Intent(activity, PublicationActivity::class.java)
+                val editor = PreferenceManager.getDefaultSharedPreferences(activity).edit()
+//                editor.putInt("idProject", objectProject.id!!)
+//                editor.apply()
+//                Log.d("ddd",objectProject.id.toString())
+
+                startActivity(intent)
+            }
 
             val gdt = GestureDetector(EditListener(mainFragment, editFragment))
             editFragment.setOnTouchListener { _, event ->

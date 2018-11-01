@@ -15,6 +15,7 @@
     <string name="done">Готово</string>
     <string name="exit">Отмена</string>
     <string name="back">Назад</string>
+    <string name="nuul" />
 
     <string-array name="greetings">
         <item>Боевик</item>
