@@ -13,6 +13,10 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_registration.*
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+
+
 
 class RegistrationActivity : AppCompatActivity() {
 
@@ -29,6 +33,12 @@ class RegistrationActivity : AppCompatActivity() {
                 .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
         mAuth = FirebaseAuth.getInstance()
+        Log.d(TAG, "firebaseAuthWithGoogle:" + mAuth.currentUser)
+
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("message")
+
+        myRef.setValue("Hello, World!")
         singButton.setOnClickListener {
 
             val signInIntent = googleSignInClient.signInIntent
@@ -68,7 +78,8 @@ class RegistrationActivity : AppCompatActivity() {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success")
                         val user = mAuth!!.currentUser
-                        //updateUI(user)
+                        startActivity(Intent(this, StartActivity::class.java))
+                        finish()
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithCredential:failure", task.exception)

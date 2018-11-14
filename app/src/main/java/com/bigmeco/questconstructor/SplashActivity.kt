@@ -4,6 +4,8 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
  class SplashActivity : AppCompatActivity() {
 
@@ -18,11 +20,29 @@ import android.os.Handler
 
     private fun scheduleSplashScreen() {
         val splashScreenDuration = getSplashScreenDuration()
+        val auth =FirebaseAuth.getInstance()
+
+
         Handler().postDelayed(
                 {
+                    FirebaseAuth.AuthStateListener {
+                        if(it.currentUser!=null){
+                            startActivity(Intent(this, StartActivity::class.java))
+                            finish()
+                        } else {
+                            startActivity(Intent(this, RegistrationActivity::class.java))
+                            finish()
+                        }
+                    }
+                            if(auth.currentUser!=null){
+                                startActivity(Intent(this, StartActivity::class.java))
+                                finish()
+                            } else {
+                                startActivity(Intent(this, RegistrationActivity::class.java))
+                                finish()
+                            }
                    // getRouteToAppropriatePage()
-                    startActivity(Intent(this, RegistrationActivity::class.java))
-                    finish()
+
                 },
                 splashScreenDuration
         )
