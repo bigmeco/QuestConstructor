@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "929904701682",
+    "firebase_url": "https://questconstructor-e78e9.firebaseio.com",
+    "project_id": "questconstructor-e78e9",
+    "storage_bucket": "questconstructor-e78e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929904701682:android:5c0cbe668982b8e5",
+        "android_client_info": {
+          "package_name": "com.bigmeco.questconstructor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "929904701682-oiis20949mvvjjuk3v5mtrjubc4pi2ui.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAF_80vUAVKb2Aav22uLI9-JZs7cl7isLQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

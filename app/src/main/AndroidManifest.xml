@@ -12,11 +12,7 @@
         <activity
             android:name=".StartActivity"
             android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".CreatorActivity"
@@ -30,7 +26,15 @@
         <activity
             android:name=".ActionScreenActivity"
             android:theme="@style/CreatorActivityTheme" />
-        <activity android:name=".PublicationActivity"></activity>
+        <activity android:name=".PublicationActivity" />
+        <activity android:name=".SplashActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".RegistrationActivity"></activity>
     </application>
 
 </manifest>
