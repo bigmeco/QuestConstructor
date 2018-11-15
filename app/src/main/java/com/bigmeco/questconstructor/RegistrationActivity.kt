@@ -13,9 +13,8 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_registration.*
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-
+import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
 
 
 class RegistrationActivity : AppCompatActivity() {
@@ -35,14 +34,32 @@ class RegistrationActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         Log.d(TAG, "firebaseAuthWithGoogle:" + mAuth.currentUser)
 
-        val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("message")
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
 
-        myRef.setValue("Hello, World!")
         singButton.setOnClickListener {
 
-            val signInIntent = googleSignInClient.signInIntent
-            startActivityForResult(signInIntent, RC_SIGN_IN)
+            val fireStoreDataBase = FirebaseFirestore.getInstance()
+
+var og: ObjectButton = ObjectButton()
+
+            og.status = true
+            og.id = 545
+            og.text = "gdfgd"
+            var pojoButton = PojoButton()
+
+            fireStoreDataBase.collection("users")
+                    .document(uid!!)
+                    .collection("test")
+                    .document("UBU861neCj4jf0ZCF7BA")
+                    .set(og)
+                    .addOnSuccessListener { aVoid ->
+                        Log.i("WORK", "Works ")
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.i("Error", "Error occurred during a personal data being submitted in database $exception")
+                    }
+//            val signInIntent = googleSignInClient.signInIntent
+//            startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
     }

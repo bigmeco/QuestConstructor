@@ -66,9 +66,9 @@ Log.d("rest",test.toString())
             it.cardPush.setOnClickListener{
                 val intent = Intent(activity, PublicationActivity::class.java)
                 val editor = PreferenceManager.getDefaultSharedPreferences(activity).edit()
-//                editor.putInt("idProject", objectProject.id!!)
-//                editor.apply()
-//                Log.d("ddd",objectProject.id.toString())
+                editor.putInt("idProject", list[i].id!!)
+                editor.apply()
+                Log.d("ddd",objectProject.id.toString())
 
                 startActivity(intent)
             }
