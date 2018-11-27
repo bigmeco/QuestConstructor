@@ -40,26 +40,26 @@ class RegistrationActivity : AppCompatActivity() {
 
             val fireStoreDataBase = FirebaseFirestore.getInstance()
 
-var og: ObjectButton = ObjectButton()
-
-            og.status = true
-            og.id = 545
-            og.text = "gdfgd"
-            var pojoButton = PojoButton()
-
-            fireStoreDataBase.collection("users")
-                    .document(uid!!)
-                    .collection("test")
-                    .document("UBU861neCj4jf0ZCF7BA")
-                    .set(og)
-                    .addOnSuccessListener { aVoid ->
-                        Log.i("WORK", "Works ")
-                    }
-                    .addOnFailureListener { exception ->
-                        Log.i("Error", "Error occurred during a personal data being submitted in database $exception")
-                    }
-//            val signInIntent = googleSignInClient.signInIntent
-//            startActivityForResult(signInIntent, RC_SIGN_IN)
+//var og: ObjectButton = ObjectButton()
+//
+//            og.status = true
+//            og.id = 545
+//            og.text = "gdfgd"
+//            var pojoButton = PojoButton()
+//
+//            fireStoreDataBase.collection("users")
+//                    .document(uid!!)
+//                    .collection("test")
+//                    .document("UBU861neCj4jf0ZCF7BA")
+//                    .set(og)
+//                    .addOnSuccessListener { aVoid ->
+//                        Log.i("WORK", "Works ")
+//                    }
+//                    .addOnFailureListener { exception ->
+//                        Log.i("Error", "Error occurred during a personal data being submitted in database $exception")
+//                    }
+            val signInIntent = googleSignInClient.signInIntent
+            startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
     }
