@@ -27,7 +27,8 @@
             android:name=".ActionScreenActivity"
             android:theme="@style/CreatorActivityTheme" />
         <activity android:name=".PublicationActivity" />
-        <activity android:name=".SplashActivity" >
+        <activity android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

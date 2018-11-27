@@ -45,7 +45,7 @@ class PublicationActivity : AppCompatActivity() {
             val fireStoreDataBase = FirebaseFirestore.getInstance()
 
             val docRef = db.collection("users").document("1pi0pMapOXZMDDfg8T5MFZujyw33").collection("test2").document("0XTy0CEbh4fzIfa1tQpu")
-            docRef.get().addOnCompleteListener(OnCompleteListener<DocumentSnapshot> { task ->
+            docRef.get().addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val document = task.result
                     if (document!!.exists()) {
@@ -56,7 +56,7 @@ class PublicationActivity : AppCompatActivity() {
                 } else {
                     Log.d("qaqaqaqaqaq", "get failed with ", task.exception)
                 }
-            })
+            }
 
             fireStoreDataBase.collection("users")
                     .document(uid)
@@ -65,7 +65,7 @@ class PublicationActivity : AppCompatActivity() {
                     .set(objectProject[0]!!)
                     .addOnSuccessListener { aVoid ->
                         Log.i("WORK", "Works ")
-                    }
+                    } 
                     .addOnFailureListener { exception ->
                         Log.i("Error", "Error occurred during a personal data being submitted in database $exception")
                     }
