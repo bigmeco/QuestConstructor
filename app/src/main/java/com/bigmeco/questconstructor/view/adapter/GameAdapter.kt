@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor
+package com.bigmeco.questconstructor.view.adapter
 
 import android.graphics.drawable.Animatable
 import android.support.v7.widget.RecyclerView
@@ -6,14 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_game.view.*
-import android.animation.ObjectAnimator
-import android.support.v4.content.ContextCompat.startActivity
-import android.provider.AlarmClock
-import android.content.Intent
-
-
-
-
+import com.bigmeco.questconstructor.data.ObjectScreen
+import com.bigmeco.questconstructor.R
 
 
 class GameAdapter(val items: ArrayList<ObjectScreen>, val listener: (item: ObjectScreen, position: Int) -> Unit) : RecyclerView.Adapter<GameAdapter.ViewHolder>() {

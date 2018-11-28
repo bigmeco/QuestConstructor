@@ -1,11 +1,11 @@
-package com.bigmeco.questconstructor
+package com.bigmeco.questconstructor.view.adapter
 
-import android.content.Intent
-import android.preference.PreferenceManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bigmeco.questconstructor.data.ObjectProject
+import com.bigmeco.questconstructor.R
 import kotlinx.android.synthetic.main.item_project.view.*
 
 class ProjectAdapter(val items: ArrayList<ObjectProject>, val listener: (itemView: View, items: ArrayList<ObjectProject>, position: Int) -> Unit) : RecyclerView.Adapter<ProjectAdapter.ViewHolder>() {
@@ -19,7 +19,7 @@ class ProjectAdapter(val items: ArrayList<ObjectProject>, val listener: (itemVie
     override fun getItemCount() = items.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: ObjectProject, listener: (itemView: View,items: ArrayList<ObjectProject>, position: Int) -> Unit, items: ArrayList<ObjectProject>, position: Int) = with(itemView) {
+        fun bind(item: ObjectProject, listener: (itemView: View, items: ArrayList<ObjectProject>, position: Int) -> Unit, items: ArrayList<ObjectProject>, position: Int) = with(itemView) {
 
 
 

@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor
+package com.bigmeco.questconstructor.view.fragments
 
 import android.content.Intent
 import android.content.res.Resources
@@ -11,12 +11,12 @@ import kotlinx.android.synthetic.main.fragment_player.*
 import android.view.animation.AnimationUtils
 import android.view.animation.Animation
 import android.graphics.drawable.ColorDrawable
-import android.provider.AlarmClock
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.NumberPicker
-
-
+import com.bigmeco.questconstructor.data.ObjectScreen
+import com.bigmeco.questconstructor.R
+import com.bigmeco.questconstructor.view.activity.InfoQuestActivity
+import com.bigmeco.questconstructor.view.adapter.GameAdapter
 
 
 class PlayerFragment : Fragment() {

@@ -1,13 +1,13 @@
-package com.bigmeco.questconstructor
+package com.bigmeco.questconstructor.view.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.widget.ImageView
-import kotlinx.android.synthetic.main.activity_action_screen.*
-import kotlinx.android.synthetic.main.activity_action_screen_fantasy.*
+import com.bigmeco.questconstructor.data.ObjectButton
+import com.bigmeco.questconstructor.R
+import com.bigmeco.questconstructor.view.adapter.ButtonsGameAdapter
 
 class ActionScreenActivity : AppCompatActivity() {
 

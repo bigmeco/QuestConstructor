@@ -1,8 +1,7 @@
-package com.bigmeco.questconstructor
+package com.bigmeco.questconstructor.view.touches
 
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
-import android.support.v7.widget.CardView
 import android.transition.TransitionManager
 import android.view.GestureDetector
 import android.view.MotionEvent

@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor
+package com.bigmeco.questconstructor.view.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
@@ -6,6 +6,8 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bigmeco.questconstructor.data.ObjectButton
+import com.bigmeco.questconstructor.R
 import io.realm.Realm
 
 import kotlinx.android.synthetic.main.item_button_add.view.*
@@ -21,7 +23,7 @@ class ButtonsAdapter(val items:ArrayList<ObjectButton>, val listener: (position:
     override fun getItemCount() = items.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: ObjectButton, listener: ( position: Int) -> Unit, items: ArrayList<ObjectButton>, position: Int) = with(itemView) {
+        fun bind(item: ObjectButton, listener: (position: Int) -> Unit, items: ArrayList<ObjectButton>, position: Int) = with(itemView) {
 
             if (item.id!=null){
                 buttenNextScreen.setImageResource(R.drawable.success)

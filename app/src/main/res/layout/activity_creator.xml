@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/createColor"
-    tools:context=".CreatorActivity">
+    tools:context=".view.activity.CreatorActivity">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"

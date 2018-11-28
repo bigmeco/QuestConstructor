@@ -1,31 +1,28 @@
-package com.bigmeco.questconstructor
+package com.bigmeco.questconstructor.view.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
 import kotlinx.android.synthetic.main.activity_creator_screen.*
 import android.content.Intent
 import android.view.KeyEvent
 import android.preference.PreferenceManager
 import android.graphics.drawable.Animatable
-import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
 import android.support.v4.app.Fragment
-import android.support.v7.widget.CardView
 import android.transition.ChangeBounds
 import android.transition.Scene
 import android.transition.Transition
 import android.transition.TransitionManager
-import android.util.Log
 import io.realm.Realm
-import android.view.MotionEvent
-import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.GestureDetector
-import android.view.View
-import android.widget.ScrollView
-import io.realm.RealmList
+import com.bigmeco.questconstructor.data.ObjectButton
+import com.bigmeco.questconstructor.data.ObjectProject
+import com.bigmeco.questconstructor.data.ObjectScreen
+import com.bigmeco.questconstructor.R
+import com.bigmeco.questconstructor.view.adapter.ListScreenAdapter
+import com.bigmeco.questconstructor.view.fragments.CreatorScreenFragment
+import com.bigmeco.questconstructor.view.touches.VoterListener
 
 
 //class CreatorScreenActivity : AppCompatActivity() {

@@ -1,38 +1,28 @@
-package com.bigmeco.questconstructor
+package com.bigmeco.questconstructor.view.fragments
 
 import android.content.Context
-import android.content.Context.INPUT_METHOD_SERVICE
-import android.content.DialogInterface
-import android.net.Uri
 import android.os.Bundle
 import android.support.constraint.ConstraintSet
 import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.transition.TransitionManager
 import android.util.Log
-import android.widget.Toast
 import com.bigmeco.questconstructor.R
 import io.realm.Realm
-import io.realm.RealmList
-import io.realm.internal.SyncObjectServerFacade.getApplicationContext
 import kotlinx.android.synthetic.main.activity_creator_screen.*
 import kotlinx.android.synthetic.main.fragment_creator_screen.*
-import android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT
-import android.support.v4.content.ContextCompat.getSystemService
 import android.view.inputmethod.InputMethodManager
-import android.content.Context.INPUT_METHOD_SERVICE
-import android.support.v4.content.ContextCompat.getSystemService
 import android.util.DisplayMetrics
 import android.view.*
-import android.view.KeyEvent.KEYCODE_ENTER
-import android.view.KeyEvent.KEYCODE_DPAD_CENTER
+import com.bigmeco.questconstructor.data.ObjectButton
+import com.bigmeco.questconstructor.data.ObjectProject
+import com.bigmeco.questconstructor.data.ObjectScreen
+import com.bigmeco.questconstructor.view.activity.CreatorScreenActivity
+import com.bigmeco.questconstructor.view.adapter.ButtonsAdapter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_button_add.view.*
-import kotlinx.android.synthetic.main.item_project.view.*
-import java.lang.Exception
 
 
 class CreatorScreenFragment : Fragment() {
@@ -140,7 +130,7 @@ class CreatorScreenFragment : Fragment() {
         }
 
         buttonExit.setOnClickListener {
-            val i =ObjectButton()
+            val i = ObjectButton()
             i.id=9000
             i.status=true
             objectButton.add(i)

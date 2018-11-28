@@ -1,24 +1,18 @@
-package com.bigmeco.questconstructor
+package com.bigmeco.questconstructor.view.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 
 import kotlinx.android.synthetic.main.activity_publication.*
-import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager.OnPageChangeListener
 import android.util.Log
+import com.bigmeco.questconstructor.data.ObjectProject
+import com.bigmeco.questconstructor.R
+import com.bigmeco.questconstructor.view.adapter.StylesPagerAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import io.realm.Realm
-import io.realm.RealmList
-import io.realm.RealmResults
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.android.gms.tasks.Task
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.firestore.DocumentReference
-
-
 
 
 class PublicationActivity : AppCompatActivity() {

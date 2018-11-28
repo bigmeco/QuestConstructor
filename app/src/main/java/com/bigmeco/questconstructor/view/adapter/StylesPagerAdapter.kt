@@ -1,11 +1,12 @@
-package com.bigmeco.questconstructor
+package com.bigmeco.questconstructor.view.adapter
 
 import android.content.Context
 import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
-
+import com.bigmeco.questconstructor.R
+import com.bigmeco.questconstructor.collections.ResourcesModel
 
 
 class StylesPagerAdapter(context: Context) : PagerAdapter() {

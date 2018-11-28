@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor
+package com.bigmeco.questconstructor.view.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -15,8 +15,9 @@ import android.util.Log
 import io.realm.Realm
 import io.realm.RealmList
 import android.preference.PreferenceManager
-
-
+import com.bigmeco.questconstructor.data.ObjectProject
+import com.bigmeco.questconstructor.data.ObjectScreen
+import com.bigmeco.questconstructor.R
 
 
 class CreatorActivity : AppCompatActivity() {

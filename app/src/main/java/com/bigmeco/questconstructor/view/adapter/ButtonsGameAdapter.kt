@@ -1,14 +1,11 @@
-package com.bigmeco.questconstructor
+package com.bigmeco.questconstructor.view.adapter
 
 import android.support.v7.widget.RecyclerView
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import io.realm.Realm
-
-import kotlinx.android.synthetic.main.item_button_add.view.*
+import com.bigmeco.questconstructor.data.ObjectButton
+import com.bigmeco.questconstructor.R
 
 
 class ButtonsGameAdapter(val items:ArrayList<ObjectButton>, val listener: (position: Int) -> Unit) : RecyclerView.Adapter<ButtonsGameAdapter.ViewHolder>() {
@@ -29,7 +26,7 @@ class ButtonsGameAdapter(val items:ArrayList<ObjectButton>, val listener: (posit
     override fun getItemCount() = items.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: ObjectButton, listener: ( position: Int) -> Unit, items: ArrayList<ObjectButton>, position: Int) = with(itemView) {
+        fun bind(item: ObjectButton, listener: (position: Int) -> Unit, items: ArrayList<ObjectButton>, position: Int) = with(itemView) {
 
         }
     }

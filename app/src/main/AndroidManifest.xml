@@ -10,24 +10,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".StartActivity"
+            android:name=".view.activity.StartActivity"
             android:theme="@style/AppTheme">
 
         </activity>
         <activity
-            android:name=".CreatorActivity"
+            android:name=".view.activity.CreatorActivity"
             android:theme="@style/CreatorActivityTheme" />
         <activity
-            android:name=".CreatorScreenActivity"
+            android:name=".view.activity.CreatorScreenActivity"
             android:theme="@style/CreatorActivityTheme" />
         <activity
-            android:name=".InfoQuestActivity"
+            android:name=".view.activity.InfoQuestActivity"
             android:theme="@style/Theme.AppCompat.Light.Dialog.MinWidth" />
         <activity
-            android:name=".ActionScreenActivity"
+            android:name=".view.activity.ActionScreenActivity"
             android:theme="@style/CreatorActivityTheme" />
-        <activity android:name=".PublicationActivity" />
-        <activity android:name=".SplashActivity"
+        <activity android:name=".view.activity.PublicationActivity" />
+        <activity android:name=".view.activity.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +35,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegistrationActivity"></activity>
+        <activity android:name=".view.activity.RegistrationActivity"></activity>
     </application>
 
 </manifest>

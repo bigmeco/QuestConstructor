@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor
+package com.bigmeco.questconstructor.view.activity
 
 import android.content.Intent
 import android.graphics.drawable.Animatable
@@ -12,6 +12,7 @@ import android.transition.Transition
 import android.transition.TransitionManager
 import android.util.Log
 import android.view.Window
+import com.bigmeco.questconstructor.R
 import kotlinx.android.synthetic.main.activity_info_quest.*
 
 class InfoQuestActivity : AppCompatActivity() {

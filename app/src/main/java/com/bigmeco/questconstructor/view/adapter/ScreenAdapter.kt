@@ -1,9 +1,11 @@
-package com.bigmeco.questconstructor
+package com.bigmeco.questconstructor.view.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bigmeco.questconstructor.data.ObjectScreen
+import com.bigmeco.questconstructor.R
 import kotlinx.android.synthetic.main.item_screen.view.*
 
 class ScreenAdapter(val items: List<ObjectScreen>, val listener: (position: Int) -> Unit) : RecyclerView.Adapter<ScreenAdapter.ViewHolder>() {

@@ -1,18 +1,16 @@
-package com.bigmeco.questconstructor
+package com.bigmeco.questconstructor.view.fragments
 
 import android.content.Context
 import android.os.Bundle
 import android.support.constraint.ConstraintSet
 import android.support.v4.app.Fragment
-import android.transition.ChangeBounds
-import android.transition.Scene
-import android.transition.Transition
 import android.transition.TransitionManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import com.bigmeco.questconstructor.data.ObjectProject
+import com.bigmeco.questconstructor.R
 import io.realm.Realm
 import kotlinx.android.synthetic.main.fragment_creator.*
 import kotlinx.android.synthetic.main.fragment_edit_project.*

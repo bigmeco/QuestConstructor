@@ -1,13 +1,15 @@
-package com.bigmeco.questconstructor
+package com.bigmeco.questconstructor.view.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bigmeco.questconstructor.data.ObjectScreen
+import com.bigmeco.questconstructor.R
 import kotlinx.android.synthetic.main.item_sreen_add.view.*
 
 
-class ListScreenAdapter(val items: ArrayList<ObjectScreen>, val listener: (item: ObjectScreen,position: Int) -> Unit) : RecyclerView.Adapter<ListScreenAdapter.ViewHolder>() {
+class ListScreenAdapter(val items: ArrayList<ObjectScreen>, val listener: (item: ObjectScreen, position: Int) -> Unit) : RecyclerView.Adapter<ListScreenAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_sreen_add, parent, false))

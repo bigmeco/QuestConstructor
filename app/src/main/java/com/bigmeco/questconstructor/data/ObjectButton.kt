@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor
+package com.bigmeco.questconstructor.data
 
 import io.realm.RealmList
 import io.realm.RealmObject
