@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor.view.fragments
+package com.bigmeco.questconstructor.screen.fragments
 
 import android.content.Context
 import android.os.Bundle

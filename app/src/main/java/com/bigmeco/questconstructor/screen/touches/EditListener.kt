@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor.view.touches
+package com.bigmeco.questconstructor.screen.touches
 
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet

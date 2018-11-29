@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor.view.adapter
+package com.bigmeco.questconstructor.screen.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.text.Editable

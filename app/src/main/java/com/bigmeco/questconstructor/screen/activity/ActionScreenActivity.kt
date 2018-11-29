@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor.view.activity
+package com.bigmeco.questconstructor.screen.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.bigmeco.questconstructor.data.ObjectButton
 import com.bigmeco.questconstructor.R
-import com.bigmeco.questconstructor.view.adapter.ButtonsGameAdapter
+import com.bigmeco.questconstructor.screen.adapter.ButtonsGameAdapter
 
 class ActionScreenActivity : AppCompatActivity() {
 

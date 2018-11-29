@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor.view.activity
+package com.bigmeco.questconstructor.screen.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

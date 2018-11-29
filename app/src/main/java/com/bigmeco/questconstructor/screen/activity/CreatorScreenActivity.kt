@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor.view.activity
+package com.bigmeco.questconstructor.screen.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -20,9 +20,9 @@ import com.bigmeco.questconstructor.data.ObjectButton
 import com.bigmeco.questconstructor.data.ObjectProject
 import com.bigmeco.questconstructor.data.ObjectScreen
 import com.bigmeco.questconstructor.R
-import com.bigmeco.questconstructor.view.adapter.ListScreenAdapter
-import com.bigmeco.questconstructor.view.fragments.CreatorScreenFragment
-import com.bigmeco.questconstructor.view.touches.VoterListener
+import com.bigmeco.questconstructor.screen.adapter.ListScreenAdapter
+import com.bigmeco.questconstructor.screen.fragments.CreatorScreenFragment
+import com.bigmeco.questconstructor.screen.touches.VoterListener
 
 
 //class CreatorScreenActivity : AppCompatActivity() {

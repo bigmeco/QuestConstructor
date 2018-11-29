@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor.view.activity
+package com.bigmeco.questconstructor.screen.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +9,7 @@ import android.support.v4.view.ViewPager.OnPageChangeListener
 import android.util.Log
 import com.bigmeco.questconstructor.data.ObjectProject
 import com.bigmeco.questconstructor.R
-import com.bigmeco.questconstructor.view.adapter.StylesPagerAdapter
+import com.bigmeco.questconstructor.screen.adapter.StylesPagerAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import io.realm.Realm

@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor.view.fragments
+package com.bigmeco.questconstructor.screen.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -18,12 +18,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.bigmeco.questconstructor.data.ObjectProject
 import com.bigmeco.questconstructor.R
-import com.bigmeco.questconstructor.view.activity.CreatorActivity
-import com.bigmeco.questconstructor.view.activity.CreatorScreenActivity
-import com.bigmeco.questconstructor.view.activity.PublicationActivity
-import com.bigmeco.questconstructor.view.adapter.ProjectAdapter
-import com.bigmeco.questconstructor.view.adapter.ScreenAdapter
-import com.bigmeco.questconstructor.view.touches.EditListener
+import com.bigmeco.questconstructor.screen.activity.CreatorActivity
+import com.bigmeco.questconstructor.screen.activity.CreatorScreenActivity
+import com.bigmeco.questconstructor.screen.activity.PublicationActivity
+import com.bigmeco.questconstructor.screen.adapter.ProjectAdapter
+import com.bigmeco.questconstructor.screen.adapter.ScreenAdapter
+import com.bigmeco.questconstructor.screen.touches.EditListener
 import io.realm.Realm
 import kotlinx.android.synthetic.main.fragment_creator.*
 import kotlinx.android.synthetic.main.item_project.view.*

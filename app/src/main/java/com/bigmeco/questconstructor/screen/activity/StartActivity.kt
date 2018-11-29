@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor.view.activity
+package com.bigmeco.questconstructor.screen.activity
 
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -12,8 +12,8 @@ import android.transition.Scene
 import android.transition.Transition
 import android.transition.ChangeBounds
 import com.bigmeco.questconstructor.R
-import com.bigmeco.questconstructor.view.fragments.CreatorFragment
-import com.bigmeco.questconstructor.view.fragments.PlayerFragment
+import com.bigmeco.questconstructor.screen.fragments.CreatorFragment
+import com.bigmeco.questconstructor.screen.fragments.PlayerFragment
 import io.realm.Realm
 
 

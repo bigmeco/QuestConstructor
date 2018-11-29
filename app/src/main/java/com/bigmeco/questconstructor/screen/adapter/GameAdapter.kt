@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor.view.adapter
+package com.bigmeco.questconstructor.screen.adapter
 
 import android.graphics.drawable.Animatable
 import android.support.v7.widget.RecyclerView

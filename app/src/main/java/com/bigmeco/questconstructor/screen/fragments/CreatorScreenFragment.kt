@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor.view.fragments
+package com.bigmeco.questconstructor.screen.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -19,8 +19,8 @@ import android.view.*
 import com.bigmeco.questconstructor.data.ObjectButton
 import com.bigmeco.questconstructor.data.ObjectProject
 import com.bigmeco.questconstructor.data.ObjectScreen
-import com.bigmeco.questconstructor.view.activity.CreatorScreenActivity
-import com.bigmeco.questconstructor.view.adapter.ButtonsAdapter
+import com.bigmeco.questconstructor.screen.activity.CreatorScreenActivity
+import com.bigmeco.questconstructor.screen.adapter.ButtonsAdapter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_button_add.view.*
 

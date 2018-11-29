@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor.view.fragments
+package com.bigmeco.questconstructor.screen.fragments
 
 import android.content.Intent
 import android.content.res.Resources
@@ -15,8 +15,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.widget.NumberPicker
 import com.bigmeco.questconstructor.data.ObjectScreen
 import com.bigmeco.questconstructor.R
-import com.bigmeco.questconstructor.view.activity.InfoQuestActivity
-import com.bigmeco.questconstructor.view.adapter.GameAdapter
+import com.bigmeco.questconstructor.screen.activity.InfoQuestActivity
+import com.bigmeco.questconstructor.screen.adapter.GameAdapter
 
 
 class PlayerFragment : Fragment() {

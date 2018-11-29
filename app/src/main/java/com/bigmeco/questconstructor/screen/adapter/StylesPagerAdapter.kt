@@ -1,4 +1,4 @@
-package com.bigmeco.questconstructor.view.adapter
+package com.bigmeco.questconstructor.screen.adapter
 
 import android.content.Context
 import android.support.v4.view.PagerAdapter
