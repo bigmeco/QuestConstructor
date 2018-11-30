@@ -1,8 +1,8 @@
 package com.bigmeco.questconstructor.presenter
 
-import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.bigmeco.questconstructor.views.RegistrationView
 import com.bigmeco.questconstructor.views.SplashView
 import com.google.firebase.auth.FirebaseAuth
 

@@ -2,7 +2,6 @@ package com.bigmeco.questconstructor.screen.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
