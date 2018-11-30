@@ -22,8 +22,13 @@ class RegistrationPresenter : MvpPresenter<RegistrationView>() {
         try {
             val account = task.getResult(ApiException::class.java)
             if (account != null) {
+                Log.d("sdsdsdds","account != null")
+
                 val credential = GoogleAuthProvider.getCredential(account.idToken, null)
                 viewState.signedInAccount(mAuth, credential)
+            }else{
+                Log.d("sdsdsdds","account == null")
+
             }
         } catch (e: ApiException) {
 

@@ -9,6 +9,6 @@ import com.bigmeco.questconstructor.views.CreatorView
 class CreatorPresenter : MvpPresenter<CreatorView>() {
 
     fun getProjects() {
-        viewState.getProjects(CreatorModel().test())
+        viewState.getProjects(CreatorModel().getProjects())
     }
 }

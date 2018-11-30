@@ -46,6 +46,8 @@ class RegistrationActivity : MvpAppCompatActivity(), RegistrationView {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        Log.d("sdsdsdds","RC_SIGN_IN")
+
         if (requestCode == RC_SIGN_IN) {
             data?.let { registrationPresenter.signedInAccount(it) }
         }

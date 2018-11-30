@@ -9,7 +9,7 @@ class CreatorModel : ICreatorModel {
     val realm: Realm = Realm.getDefaultInstance()
     private val test = ArrayList<ObjectProject>()
 
-    override fun test(): ArrayList<ObjectProject>{
+    override fun getProjects(): ArrayList<ObjectProject>{
         test.addAll(realm.where(ObjectProject::class.java).findAll())
         test.add(ObjectProject())
         return test

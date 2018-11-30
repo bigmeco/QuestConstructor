@@ -1,6 +1,5 @@
 package com.bigmeco.questconstructor.screen.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.constraint.ConstraintSet
 import android.transition.ChangeBounds
@@ -12,26 +11,32 @@ import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.util.Log
-import io.realm.Realm
 import io.realm.RealmList
 import android.preference.PreferenceManager
+import com.arellomobile.mvp.MvpAppCompatActivity
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.bigmeco.questconstructor.data.ObjectProject
 import com.bigmeco.questconstructor.data.ObjectScreen
 import com.bigmeco.questconstructor.R
+import com.bigmeco.questconstructor.presenter.ProjectCreationPresenter
+import com.bigmeco.questconstructor.views.ProjectCreationView
 
 
-class CreatorActivity : AppCompatActivity() {
+class CreatorActivity : MvpAppCompatActivity(), ProjectCreationView {
+
+    @InjectPresenter
+    lateinit var projectCreationPresenter: ProjectCreationPresenter
+
+    @ProvidePresenter
+    fun provideSplashPresenter(): ProjectCreationPresenter {
+        return ProjectCreationPresenter()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creator)
         val set = ConstraintSet()
-        Realm.init(this)
-
-        val realm = Realm.getDefaultInstance()
-        var objectProject = ObjectProject()
-
-
 
         imageBack.setOnClickListener {
             finish()
@@ -50,46 +55,24 @@ class CreatorActivity : AppCompatActivity() {
             if (textBack.text != getString(R.string.back)) {
                 transitionBody(set)
             } else {
+                val objectProject = ObjectProject()
                 objectProject.name = editName.text.toString()
                 objectProject.body = editBody.text.toString()
                 objectProject.genre = spinnerGenres.selectedItem.toString()
                 objectProject.time = spinnerTime.selectedItem.toString()
-                objectProject.id = realm.where(ObjectProject::class.java).findAll().size
-                objectProject.status = false
-//                var endProject =ObjectScreen()
-//                var endButton =ObjectButton()
-//                endButton.status= true
-//                var objectButton =RealmList<ObjectButton>()
-//                objectButton.add(endButton)
-//                endProject.id=0
-//                endProject.buttons=objectButton
-//
-                var startProject = ObjectScreen()
-                startProject.id = 0
-
-                var objectScreen = RealmList<ObjectScreen>()
-                //objectScreen.add(endProject)
-                objectScreen.add(startProject)
-                objectProject.screen = objectScreen
-                realm.beginTransaction()
-                realm.insert(objectProject)
-                realm.commitTransaction()
-                val intent = Intent(this, CreatorScreenActivity::class.java)
-                val editor = PreferenceManager.getDefaultSharedPreferences(this).edit()
-                editor.putInt("idProject", objectProject.id!!)
-                editor.apply()
-                Log.d("ddd",objectProject.id.toString())
-
-                startActivity(intent)
-
+                projectCreationPresenter.createInitialDraft(objectProject)
             }
             transitionBody(set)
-
-
         }
     }
 
-
+    override fun createInitialDraft(objectProject: ObjectProject) {
+        val intent = Intent(this, CreatorScreenActivity::class.java)
+        val editor = PreferenceManager.getDefaultSharedPreferences(this).edit()
+        editor.putInt("idProject", objectProject.id!!)
+        editor.apply()
+        startActivity(intent)
+    }
 
 
     private fun transitionName(set: ConstraintSet) {
@@ -108,7 +91,6 @@ class CreatorActivity : AppCompatActivity() {
         textBack.text = getString(R.string.exit)
         textHelloy.text = getString(R.string.greeting)
         editTextBody.text = getString(R.string.edit_text_name)
-
 
         val mySwapTransition = ChangeBounds()
         mySwapTransition.addListener(object : Transition.TransitionListener {
