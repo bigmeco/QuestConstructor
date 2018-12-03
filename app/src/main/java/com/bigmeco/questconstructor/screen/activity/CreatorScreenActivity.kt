@@ -228,16 +228,16 @@ import com.bigmeco.questconstructor.views.CreatorScreenView
 
 
 class CreatorScreenActivity :  MvpAppCompatActivity(), CreatorScreenView {
-    private var idProject = 0
 
+
+    private var idProject = 0
     private var idScreen = 0
     private var objectProject: ObjectProject? = ObjectProject()
     private var objectScreen: ObjectScreen? = ObjectScreen()
     private var oldFragment: Fragment? = null
-    val realm = Realm.getDefaultInstance()
 
     @InjectPresenter
-    lateinit var splashPresenter: CreatorScreenPresenter
+    lateinit var creatorScreenPresenter: CreatorScreenPresenter
 
     @ProvidePresenter
     fun provideSplashPresenter(): CreatorScreenPresenter {
@@ -247,14 +247,11 @@ class CreatorScreenActivity :  MvpAppCompatActivity(), CreatorScreenView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creator_screen)
-        Realm.init(this)
-
             val preferences = PreferenceManager.getDefaultSharedPreferences(this)
             idProject = preferences.getInt("idProject", 0)
             idScreen = preferences.getInt("idScreen", 0)
 
-        splashPresenter.getProject(idProject)
-
+        creatorScreenPresenter.getProject(idProject)
 
         val drawable = imageVoter.drawable
         if (drawable is Animatable) (drawable as Animatable).start()
@@ -270,26 +267,9 @@ class CreatorScreenActivity :  MvpAppCompatActivity(), CreatorScreenView {
 
         imagePlusScreen.setOnClickListener {
             screenUpdate {
-                val addScreen = ObjectScreen()
-                addScreen.id = objectProject?.screen?.size
-                realm.executeTransaction {
-                    objectProject!!.screen!!.add(addScreen)
-                }
-                val bundle = Bundle()
-                bundle.putInt("IDscreen", addScreen.id!!)
-                oldFragment?.arguments = bundle
-                transitionFragment(CreatorScreenFragment(), addScreen.id!!)
-                listScreenUpdate(ArrayList(objectProject?.screen))
-                listScreen.invalidate()
-                screenUpdate {
-
-                }
+                creatorScreenPresenter.addScreen()
             }
-
         }
-
-
-
     }
 
     private fun transitionFragment(newFragment: Fragment, idScreen: Int) {
@@ -340,9 +320,7 @@ class CreatorScreenActivity :  MvpAppCompatActivity(), CreatorScreenView {
                 bundle.putInt("IDscreen", i)
                 oldFragment?.arguments = bundle
                 transitionFragment(CreatorScreenFragment(), i)
-
             }
-
 
         }
     }
@@ -361,7 +339,14 @@ class CreatorScreenActivity :  MvpAppCompatActivity(), CreatorScreenView {
         startActivity(Intent(this, StartActivity::class.java))
 
     }
-
+    override fun addScreen(idNewScreen: Int) {
+        val bundle = Bundle()
+        bundle.putInt("IDscreen", idNewScreen)
+        oldFragment?.arguments = bundle
+        transitionFragment(CreatorScreenFragment(), idNewScreen)
+        listScreenUpdate(ArrayList(objectProject?.screen))
+        listScreen.invalidate()
+    }
 
     override fun getProject(objectProject: ObjectProject) {
         this.objectProject =objectProject

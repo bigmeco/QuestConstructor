@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 @InjectViewState
 class SplashPresenter : MvpPresenter<SplashView>() {
     fun scheduleSplashScreen() {
+
         val auth = FirebaseAuth.getInstance()
         viewState.auth(auth.currentUser!=null)
     }

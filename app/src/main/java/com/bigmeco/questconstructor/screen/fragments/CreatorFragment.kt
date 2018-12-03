@@ -35,7 +35,6 @@ import kotlinx.android.synthetic.main.item_project.view.*
 class CreatorFragment : MvpAppCompatFragment(), CreatorView {
     @InjectPresenter
     lateinit var creatorPresenter: CreatorPresenter
-    val realm: Realm = Realm.getDefaultInstance()
 
 
     @ProvidePresenter
