@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.bigmeco.questconstructor.QuestConstructorApplication
 import com.bigmeco.questconstructor.R
 import com.bigmeco.questconstructor.presenter.SplashPresenter
 import com.bigmeco.questconstructor.views.SplashView

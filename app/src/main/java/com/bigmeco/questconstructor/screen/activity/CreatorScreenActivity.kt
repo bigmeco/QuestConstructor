@@ -16,13 +16,18 @@ import android.transition.Transition
 import android.transition.TransitionManager
 import io.realm.Realm
 import android.view.GestureDetector
+import com.arellomobile.mvp.MvpAppCompatActivity
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.bigmeco.questconstructor.data.ObjectButton
 import com.bigmeco.questconstructor.data.ObjectProject
 import com.bigmeco.questconstructor.data.ObjectScreen
 import com.bigmeco.questconstructor.R
+import com.bigmeco.questconstructor.presenter.CreatorScreenPresenter
 import com.bigmeco.questconstructor.screen.adapter.ListScreenAdapter
 import com.bigmeco.questconstructor.screen.fragments.CreatorScreenFragment
 import com.bigmeco.questconstructor.screen.touches.VoterListener
+import com.bigmeco.questconstructor.views.CreatorScreenView
 
 
 //class CreatorScreenActivity : AppCompatActivity() {
@@ -222,16 +227,22 @@ import com.bigmeco.questconstructor.screen.touches.VoterListener
 //
 
 
-class CreatorScreenActivity : AppCompatActivity() {
-
+class CreatorScreenActivity :  MvpAppCompatActivity(), CreatorScreenView {
     private var idProject = 0
+
     private var idScreen = 0
-    private var idButton = 0
     private var objectProject: ObjectProject? = ObjectProject()
     private var objectScreen: ObjectScreen? = ObjectScreen()
-    private var objectButton: ArrayList<ObjectButton> = ArrayList()
     private var oldFragment: Fragment? = null
     val realm = Realm.getDefaultInstance()
+
+    @InjectPresenter
+    lateinit var splashPresenter: CreatorScreenPresenter
+
+    @ProvidePresenter
+    fun provideSplashPresenter(): CreatorScreenPresenter {
+        return CreatorScreenPresenter()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -242,8 +253,8 @@ class CreatorScreenActivity : AppCompatActivity() {
             idProject = preferences.getInt("idProject", 0)
             idScreen = preferences.getInt("idScreen", 0)
 
-        objectProject = realm.where(ObjectProject::class.java).equalTo("id", idProject).findFirst()
-        objectScreen = objectProject?.screen?.get(idScreen)
+        splashPresenter.getProject(idProject)
+
 
         val drawable = imageVoter.drawable
         if (drawable is Animatable) (drawable as Animatable).start()
@@ -276,12 +287,10 @@ class CreatorScreenActivity : AppCompatActivity() {
             }
 
         }
-        listScreen.layoutManager = LinearLayoutManager(this)
-        listScreenUpdate(ArrayList(objectProject?.screen))
+
 
 
     }
-
 
     private fun transitionFragment(newFragment: Fragment, idScreen: Int) {
         oldFragment= newFragment
@@ -323,6 +332,7 @@ class CreatorScreenActivity : AppCompatActivity() {
 
     }
 
+
      fun listScreenUpdate(screens: ArrayList<ObjectScreen>) {
         listScreen.adapter = ListScreenAdapter(screens) { objectScreen: ObjectScreen, i: Int ->
             screenUpdate {
@@ -347,9 +357,16 @@ class CreatorScreenActivity : AppCompatActivity() {
         return super.onKeyDown(keyCode, event)
     }
 
-
     override fun onBackPressed() {
         startActivity(Intent(this, StartActivity::class.java))
 
+    }
+
+
+    override fun getProject(objectProject: ObjectProject) {
+        this.objectProject =objectProject
+        objectScreen = objectProject.screen?.get(idScreen)
+        listScreen.layoutManager = LinearLayoutManager(this)
+        listScreenUpdate(ArrayList(objectProject.screen))
     }
 }
