@@ -1,6 +1,7 @@
 package com.bigmeco.questconstructor.screen.fragments
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.constraint.ConstraintSet
 import android.support.v4.app.Fragment
@@ -16,26 +17,38 @@ import kotlinx.android.synthetic.main.fragment_creator_screen.*
 import android.view.inputmethod.InputMethodManager
 import android.util.DisplayMetrics
 import android.view.*
+import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.bigmeco.questconstructor.data.ObjectButton
 import com.bigmeco.questconstructor.data.ObjectProject
 import com.bigmeco.questconstructor.data.ObjectScreen
+import com.bigmeco.questconstructor.presenter.CreatorScreenFrPresenter
 import com.bigmeco.questconstructor.screen.activity.CreatorScreenActivity
 import com.bigmeco.questconstructor.screen.adapter.ButtonsAdapter
+import com.bigmeco.questconstructor.views.CreatorScreenFrView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_button_add.view.*
 
 
-class CreatorScreenFragment : Fragment() {
-
-
+class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
     val realm = Realm.getDefaultInstance()
+
     private var idProject = 0
+
+
     private var idScreen = 0
     private var idButton: Int? = null
     private var objectProject: ObjectProject? = ObjectProject()
     private var objectScreen: ObjectScreen? = ObjectScreen()
     var objectButton: ArrayList<ObjectButton> = ArrayList()
+    @InjectPresenter
+    lateinit var creatorScreenFrPresenter: CreatorScreenFrPresenter
 
+    @ProvidePresenter
+    fun provideSplashPresenter(): CreatorScreenFrPresenter {
+        return CreatorScreenFrPresenter()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -45,35 +58,28 @@ class CreatorScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val metrics = DisplayMetrics()
-        activity!!.windowManager.defaultDisplay.getMetrics(metrics)
+        activity!!.windowManager.defaultDisplay.getMetrics(DisplayMetrics())
         val bundle = this.arguments
         if (bundle != null) {
             idProject = bundle.getInt("project", 0)
             idScreen = bundle.getInt("screen", 0)
         }
-        objectProject = realm.where(ObjectProject::class.java).equalTo("id", idProject).findFirst()
-        objectScreen = objectProject?.screen?.get(idScreen)
-        objectButton = ArrayList(objectScreen?.buttons)
-        if (objectScreen!!.image != "") {
-            Picasso.get().load(objectScreen!!.image).fit().centerCrop().error(R.drawable.plus).into(imageScreen)
-        }
-        imageScreen.setImageResource(R.drawable.plus)
 
-        editTextBody.setText(objectScreen!!.body)
+        creatorScreenFrPresenter.getProject(idProject)
+
         imageScreen.setOnClickListener {
             val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-
             val set = ConstraintSet()
             set.clone(mainLayoutFragment)
             if (cardUrl.height != ConstraintSet.MATCH_CONSTRAINT) {
                 set.constrainHeight(cardUrl.id, ConstraintSet.MATCH_CONSTRAINT)
-                imm!!.hideSoftInputFromWindow(editTextUrl.getWindowToken(), 0)
+                imm!!.hideSoftInputFromWindow(editTextUrl.windowToken, 0)
                 realm.executeTransaction {
                     objectScreen!!.image = editTextUrl.text.toString()
                 }
                 if (editTextUrl.text.toString() != "") {
-                    Picasso.get().load(editTextUrl.text.toString()).fit().centerCrop().error(R.drawable.plus).into(imageScreen)
+                    creatorScreenFrPresenter.getImageResponse(editTextUrl.text.toString(),R.drawable.plus)
+                   // Picasso.get().load(editTextUrl.text.toString()).fit().centerCrop().error(R.drawable.plus).into(imageScreen)
                 } else {
                     imageScreen.setImageResource(R.drawable.plus)
                 }
@@ -112,17 +118,8 @@ class CreatorScreenFragment : Fragment() {
 
             Log.d("rrrrr", idScreen.toString())
         }
-        listButtons.layoutManager = LinearLayoutManager(activity)
-        listButtons.adapter = ButtonsAdapter(objectButton) {
-            idButton = it
-            val set = ConstraintSet()
-            set.clone(activity?.mainLayout)
-            set.clear(activity!!.fading_edge_layout.id, ConstraintSet.TOP)
-            set.connect(activity!!.fading_edge_layout.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 512)
-            TransitionManager.beginDelayedTransition(activity!!.mainLayout)
-            set.applyTo(activity!!.mainLayout)
 
-        }
+
         buttonAdd.setOnClickListener {
             objectButton.add(ObjectButton())
             (listButtons.adapter as ButtonsAdapter).notifyItemInserted(objectButton.size)
@@ -131,18 +128,15 @@ class CreatorScreenFragment : Fragment() {
 
         buttonExit.setOnClickListener {
             val i = ObjectButton()
-            i.id=9000
-            i.status=true
+            i.id = 9000
+            i.status = true
             objectButton.add(i)
             (listButtons.adapter as ButtonsAdapter).notifyItemInserted(objectButton.size)
-            Log.d("scsdcsdcsdcs",objectProject.toString())
-            Log.d("scsdcsdcsdcs",objectScreen.toString())
-            Log.d("scsdcsdcsdcs",objectButton[0].toString())
+            Log.d("scsdcsdcsdcs", objectProject.toString())
+            Log.d("scsdcsdcsdcs", objectScreen.toString())
+            Log.d("scsdcsdcsdcs", objectButton[0].toString())
 
         }
-
-
-        //    listButtonsUpdate(objectButton)
 
 
         val itemLeftHelper = ItemTouchHelper(simpleLeftCallback)
@@ -236,6 +230,44 @@ class CreatorScreenFragment : Fragment() {
             objectButton.removeAt(viewHolder.getAdapterPosition());
             listButtons.adapter!!.notifyItemRemoved(viewHolder.getAdapterPosition());
         }
+    }
+
+    override fun getProject(objectProject: ObjectProject) {
+        this.objectProject = objectProject
+        objectScreen = objectProject.screen?.get(idScreen)
+        objectButton = ArrayList(objectScreen?.buttons)
+        editTextUrl.setText(objectScreen!!.image)
+        Log.d("eeeeeeeeeee",editTextUrl.text.toString())
+
+        editTextBody.setText(objectScreen!!.body)
+        if (editTextUrl.text.toString() != "") {
+            Log.d("eeeeeeeeeee","tru")
+
+            creatorScreenFrPresenter.getImageResponse(editTextUrl.text.toString(),R.drawable.plus)
+        } else {
+            Log.d("eeeeeeeeeee","fols")
+
+            imageScreen.setImageResource(R.drawable.plus)
+        }
+        listButtons.layoutManager = LinearLayoutManager(activity)
+        listButtons.adapter = ButtonsAdapter(objectButton) {
+            idButton = it
+            val set = ConstraintSet()
+            set.clone(activity?.mainLayout)
+            set.clear(activity!!.fading_edge_layout.id, ConstraintSet.TOP)
+            set.connect(activity!!.fading_edge_layout.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 512)
+            TransitionManager.beginDelayedTransition(activity!!.mainLayout)
+            set.applyTo(activity!!.mainLayout)
+
+
+        }
+    }
+
+
+    override fun getImageResponse(image: Bitmap) {
+            imageScreen.setImageBitmap(image)
+        Log.d("eeeeeeeeeee","override")
+
     }
 
 
