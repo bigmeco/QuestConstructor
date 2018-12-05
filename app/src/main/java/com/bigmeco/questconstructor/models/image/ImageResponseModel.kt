@@ -6,7 +6,6 @@ import com.bigmeco.questconstructor.interfaceModels.image.IImageResponseModel
 class ImageResponseModel : IImageResponseModel {
     override suspend fun getImageResponse(url: String, errorImage: Int): Bitmap? {
         val urlImageModel = UrlImageModel()
-
         return urlImageModel.urlToImage(url, errorImage)
     }
 }

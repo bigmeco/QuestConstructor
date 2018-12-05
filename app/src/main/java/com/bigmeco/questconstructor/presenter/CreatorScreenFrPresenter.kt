@@ -23,17 +23,7 @@ class CreatorScreenFrPresenter : MvpPresenter<CreatorScreenFrView>() {
     fun getImageResponse(url: String, errorImage: Int) {
         val imageResponseModel = ImageResponseModel()
           launch (UI){
-              if (imageResponseModel.getImageResponse(url, errorImage)!=null){
-                  Log.d("eeeeeeeeeee","da")
                   viewState.getImageResponse( imageResponseModel.getImageResponse(url, errorImage)!!)
-              }else {
-                  Log.d("eeeeeeeeeee","ne")
-
-                  val handler = Handler()
-                  handler.postDelayed( {  getImageResponse(url,errorImage)}, 2000)
-
-              }
-
             }
 
     }
