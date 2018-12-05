@@ -15,7 +15,7 @@ class UrlImageModel : IUrlImageModel {
 
         return suspendCoroutine { continuation ->
             try {
-                Picasso.get().load(url).into(object : com.squareup.picasso.Target {
+                Picasso.get().load(url).error(errorImage).into(object : com.squareup.picasso.Target {
                     override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
                         continuation.resume(bitmap)
                         Log.d("eeeeeeeeeee","onBitmapLoaded")
