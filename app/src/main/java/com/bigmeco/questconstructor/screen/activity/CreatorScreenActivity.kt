@@ -38,7 +38,7 @@ class CreatorScreenActivity : MvpAppCompatActivity(), CreatorScreenView {
     lateinit var creatorScreenPresenter: CreatorScreenPresenter
 
     @ProvidePresenter
-    fun provideSplashPresenter(): CreatorScreenPresenter {
+    fun provideCreatorScreenPresenter(): CreatorScreenPresenter {
         return CreatorScreenPresenter()
     }
 

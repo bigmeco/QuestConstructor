@@ -27,7 +27,7 @@ class CreatorActivity : MvpAppCompatActivity(), ProjectCreationView {
     lateinit var projectCreationPresenter: ProjectCreationPresenter
 
     @ProvidePresenter
-    fun provideSplashPresenter(): ProjectCreationPresenter {
+    fun provideProjectCreationPresenter(): ProjectCreationPresenter {
         return ProjectCreationPresenter()
     }
 

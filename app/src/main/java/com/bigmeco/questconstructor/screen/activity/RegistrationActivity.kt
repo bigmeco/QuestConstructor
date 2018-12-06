@@ -24,7 +24,7 @@ class RegistrationActivity : MvpAppCompatActivity(), RegistrationView {
     lateinit var registrationPresenter: RegistrationPresenter
 
     @ProvidePresenter
-    fun provideSplashPresenter(): RegistrationPresenter {
+    fun provideRegistrationPresenter(): RegistrationPresenter {
         return RegistrationPresenter()
     }
 

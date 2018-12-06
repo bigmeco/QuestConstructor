@@ -37,7 +37,7 @@ class CreatorFragment : MvpAppCompatFragment(), CreatorView {
 
 
     @ProvidePresenter
-    fun provideSplashPresenter(): CreatorPresenter {
+    fun provideCreatorPresenter(): CreatorPresenter {
         return CreatorPresenter()
     }
 

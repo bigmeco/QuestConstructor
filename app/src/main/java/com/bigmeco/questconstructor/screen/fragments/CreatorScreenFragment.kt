@@ -74,7 +74,7 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
             if (cardUrl.height != ConstraintSet.MATCH_CONSTRAINT) {
                 set.constrainHeight(cardUrl.id, ConstraintSet.MATCH_CONSTRAINT)
                 imm!!.hideSoftInputFromWindow(editTextUrl.windowToken, 0)
-                creatorScreenFrPresenter().setImageResponse(objectScreen, editTextUrl.text.toString())
+                creatorScreenFrPresenter.setImageResponse(objectScreen, editTextUrl.text.toString())
             } else {
                 editTextUrl.setText(objectScreen!!.image)
                 set.constrainHeight(cardUrl.id, ConstraintSet.WRAP_CONTENT)
