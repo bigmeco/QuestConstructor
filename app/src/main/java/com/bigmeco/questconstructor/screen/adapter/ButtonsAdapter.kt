@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bigmeco.questconstructor.data.ObjectButton
 import com.bigmeco.questconstructor.R
+import com.bigmeco.questconstructor.statements.ScreenConstant
 import io.realm.Realm
 
 import kotlinx.android.synthetic.main.item_button_add.view.*
@@ -28,7 +29,7 @@ class ButtonsAdapter(val items:ArrayList<ObjectButton>, val listener: (position:
             if (item.id!=null){
                 buttenNextScreen.setImageResource(R.drawable.success)
             }
-            if (item.id== 9000){
+            if (item.id== ScreenConstant.SCREEN_EXIT){
                 buttenNextScreen.isEnabled =false
                 buttenNextScreen.setImageResource(R.drawable.logout_lcon)
             }

@@ -28,17 +28,15 @@ import com.bigmeco.questconstructor.screen.adapter.ButtonsAdapter
 import com.bigmeco.questconstructor.views.CreatorScreenFrView
 import kotlinx.android.synthetic.main.item_button_add.view.*
 import android.graphics.drawable.BitmapDrawable
-
-
+import io.realm.RealmList
 
 
 class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
 
+
     val realm = Realm.getDefaultInstance()
 
     private var idProject = 0
-
-
     private var idScreen = 0
     private var idButton: Int? = null
     private var objectProject: ObjectProject? = ObjectProject()
@@ -76,7 +74,7 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
             if (cardUrl.height != ConstraintSet.MATCH_CONSTRAINT) {
                 set.constrainHeight(cardUrl.id, ConstraintSet.MATCH_CONSTRAINT)
                 imm!!.hideSoftInputFromWindow(editTextUrl.windowToken, 0)
-                creatorScreenFrPresenter().setImageResponse(objectScreen,editTextUrl.text.toString())
+                creatorScreenFrPresenter().setImageResponse(objectScreen, editTextUrl.text.toString())
             } else {
                 editTextUrl.setText(objectScreen!!.image)
                 set.constrainHeight(cardUrl.id, ConstraintSet.WRAP_CONTENT)
@@ -86,9 +84,7 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
                     if (event.getAction() === KeyEvent.ACTION_DOWN) {
                         when (keyCode) {
                             KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
-                                realm.executeTransaction {
-                                    objectScreen!!.image = editTextUrl.text.toString()
-                                }
+                                creatorScreenFrPresenter().setImageResponse(objectScreen, editTextUrl.text.toString())
                                 set.constrainHeight(cardUrl.id, ConstraintSet.MATCH_CONSTRAINT)
                                 TransitionManager.beginDelayedTransition(mainLayoutFragment)
                                 set.applyTo(mainLayoutFragment)
@@ -104,26 +100,16 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
             }
             TransitionManager.beginDelayedTransition(mainLayoutFragment)
             set.applyTo(mainLayoutFragment)
-
-            Log.d("rrrrr", idScreen.toString())
         }
 
 
         buttonAdd.setOnClickListener {
             objectButton.add(ObjectButton())
             (listButtons.adapter as ButtonsAdapter).notifyItemInserted(objectButton.size)
-
         }
 
         buttonExit.setOnClickListener {
-            val i = ObjectButton()
-            i.id = 9000
-            i.status = true
-            objectButton.add(i)
-            (listButtons.adapter as ButtonsAdapter).notifyItemInserted(objectButton.size)
-            Log.d("scsdcsdcsdcs", objectProject.toString())
-            Log.d("scsdcsdcsdcs", objectScreen.toString())
-            Log.d("scsdcsdcsdcs", objectButton[0].toString())
+            creatorScreenFrPresenter.addButtonExit(objectButton)
 
         }
 
@@ -138,73 +124,15 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
     override fun onStop() {
         super.onStop()
         val bundle = this.arguments
-
-        Log.d("fffff", bundle?.getInt("IDscreen", 0).toString())
-//        var objectButton =RealmList<ObjectButton>()
-//        objectButton.addAll(this.objectButton)
-
-        realm.executeTransaction {
-
-            if (this.idButton != null) {
-                objectButton[this.idButton!!].id = bundle?.getInt("IDscreen", 0)
-            }
-            objectScreen!!.body = editTextBody.text.toString()
-            objectScreen!!.status = objectScreen!!.thereIsNull()
-
-            objectScreen!!.buttons!!.clear()
-            objectScreen!!.buttons!!.addAll(this.objectButton)
-
-
-            for (i in 0 until objectScreen!!.buttons!!.size) {
-                if (objectScreen!!.buttons!![i]!!.thereIsNull()) {
-                    objectScreen!!.buttons!![i]!!.status = true
-                } else {
-                    objectScreen!!.buttons!![i]!!.status = false
-                    break
-                }
-            }
-            if (objectButton.size != 0) {
-                for (i in 0 until objectScreen!!.buttons!!.size) {
-                    if (objectScreen!!.buttons!![i]!!.status!!) {
-                        objectScreen!!.status = true
-                    } else {
-                        objectScreen!!.status = false
-                        break
-                    }
-                }
-            } else {
-                objectScreen!!.status = false
-            }
-
-            Log.d("asasa", objectButton.size.toString())
-            if (objectProject!!.thereIsNull()) {
-                for (i in 0 until objectProject!!.screen!!.size) {
-                    if (objectProject!!.screen!![i]!!.status!!) {
-                        objectProject!!.status = true
-                    } else {
-                        objectProject!!.status = false
-                        break
-                    }
-                }
-            } else {
-                objectProject!!.status = false
-            }
-        }
-
-        //Log.d("screan", realm.where(ObjectProject::class.java).equalTo("id", idProject).findFirst()!!.screen!![idScreen]!!.buttons!![0].toString())
-        (activity as CreatorScreenActivity).listScreenUpdate(ArrayList(objectProject!!.screen))
+        objectProject?.let {
+            creatorScreenFrPresenter.saveScreen(it,
+                    objectScreen!!,
+                    objectButton,
+                    editTextBody.text.toString(),
+                    bundle?.getInt("IDscreen", 0)!!,
+                    this.idButton)
+        }?.let { (activity as CreatorScreenActivity).listScreenUpdate(it) }
         this.idButton = null
-    }
-
-    private fun listButtonsUpdate(buttons: ArrayList<ObjectButton>) {
-        listButtons.adapter = ButtonsAdapter(buttons) {
-            //        val set = ConstraintSet()
-//        set.clone(mainLayout)
-//        set.clear(fading_edge_layout.id, ConstraintSet.TOP)
-//        set.connect(fading_edge_layout.id, ConstraintSet.TOP, cardBody.id, ConstraintSet.BOTTOM, 0)
-//        TransitionManager.beginDelayedTransition(mainLayout)
-//        set.applyTo(mainLayout)
-        }
     }
 
 
@@ -240,14 +168,17 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
         }
     }
 
+    override fun resultCreationButton(objectButtons: ArrayList<ObjectButton>) {
+        (listButtons.adapter as ButtonsAdapter).notifyItemInserted(objectButtons.size)
+    }
 
     fun getImage() {
         if (editTextUrl.text.toString() != "") {
-            Log.d("eeeeeeeeeee","tru")
+            Log.d("eeeeeeeeeee", "tru")
             creatorScreenFrPresenter.getImageResponse(editTextUrl.text.toString(), (context!!.resources
                     .getDrawable(R.drawable.cancel_image) as BitmapDrawable).bitmap)
         } else {
-            Log.d("eeeeeeeeeee","fols")
+            Log.d("eeeeeeeeeee", "fols")
             imageScreen.setImageResource(R.drawable.plus)
         }
     }
@@ -257,8 +188,8 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
     }
 
     override fun getImageResponse(image: Bitmap) {
-            imageScreen.setImageBitmap(image)
-        Log.d("eeeeeeeeeee","override")
+        imageScreen.setImageBitmap(image)
+        Log.d("eeeeeeeeeee", "override")
 
     }
 
