@@ -5,13 +5,15 @@ import android.content.Context
 import io.realm.Realm
 
 class QuestConstructorApplication : Application() {
+
     override fun onCreate() {
         super.onCreate()
-        QuestConstructorApplication.appContext = applicationContext
+        context = this
     }
 
     companion object {
-        var appContext: Context? = null
+
+        var context: Context? = null
             private set
     }
 }

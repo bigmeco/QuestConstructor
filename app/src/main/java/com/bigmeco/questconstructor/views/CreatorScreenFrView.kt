@@ -10,5 +10,6 @@ import com.bigmeco.questconstructor.data.ObjectProject
 interface CreatorScreenFrView : MvpView {
     fun getProject(objectProject: ObjectProject)
     fun getImageResponse(image:Bitmap)
+    fun readImageResponse()
 
 }

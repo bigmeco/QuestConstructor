@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.constraint.ConstraintSet
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
@@ -27,11 +26,14 @@ import com.bigmeco.questconstructor.presenter.CreatorScreenFrPresenter
 import com.bigmeco.questconstructor.screen.activity.CreatorScreenActivity
 import com.bigmeco.questconstructor.screen.adapter.ButtonsAdapter
 import com.bigmeco.questconstructor.views.CreatorScreenFrView
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_button_add.view.*
+import android.graphics.drawable.BitmapDrawable
+
+
 
 
 class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
+
     val realm = Realm.getDefaultInstance()
 
     private var idProject = 0
@@ -46,7 +48,7 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
     lateinit var creatorScreenFrPresenter: CreatorScreenFrPresenter
 
     @ProvidePresenter
-    fun provideSplashPresenter(): CreatorScreenFrPresenter {
+    fun creatorScreenFrPresenter(): CreatorScreenFrPresenter {
         return CreatorScreenFrPresenter()
     }
 
@@ -74,16 +76,7 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
             if (cardUrl.height != ConstraintSet.MATCH_CONSTRAINT) {
                 set.constrainHeight(cardUrl.id, ConstraintSet.MATCH_CONSTRAINT)
                 imm!!.hideSoftInputFromWindow(editTextUrl.windowToken, 0)
-                realm.executeTransaction {
-                    objectScreen!!.image = editTextUrl.text.toString()
-                }
-                if (editTextUrl.text.toString() != "") {
-                    creatorScreenFrPresenter.getImageResponse(editTextUrl.text.toString(),R.drawable.plus)
-                   // Picasso.get().load(editTextUrl.text.toString()).fit().centerCrop().error(R.drawable.plus).into(imageScreen)
-                } else {
-                    imageScreen.setImageResource(R.drawable.plus)
-                }
-
+                creatorScreenFrPresenter().setImageResponse(objectScreen,editTextUrl.text.toString())
             } else {
                 editTextUrl.setText(objectScreen!!.image)
                 set.constrainHeight(cardUrl.id, ConstraintSet.WRAP_CONTENT)
@@ -99,11 +92,7 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
                                 set.constrainHeight(cardUrl.id, ConstraintSet.MATCH_CONSTRAINT)
                                 TransitionManager.beginDelayedTransition(mainLayoutFragment)
                                 set.applyTo(mainLayoutFragment)
-                                if (editTextUrl.text.toString() != "") {
-                                    Picasso.get().load(editTextUrl.text.toString()).fit().centerCrop().error(R.drawable.plus).into(imageScreen)
-                                } else {
-                                    imageScreen.setImageResource(R.drawable.plus)
-                                }
+                                getImage()
                                 return@OnKeyListener true
                             }
                             else -> {
@@ -227,8 +216,8 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
             viewHolder.itemView.editBody.text = null
-            objectButton.removeAt(viewHolder.getAdapterPosition());
-            listButtons.adapter!!.notifyItemRemoved(viewHolder.getAdapterPosition());
+            objectButton.removeAt(viewHolder.adapterPosition)
+            listButtons.adapter!!.notifyItemRemoved(viewHolder.adapterPosition)
         }
     }
 
@@ -237,18 +226,8 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
         objectScreen = objectProject.screen?.get(idScreen)
         objectButton = ArrayList(objectScreen?.buttons)
         editTextUrl.setText(objectScreen!!.image)
-        Log.d("eeeeeeeeeee",editTextUrl.text.toString())
-
         editTextBody.setText(objectScreen!!.body)
-        if (editTextUrl.text.toString() != "") {
-            Log.d("eeeeeeeeeee","tru")
-
-            creatorScreenFrPresenter.getImageResponse(editTextUrl.text.toString(),R.drawable.plus)
-        } else {
-            Log.d("eeeeeeeeeee","fols")
-
-            imageScreen.setImageResource(R.drawable.plus)
-        }
+        getImage()
         listButtons.layoutManager = LinearLayoutManager(activity)
         listButtons.adapter = ButtonsAdapter(objectButton) {
             idButton = it
@@ -258,11 +237,24 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
             set.connect(activity!!.fading_edge_layout.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 512)
             TransitionManager.beginDelayedTransition(activity!!.mainLayout)
             set.applyTo(activity!!.mainLayout)
-
-
         }
     }
 
+
+    fun getImage() {
+        if (editTextUrl.text.toString() != "") {
+            Log.d("eeeeeeeeeee","tru")
+            creatorScreenFrPresenter.getImageResponse(editTextUrl.text.toString(), (context!!.resources
+                    .getDrawable(R.drawable.cancel_image) as BitmapDrawable).bitmap)
+        } else {
+            Log.d("eeeeeeeeeee","fols")
+            imageScreen.setImageResource(R.drawable.plus)
+        }
+    }
+
+    override fun readImageResponse() {
+        getImage()
+    }
 
     override fun getImageResponse(image: Bitmap) {
             imageScreen.setImageBitmap(image)
