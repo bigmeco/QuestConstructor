@@ -1,26 +1,24 @@
 package com.bigmeco.questconstructor.screen.activity
 
+import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.support.constraint.ConstraintSet
 import android.transition.ChangeBounds
 import android.transition.Scene
 import android.transition.Transition
 import android.transition.TransitionManager
-import kotlinx.android.synthetic.main.activity_creator.*
-import android.animation.ArgbEvaluator
-import android.animation.ValueAnimator
-import android.content.Intent
-import android.util.Log
-import io.realm.RealmList
-import android.preference.PreferenceManager
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.bigmeco.questconstructor.data.ObjectProject
-import com.bigmeco.questconstructor.data.ObjectScreen
 import com.bigmeco.questconstructor.R
+import com.bigmeco.questconstructor.data.ObjectProject
 import com.bigmeco.questconstructor.presenter.ProjectCreationPresenter
 import com.bigmeco.questconstructor.views.ProjectCreationView
+import kotlinx.android.synthetic.main.activity_creator.*
+
+
 
 
 class CreatorActivity : MvpAppCompatActivity(), ProjectCreationView {
@@ -68,9 +66,7 @@ class CreatorActivity : MvpAppCompatActivity(), ProjectCreationView {
 
     override fun createInitialDraft(objectProject: ObjectProject) {
         val intent = Intent(this, CreatorScreenActivity::class.java)
-        val editor = PreferenceManager.getDefaultSharedPreferences(this).edit()
-        editor.putInt("idProject", objectProject.id!!)
-        editor.apply()
+        intent.putExtra("idProject", objectProject.id!!)
         startActivity(intent)
     }
 

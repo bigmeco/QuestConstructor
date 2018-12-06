@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.drawable.Animatable
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.support.constraint.ConstraintSet
 import android.transition.ChangeBounds
 import android.transition.Scene
@@ -14,6 +13,8 @@ import android.util.Log
 import android.view.Window
 import com.bigmeco.questconstructor.R
 import kotlinx.android.synthetic.main.activity_info_quest.*
+
+
 
 class InfoQuestActivity : AppCompatActivity() {
 
@@ -43,9 +44,7 @@ class InfoQuestActivity : AppCompatActivity() {
                 }
                 override fun onTransitionEnd(transition: Transition) {
                     val intent = Intent(this@InfoQuestActivity, ActionScreenActivity::class.java)
-                    val editor = PreferenceManager.getDefaultSharedPreferences(this@InfoQuestActivity).edit()
-                    editor.putInt("idProject", 5)
-                    editor.apply()
+                    intent.putExtra("idProject", 5)
                     Log.d("ddd",5.toString())
                     startActivity(intent)
                     Log.d("startTest","start")

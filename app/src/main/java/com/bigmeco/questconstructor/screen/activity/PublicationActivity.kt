@@ -2,8 +2,6 @@ package com.bigmeco.questconstructor.screen.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceManager
-
 import kotlinx.android.synthetic.main.activity_publication.*
 import android.support.v4.view.ViewPager.OnPageChangeListener
 import android.util.Log
@@ -30,8 +28,7 @@ class PublicationActivity : AppCompatActivity() {
         }
          val db = FirebaseFirestore.getInstance();
 
-        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-        idProject = preferences.getInt("idProject", 0)
+        idProject = intent.getIntExtra("idProject", 0)
         var objectProject = realm.copyFromRealm(realm.where(ObjectProject::class.java).equalTo("id", idProject).findAll())
 
         val uid = let { FirebaseAuth.getInstance().currentUser!!.uid }

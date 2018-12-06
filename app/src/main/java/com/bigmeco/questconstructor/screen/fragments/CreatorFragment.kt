@@ -2,7 +2,6 @@ package com.bigmeco.questconstructor.screen.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.support.constraint.ConstraintSet
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
@@ -69,9 +68,7 @@ class CreatorFragment : MvpAppCompatFragment(), CreatorView {
 
             it.cardPush.setOnClickListener {
                 val intent = Intent(activity, PublicationActivity::class.java)
-                val editor = PreferenceManager.getDefaultSharedPreferences(activity).edit()
-                editor.putInt("idProject", list[index].id!!)
-                editor.apply()
+                intent.putExtra("idProject", list[index].id!!)
                 startActivity(intent)
             }
             val gdt = GestureDetector(EditListener(mainFragment, editFragment))
@@ -133,10 +130,8 @@ class CreatorFragment : MvpAppCompatFragment(), CreatorView {
             it.listScreens.adapter = findAll[index].screen?.let { it1 ->
                 ScreenAdapter(it1) {
                     val intent = Intent(activity, CreatorScreenActivity::class.java)
-                    val editor = PreferenceManager.getDefaultSharedPreferences(context).edit()
-                    editor.putInt("idProject", list[index].id!!)
-                    editor.putInt("idScreen", it)
-                    editor.apply()
+                    intent.putExtra("idProject", list[index].id!!)
+                    intent.putExtra("idScreen", it)
                     startActivity(intent)
                 }
             }

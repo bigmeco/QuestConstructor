@@ -1,33 +1,29 @@
 package com.bigmeco.questconstructor.screen.activity
 
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_creator_screen.*
 import android.content.Intent
-import android.view.KeyEvent
-import android.preference.PreferenceManager
 import android.graphics.drawable.Animatable
+import android.os.Bundle
 import android.support.constraint.ConstraintSet
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.transition.ChangeBounds
 import android.transition.Scene
 import android.transition.Transition
 import android.transition.TransitionManager
-import io.realm.Realm
 import android.view.GestureDetector
+import android.view.KeyEvent
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.bigmeco.questconstructor.data.ObjectButton
+import com.bigmeco.questconstructor.R
 import com.bigmeco.questconstructor.data.ObjectProject
 import com.bigmeco.questconstructor.data.ObjectScreen
-import com.bigmeco.questconstructor.R
 import com.bigmeco.questconstructor.presenter.CreatorScreenPresenter
 import com.bigmeco.questconstructor.screen.adapter.ListScreenAdapter
 import com.bigmeco.questconstructor.screen.fragments.CreatorScreenFragment
 import com.bigmeco.questconstructor.screen.touches.VoterListener
 import com.bigmeco.questconstructor.views.CreatorScreenView
+import kotlinx.android.synthetic.main.activity_creator_screen.*
 
 
 class CreatorScreenActivity : MvpAppCompatActivity(), CreatorScreenView {
@@ -49,10 +45,8 @@ class CreatorScreenActivity : MvpAppCompatActivity(), CreatorScreenView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creator_screen)
-
-        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-        idProject = preferences.getInt("idProject", 0)
-        idScreen = preferences.getInt("idScreen", 0)
+        idProject = intent.getIntExtra("idProject", 0)
+        idScreen = intent.getIntExtra("idScreen", 0)
         creatorScreenPresenter.getProject(idProject)
 
         val drawable = imageVoter.drawable
