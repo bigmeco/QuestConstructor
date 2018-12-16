@@ -11,6 +11,7 @@ import com.bigmeco.questconstructor.models.ExitButtonModel
 import com.bigmeco.questconstructor.models.SaveScreenModel
 import com.bigmeco.questconstructor.models.image.ImageResponseModel
 import com.bigmeco.questconstructor.models.image.RecordImageModel
+import com.bigmeco.questconstructor.statements.ImageRespons
 import com.bigmeco.questconstructor.views.CreatorScreenFrView
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
@@ -24,11 +25,13 @@ class CreatorScreenFrPresenter : MvpPresenter<CreatorScreenFrView>() {
         creatorScreenModel.getProject(idProject)?.let { viewState.getProject(it) }
     }
 
-    fun getImageResponse(url: String, errorImage: Bitmap) {
+    fun getImageResponse(url: String) {
         val imageResponseModel = ImageResponseModel()
-        launch(UI) {
-            viewState.getImageResponse(imageResponseModel.getImageResponse(url, errorImage)!!)
-        }
+        val imageRespons = ImageRespons()
+        imageRespons.respons = { responsImageOK(it) }
+        imageRespons.errorImage = {responsImageError()}
+        imageResponseModel.getImageResponse(url, imageRespons)
+
     }
 
 
@@ -47,6 +50,15 @@ class CreatorScreenFrPresenter : MvpPresenter<CreatorScreenFrView>() {
                    idScreen: Int, idButton: Int?): ArrayList<ObjectScreen> {
         val saveScreenModel = SaveScreenModel()
         return saveScreenModel.fillSaveScreen(objectProjects, objectScreen, objectButtons, body, idScreen, idButton)
+    }
+
+    private fun responsImageOK(image: Bitmap) {
+        viewState.getImageResponse(image)
+    }
+
+    private fun responsImageError() {
+        viewState.getImageError()
+
     }
 
 }

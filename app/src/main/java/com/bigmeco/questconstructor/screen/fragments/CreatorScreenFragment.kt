@@ -34,6 +34,7 @@ import io.realm.RealmList
 class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
 
 
+
     val realm = Realm.getDefaultInstance()
 
     private var idProject = 0
@@ -175,8 +176,7 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
     fun getImage() {
         if (editTextUrl.text.toString() != "") {
             Log.d("eeeeeeeeeee", "tru")
-            creatorScreenFrPresenter.getImageResponse(editTextUrl.text.toString(), (context!!.resources
-                    .getDrawable(R.drawable.cancel_image) as BitmapDrawable).bitmap)
+            creatorScreenFrPresenter.getImageResponse(editTextUrl.text.toString())
         } else {
             Log.d("eeeeeeeeeee", "fols")
             imageScreen.setImageResource(R.drawable.plus)
@@ -192,6 +192,8 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
         Log.d("eeeeeeeeeee", "override")
 
     }
-
+    override fun getImageError() {
+        imageScreen.setImageResource(R.drawable.cancel_image)
+    }
 
 }

@@ -1,7 +1,8 @@
 package com.bigmeco.questconstructor.interfaceModels.image
 
 import android.graphics.Bitmap
+import com.bigmeco.questconstructor.statements.ImageRespons
 
 interface IImageResponseModel {
-     suspend fun getImageResponse(url: String, errorImage: Bitmap): Bitmap?
+      fun getImageResponse(url: String, respons: ImageRespons)
 }

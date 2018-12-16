@@ -2,10 +2,13 @@ package com.bigmeco.questconstructor.models.image
 
 import android.graphics.Bitmap
 import com.bigmeco.questconstructor.interfaceModels.image.IImageResponseModel
+import com.bigmeco.questconstructor.statements.ImageRespons
 
-class ImageResponseModel : IImageResponseModel {
-    override suspend fun getImageResponse(url: String, errorImage: Bitmap): Bitmap? {
+class  ImageResponseModel : IImageResponseModel {
+    override fun getImageResponse(url: String,respons:ImageRespons) {
         val urlImageModel = UrlImageModel()
-        return urlImageModel.urlToImage(url, errorImage)
+        urlImageModel.urlToImage(url,respons)
     }
+
+
 }

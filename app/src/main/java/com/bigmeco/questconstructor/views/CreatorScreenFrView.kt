@@ -13,6 +13,7 @@ import io.realm.RealmList
 interface CreatorScreenFrView : MvpView {
     fun getProject(objectProject: ObjectProject)
     fun getImageResponse(image:Bitmap)
+    fun getImageError()
     fun readImageResponse()
     fun resultCreationButton(objectButtons: ArrayList<ObjectButton>)
 }
