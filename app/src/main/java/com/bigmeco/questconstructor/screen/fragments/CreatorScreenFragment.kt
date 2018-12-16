@@ -34,7 +34,6 @@ import io.realm.RealmList
 class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
 
 
-
     val realm = Realm.getDefaultInstance()
 
     private var idProject = 0
@@ -121,7 +120,6 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
 
     }
 
-
     override fun onStop() {
         super.onStop()
         val bundle = this.arguments
@@ -192,6 +190,7 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
         Log.d("eeeeeeeeeee", "override")
 
     }
+
     override fun getImageError() {
         imageScreen.setImageResource(R.drawable.cancel_image)
     }
