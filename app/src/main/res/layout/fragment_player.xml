@@ -47,6 +47,16 @@
         android:background="@drawable/full_filter_item"
         android:visibility="invisible">
 
+        <View
+            android:id="@+id/divider19"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/pleyColor"
+            android:elevation="@android:dimen/app_icon_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <NumberPicker
             android:id="@+id/timerPicker"
             android:layout_width="0dp"
@@ -108,12 +118,22 @@
         android:background="@drawable/full_menu_item"
         android:visibility="invisible">
 
+        <View
+            android:id="@+id/divider18"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/pleyColor"
+            android:elevation="@android:dimen/app_icon_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <NumberPicker
             android:id="@+id/genrePicker"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
             android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
             android:background="@android:drawable/editbox_background_normal"
             android:descendantFocusability="blocksDescendants"
             app:layout_constraintBottom_toBottomOf="parent"

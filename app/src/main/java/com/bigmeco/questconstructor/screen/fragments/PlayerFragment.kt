@@ -3,7 +3,6 @@ package com.bigmeco.questconstructor.screen.fragments
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,14 +12,32 @@ import android.view.animation.Animation
 import android.graphics.drawable.ColorDrawable
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.NumberPicker
-import com.bigmeco.questconstructor.data.ObjectScreen
+import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.bigmeco.questconstructor.R
+import com.bigmeco.questconstructor.data.InfoProject
+import com.bigmeco.questconstructor.presenter.PlayerListPresenter
 import com.bigmeco.questconstructor.screen.activity.InfoQuestActivity
 import com.bigmeco.questconstructor.screen.adapter.GameAdapter
+import com.bigmeco.questconstructor.views.PlayerListView
 
 
-class PlayerFragment : Fragment() {
+class PlayerFragment : MvpAppCompatFragment(), PlayerListView {
 
+
+    @InjectPresenter
+    lateinit var playerListPresenter: PlayerListPresenter
+
+
+    @ProvidePresenter
+    fun providePlayerListPresenter(): PlayerListPresenter {
+        return PlayerListPresenter()
+    }
+
+    var genre: String? = null
+    var timer: String? = null
+    var rating: Int? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -31,39 +48,36 @@ class PlayerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        genrePicker.maxValue = 9
+        val arrayGenre = resources.getStringArray(R.array.greetings)
         genrePicker.minValue = 0
+        genrePicker.maxValue = arrayGenre.size - 1
+        genrePicker.displayedValues = arrayGenre
+
+        val arrayTime = resources.getStringArray(R.array.duration)
+        timerPicker.minValue = 0
+        timerPicker.maxValue = arrayTime.size - 1
+        timerPicker.displayedValues = arrayTime
+
+        val arrayRating = resources.getStringArray(R.array.rating)
+        ratingPicker.minValue = 0
+        ratingPicker.maxValue = arrayRating.size - 1
+        ratingPicker.displayedValues = arrayRating
+
+
         setDividerColor(genrePicker, resources.getColor(R.color.pleyColor2))
         setDividerColor(timerPicker, resources.getColor(R.color.pleyColor2))
         setDividerColor(ratingPicker, resources.getColor(R.color.pleyColor2))
 
         listGame.layoutManager = LinearLayoutManager(activity)
-        var t = arrayListOf<ObjectScreen>()
-        t.add(ObjectScreen())
-        t.add(ObjectScreen())
-        t.add(ObjectScreen())
-        t.add(ObjectScreen())
-        t.add(ObjectScreen())
-        t.add(ObjectScreen())
-        t.add(ObjectScreen())
-        t.add(ObjectScreen())
-        listGame.adapter = GameAdapter(t) { objectScreen: ObjectScreen, i: Int ->
-            val intent = Intent(activity, InfoQuestActivity::class.java)
-//            val editor = PreferenceManager.getDefaultSharedPreferences(this).edit()
-//            editor.putInt("idProject", objectProject.id!!)
-//            editor.apply()
-//            Log.d("ddd",objectProject.id.toString())
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            startActivity(intent)
-        }
 
+        playerListPresenter.setList(updateList)
 
 
         val animFlterOpen = AnimationUtils.loadAnimation(activity, R.anim.filter_anim)
         animFlterOpen.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationEnd(animation: Animation) {
                 imageFilter.visibility = View.GONE
-                filterLayout.setBackgroundColor( resources.getColor(R.color.pleyColor))
+                filterLayout.setBackgroundColor(resources.getColor(R.color.pleyColor))
             }
 
             override fun onAnimationRepeat(animation: Animation) {}
@@ -88,7 +102,7 @@ class PlayerFragment : Fragment() {
         animScale.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationEnd(animation: Animation) {
                 imageMenu.visibility = View.GONE
-                menuLayout.setBackgroundColor( resources.getColor(R.color.pleyColor))
+                menuLayout.setBackgroundColor(resources.getColor(R.color.pleyColor))
             }
 
             override fun onAnimationRepeat(animation: Animation) {}
@@ -111,10 +125,9 @@ class PlayerFragment : Fragment() {
         })
 
         imageBaeckF.setOnClickListener {
+            playerListPresenter.setList(updateList)
             filterLayout.visibility = View.INVISIBLE
             filterLayout.startAnimation(animFlterClose)
-
-
         }
         imageFilter.setOnClickListener {
             filterLayout.visibility = View.VISIBLE
@@ -122,6 +135,7 @@ class PlayerFragment : Fragment() {
         }
 
         imageOkF.setOnClickListener {
+            playerListPresenter.setListFilter(updateList,arrayTime[timerPicker.value], ratingPicker.value)
             filterLayout.visibility = View.INVISIBLE
             filterLayout.startAnimation(animFlterClose)
         }
@@ -132,17 +146,42 @@ class PlayerFragment : Fragment() {
 
         }
         imageBeack.setOnClickListener {
+            //setList()
             menuLayout.visibility = View.INVISIBLE
             menuLayout.startAnimation(animScaleBeack)
         }
 
         imageOk.setOnClickListener {
+            playerListPresenter.setListGenre(updateList,arrayGenre[genrePicker.value])
             menuLayout.visibility = View.INVISIBLE
             menuLayout.startAnimation(animScaleBeack)
         }
 
 
     }
+    override fun getList() {
+//To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getListGenre(s: String) {
+ //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getListFilter(s: String, i: Int) {
+ //To change body of created functions use File | Settings | File Templates.
+    }
+
+
+
+   val updateList = fun(lecturesPojos: ArrayList<InfoProject>) {
+        listGame.adapter = GameAdapter(lecturesPojos) { objectScreen: InfoProject, i: Int ->
+            val intent = Intent(activity, InfoQuestActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            startActivity(intent)
+        }
+
+    }
+
 
     private fun setDividerColor(picker: NumberPicker, color: Int) {
 

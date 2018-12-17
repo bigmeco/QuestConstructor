@@ -6,6 +6,7 @@ open class InfoProject {
     var name: String? = null
     var genre: String? = null
     var body: String? = null
+    var rating: Int? = null
     var time: String? = null
     @PrimaryKey
     var id: String? = null

@@ -34,7 +34,6 @@ import io.realm.RealmList
 class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
 
 
-    val realm = Realm.getDefaultInstance()
 
     private var idProject = 0
     private var idScreen = 0

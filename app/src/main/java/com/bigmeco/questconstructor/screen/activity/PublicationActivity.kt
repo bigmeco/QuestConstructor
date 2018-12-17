@@ -19,8 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import io.realm.Realm
 
 
-class PublicationActivity :  MvpAppCompatActivity(), PublicationView {
-
+class PublicationActivity : MvpAppCompatActivity(), PublicationView {
 
 
     @InjectPresenter
@@ -31,7 +30,6 @@ class PublicationActivity :  MvpAppCompatActivity(), PublicationView {
         return PublicationPresenter()
     }
 
-    val realm = Realm.getDefaultInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,80 +38,24 @@ class PublicationActivity :  MvpAppCompatActivity(), PublicationView {
         if (pager != null) {
             pager.adapter = StylesPagerAdapter(this)
         }
-
         publicationPresenter.getCopyProject(intent.getIntExtra("idProject", 0))
+    }
 
-
-
-        pager.addOnPageChangeListener(object : OnPageChangeListener {
-
-
-            override fun onPageScrolled(position: Int, positionOffset: Float,
-                                        positionOffsetPixels: Int) {
-            }
-
-            override fun onPageSelected(position: Int) {
-                Log.d("wwwwww", position.toString())
-                Log.d("wwwwww", pager.currentItem.toString())
-            }
-
-            override fun onPageScrollStateChanged(state: Int) {
-
-            }
-        })
+    override fun releaseOK() {
+        Log.d("wwwwww", pager.currentItem.toString())
 
     }
+
+    override fun releaseError() {
+        Log.d("wwwwww", pager.currentItem.toString())
+
+    }
+
+
     override fun getCopyProject(objectProject: ObjectProject) {
-
-
-        val fireStoreDataBase = FirebaseFirestore.getInstance()
-        val uid = let { FirebaseAuth.getInstance().currentUser!!.uid }
-        val db = FirebaseFirestore.getInstance()
-
-
-
-        fireStoreDataBase.collection("quests").document().get().addOnCompleteListener {
-            Log.d("wwwwww",   it.result!!.toString())
-
-
-        }
-
         textOk.setOnClickListener {
-            objectProject.idStyle =pager.currentItem
-            val infoProject= InfoProject()
-            val id = db.collection("quests").document().id
-            infoProject.id =id
-            infoProject.body  = objectProject.body
-            infoProject.name  = objectProject.name
-            infoProject.genre  = objectProject.genre
-            infoProject.time = objectProject.time
-            fireStoreDataBase.collection("questBody")
-                    .document(id)
-                    .set(objectProject)
-                    .addOnSuccessListener { aVoid ->
-                        Log.i("WORK", "Works ")
-                    }
-                    .addOnFailureListener { exception ->
-                        Log.i("Error", "Error occurred during a personal data being submitted in database $exception")
-                    }
-            fireStoreDataBase.collection("quests").document(id).set(infoProject)
-
-//            val docRef = db.collection("users").document("1pi0pMapOXZMDDfg8T5MFZujyw33").collection("test2").document("0XTy0CEbh4fzIfa1tQpu")
-//            docRef.get().addOnCompleteListener { task ->
-//                if (task.isSuccessful) {
-//                    val document = task.result
-//                    if (document!!.exists()) {
-//                        Log.d("qaqaqaqaqaq", "DocumentSnapshot data: " + document.data!!)
-//                    } else {
-//                        Log.d("qaqaqaqaqaq", "No such document")
-//                    }
-//                } else {
-//                    Log.d("qaqaqaqaqaq", "get failed with ", task.exception)
-//                }
-//            }
-
+            publicationPresenter.releaseProject(pager.currentItem, objectProject)
 
         }
-
     }
 }

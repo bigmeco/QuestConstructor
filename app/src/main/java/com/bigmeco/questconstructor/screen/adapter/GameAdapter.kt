@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_game.view.*
 import com.bigmeco.questconstructor.data.ObjectScreen
 import com.bigmeco.questconstructor.R
+import com.bigmeco.questconstructor.collections.RatingModel
+import com.bigmeco.questconstructor.data.InfoProject
 
 
-class GameAdapter(val items: ArrayList<ObjectScreen>, val listener: (item: ObjectScreen, position: Int) -> Unit) : RecyclerView.Adapter<GameAdapter.ViewHolder>() {
+class GameAdapter(val items: ArrayList<InfoProject>, val listener: (item: InfoProject, position: Int) -> Unit) : RecyclerView.Adapter<GameAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_game, parent, false))
@@ -21,22 +23,22 @@ class GameAdapter(val items: ArrayList<ObjectScreen>, val listener: (item: Objec
     override fun getItemCount() = items.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: ObjectScreen, listener: (item: ObjectScreen, position: Int) -> Unit, items: ArrayList<ObjectScreen>, position: Int) = with(itemView) {
+        fun bind(item: InfoProject, listener: (item: InfoProject, position: Int) -> Unit, items: ArrayList<InfoProject>, position: Int) = with(itemView) {
+            textName.text =item.name
+            textTime.text =item.time
+            textGenre.text =item.genre
+
             mainLayout.setOnClickListener {
                 listener.invoke(item,position)
             }
-//                listener.invoke(item,position)
-//            }
-//            if (item.body != null || item.body != "") {
-//                editTextBody.text = item.body
-//            }
-//            if (item.status!!) {
-//                cardState.setCardBackgroundColor(resources.getColor(R.color.createColor))
-//            }
+
             imageStar.setOnClickListener{
 
             }
-            imageStar.setImageResource(R.drawable.anim_star35)
+            for (id in RatingModel.values()) {
+                if (item.rating==id.size)
+                    imageStar.setImageResource(id.image)
+            }
             val drawable = imageStar.drawable
             if (drawable is Animatable) (drawable as Animatable).start()
 
