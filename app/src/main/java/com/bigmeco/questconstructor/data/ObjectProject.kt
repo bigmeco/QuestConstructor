@@ -12,8 +12,9 @@ open class ObjectProject : RealmObject() {
     var time: String? =null
     @PrimaryKey
     var id: Int? =null
+    var saveScreen: Int =0
     var idStyle: Int? =null
-    var status: Boolean? = false
+    var status: Boolean = false
     var screen: RealmList<ObjectScreen>? =null
 
 

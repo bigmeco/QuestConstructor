@@ -17,6 +17,7 @@ class PlayerListPresenter : MvpPresenter<PlayerListView>() {
 
     fun setListGenre(updateList: (ArrayList<InfoProject>) -> Unit, s: String) {
         loadList.setListGenre(updateList,s)
+
     }
 
     fun setListFilter(updateList: (ArrayList<InfoProject>) -> Unit, s: String, i: Int) {

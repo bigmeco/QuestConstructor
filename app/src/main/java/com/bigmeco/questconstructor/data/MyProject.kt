@@ -4,7 +4,7 @@ import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
-open class Project {
+open class MyProject : RealmObject() {
 
     var name: String? =null
     var genre: String? =null
@@ -15,9 +15,10 @@ open class Project {
     var saveScreen: Int =0
     var idStyle: Int? =null
     var status: Boolean = false
-    var screen: ArrayList<Screen>? =null
+    var screen: RealmList<MyScreen>? =null
 
 
+    fun thereIsNull(): Boolean = name != null && body != null && name != "" && body != ""
 
 
 }
