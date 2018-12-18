@@ -16,6 +16,7 @@ class LoadListGameModel: ILoadListGameModel {
                         lecturesPojos.add(myObject)
                     }
                     updateList(lecturesPojos)
+
                 }
     }
 

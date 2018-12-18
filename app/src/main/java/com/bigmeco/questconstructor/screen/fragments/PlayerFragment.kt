@@ -174,12 +174,14 @@ class PlayerFragment : MvpAppCompatFragment(), PlayerListView {
 
 
    val updateList = fun(lecturesPojos: ArrayList<InfoProject>) {
-        listGame.adapter = GameAdapter(lecturesPojos) { objectScreen: InfoProject, i: Int ->
+        listGame.adapter = GameAdapter(lecturesPojos) { infoProject: InfoProject, i: Int ->
             val intent = Intent(activity, InfoQuestActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            val bundle = Bundle()
+            bundle.putSerializable("value", infoProject)
+            intent.putExtras(bundle)
             startActivity(intent)
         }
-
     }
 
 

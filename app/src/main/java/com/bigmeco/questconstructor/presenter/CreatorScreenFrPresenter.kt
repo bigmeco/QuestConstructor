@@ -13,8 +13,7 @@ import com.bigmeco.questconstructor.models.image.ImageResponseModel
 import com.bigmeco.questconstructor.models.image.RecordImageModel
 import com.bigmeco.questconstructor.statements.ImageRespons
 import com.bigmeco.questconstructor.views.CreatorScreenFrView
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.launch
+
 
 
 @InjectViewState

@@ -8,14 +8,13 @@ import com.bigmeco.questconstructor.data.ObjectButton
 import com.bigmeco.questconstructor.R
 
 
-class ButtonsGameAdapter(val items:ArrayList<ObjectButton>, val listener: (position: Int) -> Unit) : RecyclerView.Adapter<ButtonsGameAdapter.ViewHolder>() {
+class ButtonsGameAdapter(val idSt:Int, val items:ArrayList<ObjectButton>, val listener: (position: Int) -> Unit) : RecyclerView.Adapter<ButtonsGameAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-       var i = if (false){
-            LayoutInflater.from(parent.context).inflate(R.layout.item_steampunk, parent, false)
-        }
-        else{
-            LayoutInflater.from(parent.context).inflate(R.layout.item_cyberpunk, parent, false)
-        }
+       var i = when(idSt) {
+           0 -> LayoutInflater.from(parent.context).inflate(R.layout.item_steampunk, parent, false)
+           1 -> LayoutInflater.from(parent.context).inflate(R.layout.item_cyberpunk, parent, false)
+           else -> LayoutInflater.from(parent.context).inflate(R.layout.item_steampunk, parent, false)
+       }
        return ViewHolder(i)
     }
 

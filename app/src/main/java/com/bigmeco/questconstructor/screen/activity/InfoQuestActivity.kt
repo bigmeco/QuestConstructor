@@ -12,8 +12,9 @@ import android.transition.TransitionManager
 import android.util.Log
 import android.view.Window
 import com.bigmeco.questconstructor.R
+import com.bigmeco.questconstructor.collections.RatingModel
+import com.bigmeco.questconstructor.data.InfoProject
 import kotlinx.android.synthetic.main.activity_info_quest.*
-
 
 
 class InfoQuestActivity : AppCompatActivity() {
@@ -21,17 +22,27 @@ class InfoQuestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
-
         setContentView(R.layout.activity_info_quest)
-        imageStarInfo.setImageResource(R.drawable.anim_star25)
+
+        val intent = this.intent
+        val bundle = intent.extras
+        val thumbs = bundle.getSerializable("value") as InfoProject
+
+        textName.text = thumbs.name
+        textGenre.text = thumbs.genre
+        textTime.text = thumbs.time
+        textBody.text = thumbs.body
+        for (id in RatingModel.values()) {
+            if (thumbs.rating == id.size)
+                imageStarInfo.setImageResource(id.image)
+        }
         val drawable = imageStarInfo.drawable
         if (drawable is Animatable) (drawable as Animatable).start()
-        buttonGame.setOnClickListener{
-            Log.d("startTest","nutton")
+        buttonGame.setOnClickListener {
+            Log.d("startTest", "nutton")
 
             val set = ConstraintSet()
             set.clone(mainLayout)
-           // set.setVisibility(buttonGame.id,ConstraintSet.GONE)
             set.clear(buttonGame.id, ConstraintSet.END)
             set.setElevation(buttonGame.id, 20f)
 
@@ -42,12 +53,12 @@ class InfoQuestActivity : AppCompatActivity() {
                 override fun onTransitionStart(transition: Transition) {
 
                 }
+
                 override fun onTransitionEnd(transition: Transition) {
                     val intent = Intent(this@InfoQuestActivity, ActionScreenActivity::class.java)
-                    intent.putExtra("idProject", 5)
-                    Log.d("ddd",5.toString())
+                    intent.putExtra("idProject", thumbs.id)
                     startActivity(intent)
-                    Log.d("startTest","start")
+                    Log.d("startTest", "start")
 
                 }
 
@@ -58,10 +69,10 @@ class InfoQuestActivity : AppCompatActivity() {
             TransitionManager.go(Scene(mainLayout), mySwapTransition)
             set.applyTo(mainLayout)
         }
-        buttonComment.setOnClickListener{
+        buttonComment.setOnClickListener {
             val set = ConstraintSet()
             set.clone(mainLayout)
-           // set.setVisibility(buttonGame.id,ConstraintSet.GONE)
+            // set.setVisibility(buttonGame.id,ConstraintSet.GONE)
             set.clear(buttonComment.id, ConstraintSet.START)
             set.setElevation(buttonComment.id, 20f)
             set.connect(buttonComment.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
@@ -71,6 +82,7 @@ class InfoQuestActivity : AppCompatActivity() {
                 override fun onTransitionStart(transition: Transition) {
 
                 }
+
                 override fun onTransitionEnd(transition: Transition) {
                     val intent = Intent(this@InfoQuestActivity, StartActivity::class.java)
 //            val editor = PreferenceManager.getDefaultSharedPreferences(this).edit()
@@ -87,7 +99,6 @@ class InfoQuestActivity : AppCompatActivity() {
             TransitionManager.go(Scene(mainLayout), mySwapTransition)
             set.applyTo(mainLayout)
         }
-
 
 
     }
