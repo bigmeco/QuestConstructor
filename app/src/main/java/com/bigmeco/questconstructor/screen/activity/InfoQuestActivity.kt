@@ -55,9 +55,10 @@ class InfoQuestActivity : AppCompatActivity() {
                 }
 
                 override fun onTransitionEnd(transition: Transition) {
+                    finish()
                     val intent = Intent(this@InfoQuestActivity, ActionScreenActivity::class.java)
                     intent.putExtra("idProject", thumbs.id)
-                    intent.putExtra("saveProject", thumbs.id)
+                    intent.putExtra("saveProject", bundle.getBoolean("saveProject"))
                     startActivity(intent)
                     Log.d("startTest", "start")
 

@@ -13,6 +13,7 @@ import com.bigmeco.questconstructor.views.PublicationView
 @InjectViewState
 class PublicationPresenter : MvpPresenter<PublicationView>() {
     fun getCopyProject(idProject: Int) {
+
         viewState.getCopyProject(CopyProjectModel().getCopyProject(idProject))
     }
 

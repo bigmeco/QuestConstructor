@@ -11,16 +11,16 @@ import com.bigmeco.questconstructor.views.PlayerListView
 class PlayerListPresenter : MvpPresenter<PlayerListView>() {
     val loadList:ILoadListGameModel = LoadListGameModel()
 
-    fun setList(updateList: (ArrayList<InfoProject>) -> Unit) {
+    fun setList(updateList: (ArrayList<InfoProject>,save:Boolean) -> Unit) {
         loadList.setList(updateList)
     }
 
-    fun setListGenre(updateList: (ArrayList<InfoProject>) -> Unit, s: String) {
+    fun setListGenre(updateList: (ArrayList<InfoProject>,save:Boolean) -> Unit, s: String) {
         loadList.setListGenre(updateList,s)
 
     }
 
-    fun setListFilter(updateList: (ArrayList<InfoProject>) -> Unit, s: String, i: Int) {
+    fun setListFilter(updateList: (ArrayList<InfoProject>,save:Boolean) -> Unit, s: String, i: Int) {
         loadList.setListFilter(updateList,s,i)
     }
 }

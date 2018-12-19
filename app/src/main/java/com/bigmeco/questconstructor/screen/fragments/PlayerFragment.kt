@@ -135,7 +135,7 @@ class PlayerFragment : MvpAppCompatFragment(), PlayerListView {
         }
 
         imageOkF.setOnClickListener {
-            playerListPresenter.setListFilter(updateList,arrayTime[timerPicker.value], ratingPicker.value)
+            playerListPresenter.setListFilter(updateList, arrayTime[timerPicker.value], ratingPicker.value)
             filterLayout.visibility = View.INVISIBLE
             filterLayout.startAnimation(animFlterClose)
         }
@@ -152,35 +152,38 @@ class PlayerFragment : MvpAppCompatFragment(), PlayerListView {
         }
 
         imageOk.setOnClickListener {
-            playerListPresenter.setListGenre(updateList,arrayGenre[genrePicker.value])
+            playerListPresenter.setListGenre(updateList, arrayGenre[genrePicker.value])
             menuLayout.visibility = View.INVISIBLE
             menuLayout.startAnimation(animScaleBeack)
         }
 
 
     }
+
     override fun getList() {
 //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun getListGenre(s: String) {
- //To change body of created functions use File | Settings | File Templates.
+        //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun getListFilter(s: String, i: Int) {
- //To change body of created functions use File | Settings | File Templates.
+        //To change body of created functions use File | Settings | File Templates.
     }
 
 
-
-   val updateList = fun(lecturesPojos: ArrayList<InfoProject>) {
-        listGame.adapter = GameAdapter(lecturesPojos) { infoProject: InfoProject, i: Int ->
-            val intent = Intent(activity, InfoQuestActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            val bundle = Bundle()
-            bundle.putSerializable("value", infoProject)
-            intent.putExtras(bundle)
-            startActivity(intent)
+    val updateList = fun(lecturesPojos: ArrayList<InfoProject>,save:Boolean) {
+        if (listGame != null) {
+            listGame.adapter = GameAdapter(lecturesPojos) { infoProject: InfoProject, i: Int ->
+                val intent = Intent(activity, InfoQuestActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                val bundle = Bundle()
+                bundle.putSerializable("value", infoProject)
+                bundle.putBoolean("saveProject", save)
+                intent.putExtras(bundle)
+                startActivity(intent)
+            }
         }
     }
 

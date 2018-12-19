@@ -10,7 +10,7 @@ import io.realm.Realm
 class LoadListGameModel : ILoadListGameModel {
     val fireStoreDataBase = FirebaseFirestore.getInstance()
 
-    override fun setList(updateList: (ArrayList<InfoProject>) -> Unit) {
+    override fun setList(updateList: (ArrayList<InfoProject>,save:Boolean) -> Unit) {
         fireStoreDataBase.collection("quests")
                 .get().addOnCompleteListener {
                     val lecturesPojos = ArrayList<InfoProject>()
@@ -18,12 +18,12 @@ class LoadListGameModel : ILoadListGameModel {
                         val myObject = document.toObject(InfoProject::class.java)
                         lecturesPojos.add(myObject)
                     }
-                    updateList(lecturesPojos)
+                    updateList(lecturesPojos,false)
 
                 }
     }
 
-    override fun setListGenre(updateList: (ArrayList<InfoProject>) -> Unit, s: String) {
+    override fun setListGenre(updateList: (ArrayList<InfoProject>,save:Boolean) -> Unit, s: String) {
         if (s != "Мои") {
             fireStoreDataBase.collection("quests")
                     .whereEqualTo("genre", s)
@@ -33,7 +33,7 @@ class LoadListGameModel : ILoadListGameModel {
                             val myObject = document.toObject(InfoProject::class.java)
                             lecturesPojos.add(myObject)
                         }
-                        updateList(lecturesPojos)
+                        updateList(lecturesPojos,false)
                     }
         } else {
             val realm: Realm = Realm.getDefaultInstance()
@@ -53,13 +53,13 @@ class LoadListGameModel : ILoadListGameModel {
                 infoProject.time = myPr.time
                 infoProjects.add(infoProject)
             }
-            updateList(infoProjects)
+            updateList(infoProjects,true)
 
 
         }
     }
 
-    override fun setListFilter(updateList: (ArrayList<InfoProject>) -> Unit, s: String, i: Int) {
+    override fun setListFilter(updateList: (ArrayList<InfoProject>,save:Boolean) -> Unit, s: String, i: Int) {
         fireStoreDataBase.collection("quests")
                 .whereEqualTo("time", s)
                 .whereEqualTo("rating", i)
@@ -69,7 +69,7 @@ class LoadListGameModel : ILoadListGameModel {
                         val myObject = document.toObject(InfoProject::class.java)
                         lecturesPojos.add(myObject)
                     }
-                    updateList(lecturesPojos)
+                    updateList(lecturesPojos,false)
                 }
     }
 }

@@ -9,6 +9,8 @@ import android.transition.ChangeBounds
 import android.transition.Scene
 import android.transition.Transition
 import android.transition.TransitionManager
+import android.view.KeyEvent
+import android.view.inputmethod.InputMethodManager
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -35,7 +37,7 @@ class CreatorActivity : MvpAppCompatActivity(), ProjectCreationView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creator)
         val set = ConstraintSet()
-
+        desroiEnter()
         imageBack.setOnClickListener {
             finish()
         }
@@ -63,6 +65,23 @@ class CreatorActivity : MvpAppCompatActivity(), ProjectCreationView {
             transitionBody(set)
         }
     }
+
+    private fun desroiEnter() {
+        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
+        editName.setOnKeyListener { p0, keyCode, p2 ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                imm!!.hideSoftInputFromWindow(editName.windowToken, 0)
+            }
+            false
+        }
+        editBody.setOnKeyListener { p0, keyCode, p2 ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                imm!!.hideSoftInputFromWindow(editBody.windowToken, 0)
+            }
+            false
+        }
+    }
+
 
     override fun createInitialDraft(objectProject: ObjectProject) {
         val intent = Intent(this, CreatorScreenActivity::class.java)

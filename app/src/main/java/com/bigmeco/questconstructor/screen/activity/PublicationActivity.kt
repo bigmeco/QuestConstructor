@@ -1,5 +1,6 @@
 package com.bigmeco.questconstructor.screen.activity
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_publication.*
@@ -53,9 +54,15 @@ class PublicationActivity : MvpAppCompatActivity(), PublicationView {
 
 
     override fun getCopyProject(objectProject: ObjectProject) {
+        Log.e("dfghdfgdfgdfgdf",objectProject.releaseKey+"  dxcgbxcvg")
         textOk.setOnClickListener {
             publicationPresenter.releaseProject(pager.currentItem, objectProject)
+            finish()
 
+
+        }
+        textBeac.setOnClickListener {
+           finish()
         }
     }
 }

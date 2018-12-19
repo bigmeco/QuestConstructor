@@ -61,6 +61,8 @@ class StartActivity : AppCompatActivity() {
     }
 
     private fun transitionCreator(newFragment: Fragment, set: ConstraintSet) {
+        itemCreator.isEnabled =false
+        itemPlayer.isEnabled =false
         set.clone(mainLayout)
         set.clear(divider2.id, ConstraintSet.BOTTOM)
         set.connect(divider2.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
@@ -76,6 +78,8 @@ class StartActivity : AppCompatActivity() {
                 set.setVisibility(itemCreator.id, ConstraintSet.INVISIBLE)
                 TransitionManager.beginDelayedTransition(mainLayout)
                 set.applyTo(mainLayout)
+                itemCreator.isEnabled =true
+                itemPlayer.isEnabled =true
             }
 
             override fun onTransitionCancel(transition: Transition) {}
@@ -91,6 +95,8 @@ class StartActivity : AppCompatActivity() {
     }
 
     private fun transitionPlayer(newFragment: Fragment, set: ConstraintSet) {
+        itemCreator.isEnabled =false
+        itemPlayer.isEnabled =false
         set.clone(mainLayout)
         set.clear(divider.id, ConstraintSet.TOP)
         set.connect(divider.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
@@ -106,6 +112,8 @@ class StartActivity : AppCompatActivity() {
                 set.setVisibility(itemPlayer.id, ConstraintSet.INVISIBLE)
                 TransitionManager.beginDelayedTransition(mainLayout)
                 set.applyTo(mainLayout)
+                itemCreator.isEnabled =true
+                itemPlayer.isEnabled =true
             }
 
             override fun onTransitionCancel(transition: Transition) {}
@@ -127,5 +135,20 @@ class StartActivity : AppCompatActivity() {
         }
         TransitionManager.beginDelayedTransition(mainLayout)
         set.applyTo(mainLayout)
+    }
+
+    override fun onBackPressed() {
+        val set = ConstraintSet()
+        set.clone(mainLayout)
+        set.clear(divider2.id, ConstraintSet.BOTTOM)
+        set.clear(divider.id, ConstraintSet.TOP)
+        set.connect(divider.id, ConstraintSet.TOP, itemCreator.id, ConstraintSet.BOTTOM, 0)
+        set.setVisibility(itemPlayer.id, ConstraintSet.VISIBLE)
+        set.connect(divider2.id, ConstraintSet.BOTTOM, itemPlayer.id, ConstraintSet.TOP, 0)
+        set.setVisibility(itemCreator.id, ConstraintSet.VISIBLE)
+        TransitionManager.beginDelayedTransition(mainLayout)
+        set.applyTo(mainLayout)
+
+
     }
 }
