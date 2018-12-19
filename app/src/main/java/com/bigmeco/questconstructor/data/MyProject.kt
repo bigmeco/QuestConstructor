@@ -11,7 +11,7 @@ open class MyProject : RealmObject() {
     var body: String? =null
     var time: String? =null
     @PrimaryKey
-    var id: Int? =null
+    var id: String? =null
     var saveScreen: Int =0
     var idStyle: Int? =null
     var status: Boolean = false

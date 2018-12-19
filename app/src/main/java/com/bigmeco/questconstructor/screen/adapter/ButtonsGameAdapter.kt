@@ -9,7 +9,7 @@ import com.bigmeco.questconstructor.R
 import com.bigmeco.questconstructor.data.Button
 
 
-class ButtonsGameAdapter(val idSt: Int, val items: ArrayList<Button>, val listener: (view: View) -> Unit) : RecyclerView.Adapter<ButtonsGameAdapter.ViewHolder>() {
+class ButtonsGameAdapter(val idSt: Int, val items: ArrayList<Button>, val listener: (item: Button) -> Unit) : RecyclerView.Adapter<ButtonsGameAdapter.ViewHolder>() {
     var view = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         var i = when (idSt) {
@@ -26,10 +26,11 @@ class ButtonsGameAdapter(val idSt: Int, val items: ArrayList<Button>, val listen
     override fun getItemCount() = items.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: Button, listener: (view: View) -> Unit, items: ArrayList<Button>, position: Int) = with(itemView) {
-            var v = findViewById<TextView>(R.id.textBody)
-            v.text = "dfgdfgdfgf"
-            listener.invoke(this)
+        fun bind(item: Button, listener: (item: Button) -> Unit, items: ArrayList<Button>, position: Int) = with(itemView) {
+            val textBodyCard = findViewById<TextView>(R.id.textBodyCard)
+            val view = findViewById<View>(R.id.viewCard)
+            textBodyCard.text = item.text
+            view.setOnClickListener {listener.invoke(item) }
         }
     }
 }

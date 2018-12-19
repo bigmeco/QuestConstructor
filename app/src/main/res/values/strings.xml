@@ -37,6 +37,27 @@
         <item>Эротика</item>
     </string-array>
 
+    <string-array name="greetingsGame">
+        <item>Боевик</item>
+        <item>Вестерн</item>
+        <item>Военный</item>
+        <item>Детектив</item>
+        <item>Детский</item>
+        <item>Драма</item>
+        <item>Комедия</item>
+        <item>Криминал</item>
+        <item>Мелодрама</item>
+        <item>Мистика</item>
+        <item>Научный</item>
+        <item>Приключения</item>
+        <item>Триллер</item>
+        <item>Ужасы</item>
+        <item>Фантастика</item>
+        <item>Фэнтези</item>
+        <item>Эротика</item>
+        <item>Мои</item>
+    </string-array>
+
     <string-array name="duration">
         <item>5-10 мин</item>
         <item>10-20 мин</item>

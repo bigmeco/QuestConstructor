@@ -48,7 +48,7 @@ class PlayerFragment : MvpAppCompatFragment(), PlayerListView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val arrayGenre = resources.getStringArray(R.array.greetings)
+        val arrayGenre = resources.getStringArray(R.array.greetingsGame)
         genrePicker.minValue = 0
         genrePicker.maxValue = arrayGenre.size - 1
         genrePicker.displayedValues = arrayGenre

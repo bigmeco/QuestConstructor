@@ -1,10 +1,13 @@
 package com.bigmeco.questconstructor.models
 
+import android.util.Log
 import com.bigmeco.questconstructor.data.InfoProject
+import com.bigmeco.questconstructor.data.MyProject
 import com.bigmeco.questconstructor.interfaceModels.ILoadListGameModel
 import com.google.firebase.firestore.FirebaseFirestore
+import io.realm.Realm
 
-class LoadListGameModel: ILoadListGameModel {
+class LoadListGameModel : ILoadListGameModel {
     val fireStoreDataBase = FirebaseFirestore.getInstance()
 
     override fun setList(updateList: (ArrayList<InfoProject>) -> Unit) {
@@ -21,16 +24,39 @@ class LoadListGameModel: ILoadListGameModel {
     }
 
     override fun setListGenre(updateList: (ArrayList<InfoProject>) -> Unit, s: String) {
-        fireStoreDataBase.collection("quests")
-                .whereEqualTo("genre", s)
-                .get().addOnCompleteListener {
-                    val lecturesPojos = ArrayList<InfoProject>()
-                    for (document in it.result!!) {
-                        val myObject = document.toObject(InfoProject::class.java)
-                        lecturesPojos.add(myObject)
+        if (s != "Мои") {
+            fireStoreDataBase.collection("quests")
+                    .whereEqualTo("genre", s)
+                    .get().addOnCompleteListener {
+                        val lecturesPojos = ArrayList<InfoProject>()
+                        for (document in it.result!!) {
+                            val myObject = document.toObject(InfoProject::class.java)
+                            lecturesPojos.add(myObject)
+                        }
+                        updateList(lecturesPojos)
                     }
-                    updateList(lecturesPojos)
-                }
+        } else {
+            val realm: Realm = Realm.getDefaultInstance()
+            val myProject = ArrayList<MyProject>()
+        Log.e("fdddddddddddd",realm.where(MyProject::class.java).findAll()!!.toString())
+            myProject.addAll(realm.where(MyProject::class.java).findAll()!!)
+            Log.e("fdddddddddddd",myProject.toString())
+
+            val infoProjects = ArrayList<InfoProject>()
+            for (myPr in myProject.iterator()){
+                val infoProject= InfoProject()
+                infoProject.body = myPr.body
+                infoProject.genre = myPr.genre
+                infoProject.id= myPr.id
+                infoProject.name = myPr.name
+                infoProject.rating = 8
+                infoProject.time = myPr.time
+                infoProjects.add(infoProject)
+            }
+            updateList(infoProjects)
+
+
+        }
     }
 
     override fun setListFilter(updateList: (ArrayList<InfoProject>) -> Unit, s: String, i: Int) {

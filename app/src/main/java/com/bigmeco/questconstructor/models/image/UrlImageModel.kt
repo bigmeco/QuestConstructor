@@ -41,6 +41,8 @@ class UrlImageModel : IUrlImageModel {
 
             }
             Picasso.get().load(url).into(target!!)
+        } else{
+            respons.errorImage!!.invoke()
         }
     }
 }
