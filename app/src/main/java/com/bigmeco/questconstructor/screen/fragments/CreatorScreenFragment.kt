@@ -106,6 +106,7 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
         buttonAdd.setOnClickListener {
             objectButton.add(ObjectButton())
             (listButtons.adapter as ButtonsAdapter).notifyItemInserted(objectButton.size)
+            listButtons.scrollToPosition(objectButton.size-1)
         }
 
         buttonExit.setOnClickListener {
@@ -122,17 +123,20 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
             view.getWindowVisibleDisplayFrame(r)
             val screenHeight = view.rootView.height
             val keypadHeight = screenHeight - r.bottom
-            set.clone(mainLayoutFragment)
+           try {
+               set.clone(mainLayoutFragment)
 
-            if (keypadHeight > screenHeight * 0.15) {
-                set.setMargin(scrollView2.id, ConstraintSet.BOTTOM, resources.getDimension(R.dimen.keyBord).toInt())
-                set.setMargin(imageView7.id, ConstraintSet.TOP, resources.getDimension(R.dimen.imageKeyBordON).toInt())
-            } else {
-                set.setMargin(scrollView2.id, ConstraintSet.BOTTOM, 0)
-                set.setMargin(imageView7.id, ConstraintSet.TOP, resources.getDimension(R.dimen.imageKeyBord).toInt())
-            }
+               if (keypadHeight > screenHeight * 0.15) {
+                   set.setMargin(scrollView2.id, ConstraintSet.BOTTOM, resources.getDimension(R.dimen.keyBord).toInt())
+                   set.setMargin(imageView7.id, ConstraintSet.TOP, resources.getDimension(R.dimen.imageKeyBordON).toInt())
+               } else {
+                   set.setMargin(scrollView2.id, ConstraintSet.BOTTOM, 0)
+                   set.setMargin(imageView7.id, ConstraintSet.TOP, resources.getDimension(R.dimen.imageKeyBord).toInt())
+               }
 
-            set.applyTo(mainLayoutFragment)
+               set.applyTo(mainLayoutFragment)
+           } catch (e:NullPointerException){
+        }
         }
 
     }

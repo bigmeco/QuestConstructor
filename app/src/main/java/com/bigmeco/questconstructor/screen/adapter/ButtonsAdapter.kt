@@ -13,7 +13,7 @@ import io.realm.Realm
 
 import kotlinx.android.synthetic.main.item_button_add.view.*
 val realm = Realm.getDefaultInstance()
-
+//TODO
 class ButtonsAdapter(val items:ArrayList<ObjectButton>, val listener: (position: Int) -> Unit) : RecyclerView.Adapter<ButtonsAdapter.ViewHolder>() {
 
 
@@ -36,6 +36,7 @@ class ButtonsAdapter(val items:ArrayList<ObjectButton>, val listener: (position:
             buttenNextScreen.setOnClickListener {
                 listener.invoke(position)
             }
+            itemView.editBody.requestFocus()
             itemView.editBody.setText(item.text)
             itemView.editBody.addTextChangedListener(object : TextWatcher {
 

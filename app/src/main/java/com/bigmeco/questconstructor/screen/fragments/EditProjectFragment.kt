@@ -15,6 +15,7 @@ import io.realm.Realm
 import kotlinx.android.synthetic.main.fragment_creator.*
 import kotlinx.android.synthetic.main.fragment_edit_project.*
 
+//TODO
 
 class EditProjectFragment : Fragment() {
     private var objectProject: ObjectProject? = ObjectProject()
@@ -48,7 +49,13 @@ class EditProjectFragment : Fragment() {
                 objectProject!!.body = editBody.text.toString()
                 objectProject!!.genre = spinnerGenres.selectedItem.toString()
                 objectProject!!.time = spinnerTime.selectedItem.toString()
-                objectProject!!.status = editName.text.toString() != "" && editBody.text.toString() != ""
+                var state = true
+                for (screen in objectProject!!.screen!!.iterator()){
+                    if (!screen.status!!){
+                    state = screen.status!!
+                }
+                }
+                objectProject!!.status = editName.text.toString() != "" && editBody.text.toString() != "" && state
             }
             val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
             imm!!.hideSoftInputFromWindow(editName.getWindowToken(), 0)
