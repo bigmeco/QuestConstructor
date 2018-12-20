@@ -127,6 +127,10 @@ class CreatorScreenActivity : MvpAppCompatActivity(), CreatorScreenView {
     }
 
     override fun onBackPressed() {
+        val bundle = Bundle()
+        bundle.putInt("IDscreen", 0)
+        oldFragment?.arguments = bundle
+        transitionFragment(CreatorScreenFragment(), 0)
         startActivity(Intent(this, StartActivity::class.java))
     }
 

@@ -25,7 +25,7 @@ class ButtonsAdapter(val items:ArrayList<ObjectButton>, val listener: (position:
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: ObjectButton, listener: (position: Int) -> Unit, items: ArrayList<ObjectButton>, position: Int) = with(itemView) {
-
+            itemView.editBody.requestFocus()
             if (item.id!=null){
                 buttenNextScreen.setImageResource(R.drawable.success)
             }
@@ -36,7 +36,6 @@ class ButtonsAdapter(val items:ArrayList<ObjectButton>, val listener: (position:
             buttenNextScreen.setOnClickListener {
                 listener.invoke(position)
             }
-            itemView.editBody.requestFocus()
             itemView.editBody.setText(item.text)
             itemView.editBody.addTextChangedListener(object : TextWatcher {
 
@@ -55,6 +54,7 @@ class ButtonsAdapter(val items:ArrayList<ObjectButton>, val listener: (position:
                                            before: Int, count: Int) {
                 }
             })
+
 
         }
     }

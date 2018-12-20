@@ -141,6 +141,8 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
 
     }
 
+
+
     override fun onStop() {
         super.onStop()
         val bundle = this.arguments
