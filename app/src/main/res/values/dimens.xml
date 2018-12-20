@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- dimensions -->
+    <dimen name="keyBord">186dp</dimen>
+    <dimen name="imageKeyBord">182dp</dimen>
+    <dimen name="imageKeyBordON">100dp</dimen>
+
+</resources>

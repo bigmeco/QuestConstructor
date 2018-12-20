@@ -20,18 +20,17 @@ class ProjectAdapter(val items: ArrayList<ObjectProject>, val listener: (itemVie
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: ObjectProject, listener: (itemView: View, items: ArrayList<ObjectProject>, position: Int) -> Unit, items: ArrayList<ObjectProject>, position: Int) = with(itemView) {
-
-
-
-
-
-            if (item.status!!) {
+            if (item.status) {
                 cardColor.setCardBackgroundColor(resources.getColor(R.color.createColor))
+                if(item.releaseKey!="") {
+                    pushButton.text ="ОБНОВИТЬ"
+                }else{
+                    pushButton.text ="ОПУБЛИКОВАТЬ"
+                }
                 cardPush.visibility =View.VISIBLE
             }else {
                 cardColor.setCardBackgroundColor(resources.getColor(R.color.pleyColor))
                 cardPush.visibility =View.GONE
-
             }
             textName.text =item.name
             editTextBody.text =item.body

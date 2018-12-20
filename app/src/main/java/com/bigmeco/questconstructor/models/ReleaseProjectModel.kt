@@ -58,7 +58,7 @@ class ReleaseProjectModel : IReleaseProjectModel {
                         result.error?.invoke()
 
                     }
-            //fireStoreDataBase.collection("quests").document(id).set(infoProject)
+            fireStoreDataBase.collection("quests").document(prKey).set(infoProject)
         }
     }
 

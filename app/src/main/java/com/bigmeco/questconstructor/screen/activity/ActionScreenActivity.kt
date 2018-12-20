@@ -24,9 +24,6 @@ import com.bigmeco.questconstructor.screen.adapter.ButtonsGameAdapter
 import com.bigmeco.questconstructor.statements.ImageRespons
 import com.bigmeco.questconstructor.statements.ScreenConstant
 import com.bigmeco.questconstructor.views.ActionScreenView
-import com.google.firebase.firestore.FirebaseFirestore
-import io.realm.Realm
-import io.realm.RealmList
 
 
 class ActionScreenActivity : MvpAppCompatActivity(), ActionScreenView {
@@ -39,82 +36,39 @@ class ActionScreenActivity : MvpAppCompatActivity(), ActionScreenView {
         return ActionScreenPresenter()
     }
 
-
-    val fireStoreDataBase = FirebaseFirestore.getInstance()
     var project = Project()
     var id: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         id = intent.getStringExtra("idProject")
-
+        Log.e("sdssdsdsds",id)
         if ((intent.getBooleanExtra("saveProject", false))) {
-             val realm = Realm.getDefaultInstance()
-
-
-            val obProject= realm.copyFromRealm(realm.where(MyProject::class.java).equalTo("id", id).findFirst()!!)
-
-            project.body = obProject.body
-            project.idStyle = obProject.idStyle
-            project.genre = obProject.genre
-            project.name = obProject.name
-            project.saveScreen = obProject.saveScreen
-            project.status = obProject.status
-            project.time = obProject.time
-            project.screen = ArrayList()
-            for (screen in obProject.screen!!.iterator()) {
-
-                val objectScreen = Screen()
-                objectScreen.body = screen.body
-                objectScreen.id = screen.id
-                objectScreen.image = screen.image
-                objectScreen.status = screen.status
-                objectScreen.buttons = ArrayList<Button>()
-
-                for (button in screen.buttons!!.iterator()) {
-                    val objectButton = Button()
-                    objectButton.id = button.id
-                    objectButton.status = button.status
-                    objectButton.text = button.text
-                    objectScreen.buttons!!.add(objectButton)
-                }
-                project.screen!!.add(objectScreen)
-                Log.e("LOAD_HISTORY_OF_REPORTS", project.screen.toString())
-            }
-            when (project.idStyle!!) {
-                0 -> setContentView(R.layout.activity_action_screen_cyberpunk)
-                1 -> setContentView(R.layout.activity_action_screen)
-            }
-            updateScreen()
+            actionScreenPresenter.loadHistory(id, loadScreen)
         } else {
-            fireStoreDataBase.collection("questBody").document(id)
-                    .get().addOnCompleteListener { it ->
-                        val document = it.result
-                        project = document!!.toObject(Project::class.java)!!
-                        when (project!!.idStyle) {
-                            0 -> setContentView(R.layout.activity_action_screen_cyberpunk)
-                            1 -> setContentView(R.layout.activity_action_screen)
-                        }
-                        updateScreen()
+            actionScreenPresenter.downloadProject(id, loadScreen)
 
-                    }
         }
     }
 
+    private val loadScreen = fun(project: Project) {
+        this.project = project
+        when (project.idStyle) {
+            0 -> setContentView(R.layout.activity_action_screen_cyberpunk)
+            1 -> setContentView(R.layout.activity_action_screen)
+        }
+        updateScreen(project)
+    }
 
-    private fun updateScreen() {
-        Log.e("LOAD_HISTORY_OF_REPORTS", project.screen!!.toArray().toString())
-        Log.e("LOAD_HISTORY_OF_REPORTS",project.saveScreen.toString())
+
+    private fun updateScreen(project: Project) {
+
         val imageUsers = findViewById<ImageView>(R.id.imageUsers)
         val textBody = findViewById<TextView>(R.id.textBody)
         val cardView = findViewById<FrameLayout>(R.id.cardView3)
         val mainLayout = findViewById<ConstraintLayout>(R.id.mainLayout)
         val listButton = findViewById<RecyclerView>(R.id.listButton)
-        Log.e("LOAD_HISTORY_OF_REPORTS", project.screen!![project.saveScreen].body+"  fffff")
-        Log.e("LOAD_HISTORY_OF_REPORTS", "entrance " + project.screen!![project.saveScreen].buttons!!+"  gsdfgdf")
-        Log.e("LOAD_HISTORY_OF_REPORTS", "entrance " + project.saveScreen)
         textBody.text = project.screen!![project.saveScreen].body
 
         val imageResponseModel = ImageResponseModel()
@@ -143,16 +97,13 @@ class ActionScreenActivity : MvpAppCompatActivity(), ActionScreenView {
             set.applyTo(mainLayout)
         }
         project.screen!![project.saveScreen].image?.let { it1 -> imageResponseModel.getImageResponse(it1, imageRespons) }
-//        Log.i("LOAD_HISTORY_OF_REPORTS", "entrance " + (realm.where(MyProject::class.java).equalTo("id", id).findFirst() == null))
-        Log.e("LOAD_HISTORY_OF_REPORTS", "entrance " + project.screen!![project.saveScreen].buttons!!+"  gsdfgdf")
-        Log.e("LOAD_HISTORY_OF_REPORTS", "entrance " + project.saveScreen)
 
         listButton.layoutManager = LinearLayoutManager(this)
 
         listButton.adapter = ButtonsGameAdapter(project.idStyle!!, project.screen!![project.saveScreen].buttons!!) { button ->
             project.saveScreen = button.id!!
             if (project.saveScreen != ScreenConstant.SCREEN_EXIT) {
-                updateScreen()
+                updateScreen(project)
             } else {
                 onClick()
             }

@@ -2,6 +2,7 @@ package com.bigmeco.questconstructor.screen.fragments
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Rect
 import android.os.Bundle
 import android.support.constraint.ConstraintSet
 import android.support.v7.widget.LinearLayoutManager
@@ -115,7 +116,24 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
 
         val itemLeftHelper = ItemTouchHelper(simpleLeftCallback)
         itemLeftHelper.attachToRecyclerView(listButtons)
+        view.viewTreeObserver.addOnGlobalLayoutListener {
+            val set = ConstraintSet()
+            val r = Rect()
+            view.getWindowVisibleDisplayFrame(r)
+            val screenHeight = view.rootView.height
+            val keypadHeight = screenHeight - r.bottom
+            set.clone(mainLayoutFragment)
 
+            if (keypadHeight > screenHeight * 0.15) {
+                set.setMargin(scrollView2.id, ConstraintSet.BOTTOM, resources.getDimension(R.dimen.keyBord).toInt())
+                set.setMargin(imageView7.id, ConstraintSet.TOP, resources.getDimension(R.dimen.imageKeyBordON).toInt())
+            } else {
+                set.setMargin(scrollView2.id, ConstraintSet.BOTTOM, 0)
+                set.setMargin(imageView7.id, ConstraintSet.TOP, resources.getDimension(R.dimen.imageKeyBord).toInt())
+            }
+
+            set.applyTo(mainLayoutFragment)
+        }
 
     }
 

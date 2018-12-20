@@ -87,10 +87,7 @@ class InfoQuestActivity : AppCompatActivity() {
 
                 override fun onTransitionEnd(transition: Transition) {
                     val intent = Intent(this@InfoQuestActivity, StartActivity::class.java)
-//            val editor = PreferenceManager.getDefaultSharedPreferences(this).edit()
-//            editor.putInt("idProject", objectProject.id!!)
-//            editor.apply()
-//            Log.d("ddd",objectProject.id.toString())
+
                     startActivity(intent)
                 }
 
