@@ -3,6 +3,7 @@ package com.bigmeco.questconstructor.screen.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -40,7 +41,8 @@ class RegistrationActivity : MvpAppCompatActivity(), RegistrationView {
                         .requestEmail()
                         .build())
         singButton.setOnClickListener {
-
+            singButton.isEnabled = false
+            progressBar.visibility= View.VISIBLE
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
@@ -54,6 +56,8 @@ class RegistrationActivity : MvpAppCompatActivity(), RegistrationView {
         if (requestCode == RC_SIGN_IN) {
             data?.let { registrationPresenter.signedInAccount(it) }
         }
+        singButton.isEnabled = true
+        progressBar.visibility= View.INVISIBLE
     }
 
 

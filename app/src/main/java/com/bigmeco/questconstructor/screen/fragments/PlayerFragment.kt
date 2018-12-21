@@ -47,7 +47,7 @@ class PlayerFragment : MvpAppCompatFragment(), PlayerListView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        progressBar2.visibility = View.VISIBLE
         val arrayGenre = resources.getStringArray(R.array.greetingsGame)
         genrePicker.minValue = 0
         genrePicker.maxValue = arrayGenre.size - 1
@@ -125,6 +125,7 @@ class PlayerFragment : MvpAppCompatFragment(), PlayerListView {
         })
 
         imageBaeckF.setOnClickListener {
+            progressBar2.visibility = View.VISIBLE
             playerListPresenter.setList(updateList)
             filterLayout.visibility = View.INVISIBLE
             filterLayout.startAnimation(animFlterClose)
@@ -135,6 +136,7 @@ class PlayerFragment : MvpAppCompatFragment(), PlayerListView {
         }
 
         imageOkF.setOnClickListener {
+            progressBar2.visibility = View.VISIBLE
             playerListPresenter.setListFilter(updateList, arrayTime[timerPicker.value], ratingPicker.value)
             filterLayout.visibility = View.INVISIBLE
             filterLayout.startAnimation(animFlterClose)
@@ -146,12 +148,14 @@ class PlayerFragment : MvpAppCompatFragment(), PlayerListView {
 
         }
         imageBeack.setOnClickListener {
-            //setList()
+            progressBar2.visibility = View.VISIBLE
             menuLayout.visibility = View.INVISIBLE
+            playerListPresenter.setList(updateList)
             menuLayout.startAnimation(animScaleBeack)
         }
 
         imageOk.setOnClickListener {
+            progressBar2.visibility = View.VISIBLE
             playerListPresenter.setListGenre(updateList, arrayGenre[genrePicker.value])
             menuLayout.visibility = View.INVISIBLE
             menuLayout.startAnimation(animScaleBeack)
@@ -174,6 +178,7 @@ class PlayerFragment : MvpAppCompatFragment(), PlayerListView {
 
 
     val updateList = fun(lecturesPojos: ArrayList<InfoProject>,save:Boolean) {
+        progressBar2.visibility = View.INVISIBLE
         if (listGame != null) {
             listGame.adapter = GameAdapter(lecturesPojos) { infoProject: InfoProject, i: Int ->
                 val intent = Intent(activity, InfoQuestActivity::class.java)
