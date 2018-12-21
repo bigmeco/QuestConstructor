@@ -28,16 +28,19 @@ class RegistrationActivity : MvpAppCompatActivity(), RegistrationView {
         return RegistrationPresenter()
     }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
+        googleSignInClient = GoogleSignIn.getClient(this,
+                GoogleSignInOptions
+                        .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.default_web_client_id))
+                        .requestEmail()
+                        .build())
         singButton.setOnClickListener {
-            googleSignInClient = GoogleSignIn.getClient(this,
-                    GoogleSignInOptions
-                            .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                            .requestIdToken(getString(R.string.default_web_client_id))
-                            .requestEmail()
-                            .build())
+
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
