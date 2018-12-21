@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:opacity="opaque">
-    <item android:drawable="@color/color868e75" />
+    <item android:drawable="@color/icon_color" />
     <item
         android:width="400dp"
         android:height="400dp"
         android:bottom="140dp"
-        android:drawable="@drawable/ic_launcher_foreground"
+        android:drawable="@drawable/ic_launcher_splash"
         android:gravity="center"
         android:top="140dp" />
 </layer-list>
