@@ -33,5 +33,7 @@
         android:pathData="M1.78,1.09 L4.7,98.48 L7.01,96.5 L8.75,5.75 L212.78,2.97 L215.57,1.09 L1.78,1.09 Z" />
     <path
         android:fillColor="#eb4f696c"
+        android:fillAlpha="0.8"
+        android:strokeAlpha="0.8"
         android:pathData="M212.96,2.97 L211.88,93.32 L7.01,96.5 L4.7,98.48 L218.63,98.48 L215.57,1.09 L212.96,2.97 Z" />
 </vector>
