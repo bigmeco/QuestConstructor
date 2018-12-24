@@ -14,31 +14,39 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".screen.activity.StartActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity
             android:name=".screen.activity.CreatorActivity"
-            android:theme="@style/CreatorActivityTheme" />
+            android:theme="@style/CreatorActivityTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.activity.CreatorScreenActivity"
-            android:theme="@style/CreatorActivityTheme" />
+            android:theme="@style/CreatorActivityTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.activity.InfoQuestActivity"
-            android:theme="@style/Theme.AppCompat.Light.Dialog.MinWidth" />
+            android:theme="@style/Theme.AppCompat.Light.Dialog.MinWidth"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.activity.ActionScreenActivity"
-            android:theme="@style/CreatorActivityTheme" />
-        <activity android:name=".screen.activity.PublicationActivity" />
+            android:theme="@style/CreatorActivityTheme"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screen.activity.PublicationActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".screen.activity.SplashActivity"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".screen.activity.RegistrationActivity"></activity>
+        <activity android:name=".screen.activity.RegistrationActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

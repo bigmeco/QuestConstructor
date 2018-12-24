@@ -127,9 +127,15 @@ class CreatorScreenFragment : MvpAppCompatFragment(), CreatorScreenFrView {
                set.clone(mainLayoutFragment)
 
                if (keypadHeight > screenHeight * 0.15) {
+                   if (activity!!.currentFocus !=editTextBody){
+                       editTextBody.maxLines =3
+                   }else{
+                       editTextBody.maxLines =7
+                   }
                    set.setMargin(scrollView2.id, ConstraintSet.BOTTOM, resources.getDimension(R.dimen.keyBord).toInt())
                    set.setMargin(imageView7.id, ConstraintSet.TOP, resources.getDimension(R.dimen.imageKeyBordON).toInt())
                } else {
+                   editTextBody.maxLines =7
                    set.setMargin(scrollView2.id, ConstraintSet.BOTTOM, 0)
                    set.setMargin(imageView7.id, ConstraintSet.TOP, resources.getDimension(R.dimen.imageKeyBord).toInt())
                }

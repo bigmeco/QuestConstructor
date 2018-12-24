@@ -24,6 +24,7 @@ class ReleaseProjectModel : IReleaseProjectModel {
         val realm = Realm.getDefaultInstance()
         val prKey = CreatorScreenModel().getProject(objectProject.id!!)!!.releaseKey
         Log.e("dfghdfgdfgdfgdf",prKey+"  dxcgbxcvg")
+        infoProject.id = prKey
 
         if (prKey == "") {
             val id = fireStoreDataBase.collection("quests").document().id

@@ -136,9 +136,9 @@
             android:gravity="top|left"
             android:hint="Текст экрана"
             android:inputType="textCapSentences|textMultiLine"
-            android:lines="8"
-            android:maxLines="14"
-            android:minLines="4"
+            android:lines="7"
+            android:maxLines="7"
+            android:minLines="3"
             android:textColor="@color/colorPrimaryDark"
             tools:layout_editor_absoluteX="211dp"
             tools:layout_editor_absoluteY="206dp" />
