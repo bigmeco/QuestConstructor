@@ -58,6 +58,7 @@ class ActionScreenActivity : MvpAppCompatActivity(), ActionScreenView {
             0 -> setContentView(R.layout.activity_action_screen_cyberpunk)
             1 -> setContentView(R.layout.activity_action_screen)
             2 -> setContentView(R.layout.activity_action_screen_fantasy)
+            3 -> setContentView(R.layout.activity_action_screen_horror)
         }
         updateScreen(project)
     }

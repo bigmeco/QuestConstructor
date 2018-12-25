@@ -16,7 +16,9 @@
     <color name="beack_cyberpunk">#ec4080</color>
     <color name="color_button_cyberpunk">#073037</color>
     <color name="color_button_fantasy">#53BABD</color>
+    <color name="color_button_horror">#232525</color>
     <color name="beackgaund_style">#3e2723</color>
     <color name="icon_color">#f2f2f2</color>
     <color name="color_test_fantasy">#293034</color>
+    <color name="color_body_horror">#fa1a1b1b</color>
 </resources>

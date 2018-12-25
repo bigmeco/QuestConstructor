@@ -16,6 +16,7 @@ class ButtonsGameAdapter(val idSt: Int, val items: ArrayList<Button>, val listen
             0 -> LayoutInflater.from(parent.context).inflate(R.layout.item_cyberpunk, parent, false)
             1 -> LayoutInflater.from(parent.context).inflate(R.layout.item_steampunk, parent, false)
             2 -> LayoutInflater.from(parent.context).inflate(R.layout.item_fantasy, parent, false)
+            3 -> LayoutInflater.from(parent.context).inflate(R.layout.item_horror, parent, false)
             else -> LayoutInflater.from(parent.context).inflate(R.layout.item_cyberpunk, parent, false)
         }
         return ViewHolder(i)

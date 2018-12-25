@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/beac_horror"
+    tools:context=".screen.activity.ActionScreenActivity">
+
+    <ImageView
+        android:id="@+id/imageView24"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:paddingStart="16dp"
+        app:srcCompat="@drawable/derevo1_1" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="14dp"
+            android:elevation="20dp"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
+            android:paddingBottom="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView3">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="76dp"
+                app:cardBackgroundColor="@color/color_body_horror"
+                app:cardCornerRadius="4dp">
+
+                <ImageView
+                    android:id="@+id/imageView28"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:paddingStart="2dp"
+                    android:paddingTop="2dp"
+                    android:paddingEnd="2dp"
+                    app:srcCompat="@drawable/ram_body" />
+
+                <ImageView
+                    android:id="@+id/imageView29"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:adjustViewBounds="true"
+                    android:paddingStart="2dp"
+                    android:paddingTop="2dp"
+                    android:paddingEnd="2dp"
+                    android:rotation="180"
+                    app:srcCompat="@drawable/ram_body" />
+
+                <TextView
+                    android:id="@+id/textBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTintMode="screen"
+                    android:fontFamily="@font/fan"
+                    android:paddingStart="36dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="36dp"
+                    android:paddingBottom="16dp"
+                    android:text="Шеф взъярён тчк щипцы с эхом гудбай Жюль. Эй, жлоб! Где туз? Прячь юных съёмщиц в шкаф. Экс-граф? Плюш изъят. Бьём чуждый цен хвощ! Эх, чужак! Общий съём цен шляп (юфть) — вдрызг! Эх, чужд кайф, сплющь объём вши, грызя цент. Чушь: гид вёз кэб цапф, юный жмот съел хрящ."
+                    android:textColor="@color/icon_color"
+                    android:textSize="16sp"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="240dp" />
+            </android.support.v7.widget.CardView>
+
+        </FrameLayout>
+
+        <FrameLayout
+
+            android:id="@+id/cardView3"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="22dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="4dp"
+                android:foregroundGravity="center"
+                app:cardBackgroundColor="@color/common_google_signin_btn_text_light_focused"
+                app:cardCornerRadius="5dp">
+
+                <ImageView
+                    android:id="@+id/imageUsers"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="center"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
+                    app:layout_constraintEnd_toEndOf="@+id/imageBackground"
+                    app:layout_constraintStart_toStartOf="@+id/imageBackground"
+                    app:layout_constraintTop_toTopOf="@+id/imageBackground"
+                    app:srcCompat="@drawable/name_image" />
+
+
+                <ImageView
+                    android:id="@+id/imageView36"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="false"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/beac_horror_ram" />
+
+                <ImageView
+                    android:id="@+id/imageView26"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="false"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/beac_image_horror" />
+
+            </android.support.v7.widget.CardView>
+
+        </FrameLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>
+
+    <ImageView
+        android:id="@+id/imageView23"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/derevo1" />
+
+    <ImageView
+        android:id="@+id/imageView25"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/derevo2" />
+</FrameLayout>
