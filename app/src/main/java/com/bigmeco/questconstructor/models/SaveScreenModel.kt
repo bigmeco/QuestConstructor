@@ -14,7 +14,11 @@ class SaveScreenModel : ISaveScreenModel {
         realm.executeTransaction {
 
             if (idButton != null) {
-                objectButtons[idButton].id = idScreen
+                try {
+                    objectButtons[idButton].id = idScreen
+                }catch (e: IndexOutOfBoundsException){
+                }
+
             }
             objectScreen.body = body
             objectScreen.status = objectScreen.thereIsNull()
