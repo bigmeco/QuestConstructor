@@ -10,8 +10,8 @@ android {
         applicationId "com.bigmeco.questconstructor"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 10
-        versionName "1.9"
+        versionCode 12
+        versionName "2.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -25,7 +25,10 @@ android {
 realm {
     syncEnabled = true
 }
-
+configurations {
+    all*.exclude group: 'com.google.firebase', module: 'firebase-core'
+    all*.exclude group: 'com.google.firebase', module: 'firebase-iid'
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
