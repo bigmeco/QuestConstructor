@@ -10,8 +10,8 @@ android {
         applicationId "com.bigmeco.questconstructor"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 13
-        versionName "2.2"
+        versionCode 14
+        versionName "2.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

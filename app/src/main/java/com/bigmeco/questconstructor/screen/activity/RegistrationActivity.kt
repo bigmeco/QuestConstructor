@@ -49,7 +49,7 @@ class RegistrationActivity : MvpAppCompatActivity(), RegistrationView {
         }
 
         textPrivacy.setOnClickListener {
-            val url = "https://github.com/bigmeco/QuestConstructor/edit/master/privacy_policy.md"
+            val url = "https://github.com/bigmeco/QuestConstructor/wiki/Privacy-Policy"
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(url)
             startActivity(i)
