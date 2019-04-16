@@ -1,6 +1,7 @@
 package com.bigmeco.questconstructor.screen.activity
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -45,6 +46,13 @@ class RegistrationActivity : MvpAppCompatActivity(), RegistrationView {
             progressBar.visibility= View.VISIBLE
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
+        }
+
+        textPrivacy.setOnClickListener {
+            val url = "https://github.com/bigmeco/QuestConstructor/edit/master/privacy_policy.md"
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(url)
+            startActivity(i)
         }
     }
 
